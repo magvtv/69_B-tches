@@ -8,6 +8,7 @@ Payments: Stripe + M-Pesa + Crypto (future)
 Monitoring: Grafana + Prometheus + Sentry
 
 ## High Level Architecture
+```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   Edge Workers  │    │  Load Balancer   │    │   API Gateway   │
 │   (Cloudflare)  │◄──►│    (Nginx)       │◄──►│   (Fastify)     │
@@ -24,6 +25,7 @@ Monitoring: Grafana + Prometheus + Sentry
 │   MongoDB       │    │    Redis         │    │   Monitoring    │
 │   Atlas         │    │   (Cache/Queue)  │    │   (Grafana)     │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
+```
 
 ## Advanced Protection Systems
 // Advanced canvas rendering with cryptographic noise injection
@@ -196,6 +198,7 @@ interface EnvironmentConfig {
 
 ## Microservices Architecture
 ### Service Breakdown
+```
 ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
 │   Auth Service  │  │  Image Service  │  │ Payment Service │
 │   (Port 3001)   │  │  (Port 3002)    │  │  (Port 3003)    │
@@ -207,6 +210,7 @@ interface EnvironmentConfig {
                     │  API Gateway    │
                     │  (Port 3000)    │
                     └─────────────────┘
+```
 
 ### Service Communication
 ```
@@ -436,7 +440,3 @@ jobs:
       - run: docker push 69bitches/app:${{ github.sha }}
       - run: kubectl set image deployment/app app=69bitches/app:${{ github.sha }}
 ```
-
-
-
-
