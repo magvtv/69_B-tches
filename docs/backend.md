@@ -1,4 +1,5 @@
 ## Folder Scaffolding
+```
 backend/
 ├── controllers/
 │   ├── artworkController.js
@@ -32,7 +33,7 @@ backend/
     ├── database.js
     ├── mpesa.js
     └── cloudinary.js
-
+```
 
 ## Backend Architecture
 
