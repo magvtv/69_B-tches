@@ -1,4 +1,5 @@
 ## Folder Scaffolding
+```
 frontend/
 ├── components/
 │   ├── Gallery/
@@ -45,6 +46,7 @@ frontend/
     │   └── main.css
     └── fonts/
         └── renaissance-fonts/
+```
 
 ## Frontend Architecture
 
