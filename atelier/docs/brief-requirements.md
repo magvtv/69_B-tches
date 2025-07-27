@@ -1,9 +1,9 @@
-# 69_B*tches Technical Requirements Document
+# Atelier Technical Requirements Document
 
 ## 1. Project Overview
 
 ### 1.1 Project Name
-69_B*tches Digital Art Sanctuary
+Atelier Digital Art Sanctuary
 
 ### 1.2 Project Type
 Full-stack web application with mobile-responsive design
