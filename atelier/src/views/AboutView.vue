@@ -21,7 +21,7 @@
         <!-- Hero Section -->
         <div class="text-center mb-16">
           <h1 class="text-5xl md:text-6xl font-display text-primary mb-6 tracking-wide">
-            About Atelier
+            About Artelia
           </h1>
           <div class="renaissance-divider fancy mx-auto mb-8"></div>
           <p class="text-xl text-text-muted font-body max-w-3xl mx-auto leading-relaxed">
@@ -36,7 +36,7 @@
           </div>
           <div class="renaissance-card-body">
             <p class="text-lg leading-relaxed mb-6">
-              Atelier curates and showcases contemporary feminine art that draws inspiration from the masterpieces of the Renaissance era. 
+              Artelia curates and showcases contemporary feminine art that draws inspiration from the masterpieces of the Renaissance era. 
               We bridge the gap between classical artistic traditions and modern feminine expression, creating a space where powerful 
               feminine narratives are celebrated through the lens of timeless aesthetic principles.
             </p>

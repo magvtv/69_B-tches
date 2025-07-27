@@ -3,7 +3,7 @@
     <div class="w-full max-w-md">
       <div class="bg-background-tertiary p-8 rounded-2xl shadow-renaissance border border-border">
         <h1 class="text-3xl text-center mb-2 text-text font-display">Register</h1>
-        <p class="text-center text-text-muted mb-8">Join the Atelier community</p>
+        <p class="text-center text-text-muted mb-8">Join the Artelia community</p>
         
         <form @submit.prevent="handleRegister" class="space-y-6">
           <div>

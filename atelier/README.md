@@ -1,4 +1,4 @@
-# Atelier: A Digital Sanctuary for Feminine Expression
+# Artelia: A Digital Sanctuary for Feminine Expression
 
 An advanced digital art platform with sophisticated anti-scraping architecture and cryptographic content protection
 

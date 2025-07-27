@@ -14,7 +14,7 @@
     ></div>
     
     <div v-if="showWatermark" class="absolute bottom-2.5 right-2.5 font-serif text-sm text-primary opacity-30 pointer-events-none transform -rotate-15 shadow-sm">
-      <span>Atelier</span>
+      <span>Artelia</span>
     </div>
     
     <div v-if="debug" class="absolute top-2.5 left-2.5 bg-black/50 text-primary px-2 py-1 rounded text-xs pointer-events-none">

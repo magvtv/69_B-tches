@@ -94,7 +94,7 @@ function viewArtworkDetails(artwork: Artwork) {
   <div class="py-8">
     <div class="text-center py-16 md:py-20 px-4 md:px-8 bg-gradient-highlight rounded-2xl mx-4 md:mx-8 mb-16">
       <h1 class="text-4xl md:text-5xl lg:text-6xl mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-display">
-        Atelier Digital Art Sanctuary
+        Artelia Digital Art Sanctuary
       </h1>
       <p class="text-lg text-text-muted mb-8 max-w-2xl mx-auto">
         A curated collection of contemporary feminine art with Renaissance aesthetics

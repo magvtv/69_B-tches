@@ -3,7 +3,7 @@
     <div class="bg-background-secondary py-12 md:py-16 mb-8 border-b border-border">
       <div class="container">
         <h1 class="font-display text-4xl md:text-5xl text-primary font-bold tracking-wide text-center mb-4">
-          Atelier Digital Art Sanctuary
+          Artelia Digital Art Sanctuary
         </h1>
         <p class="font-serif text-lg text-text-muted max-w-3xl mx-auto text-center mb-8">
           A curated collection of contemporary feminine art with Renaissance aesthetics

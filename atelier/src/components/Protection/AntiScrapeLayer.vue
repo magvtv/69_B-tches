@@ -15,7 +15,7 @@
       :class="{ 'opacity-100': isProtectionActive, 'opacity-0': !isProtectionActive }"
     ></div>
     <div v-if="showWatermark" class="absolute bottom-2.5 right-2.5 font-serif text-sm text-primary opacity-30 pointer-events-none transform -rotate-15 shadow-sm">
-      <span>Atelier</span>
+      <span>Artelia</span>
     </div>
     <div v-if="showWarning" class="absolute inset-0 bg-black/80 flex items-center justify-center z-50 animate-fadeIn">
       <div class="bg-background-secondary border border-primary p-8 rounded-lg text-center max-w-[80%]">
