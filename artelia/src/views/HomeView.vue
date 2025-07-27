@@ -1,83 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import RenaissanceButton from '@/components/UI/RenaissanceButton.vue';
+import { artworkService, type Artwork } from '@/services/artworkService';
 
 const router = useRouter();
-const featuredArtworks = ref([
-  {
-    id: '1',
-    title: 'Mysterious Femininity',
-    artist: 'Contemporary Artist',
-    description: 'A powerful exploration of modern femininity through bold colors and expressive brushwork',
-    imageUrl: '/art-vault/bitch-1.jpeg',
-    hall: 'renaissance',
-    year: 2024,
-    medium: 'Digital Art'
-  },
-  {
-    id: '2',
-    title: 'Renaissance Reimagined',
-    artist: 'Digital Master',
-    description: 'Classical composition meets contemporary vision in this stunning digital masterpiece',
-    imageUrl: '/art-vault/bitch-2.jpeg',
-    hall: 'renaissance',
-    year: 2024,
-    medium: 'Mixed Media'
-  },
-  {
-    id: '3',
-    title: 'Contemporary Feminism',
-    artist: 'Modern Visionary',
-    description: 'A bold statement on contemporary feminine ideals expressed through vibrant artistic language',
-    imageUrl: '/art-vault/bitch-3.jpeg',
-    hall: 'contemporary',
-    year: 2024,
-    medium: 'Digital Painting'
-  },
-  {
-    id: '4',
-    title: 'Ethereal Beauty',
-    artist: 'Renaissance Soul',
-    description: 'Capturing the essence of timeless beauty with modern artistic techniques',
-    imageUrl: '/art-vault/bitch-4.jpeg',
-    hall: 'renaissance',
-    year: 2024,
-    medium: 'Digital Art'
-  },
-  {
-    id: '5',
-    title: 'Urban Goddess',
-    artist: 'Street Poet',
-    description: 'Where street art meets classical portraiture in a celebration of modern femininity',
-    imageUrl: '/art-vault/bitch-5.jpeg',
-    hall: 'modern',
-    year: 2024,
-    medium: 'Digital Collage'
-  },
-  {
-    id: '6',
-    title: 'Golden Hour Dreams',
-    artist: 'Light Weaver',
-    description: 'A mesmerizing play of light and shadow that captures the magic of golden hour',
-    imageUrl: '/art-vault/bitch-6.jpeg',
-    hall: 'contemporary',
-    year: 2024,
-    medium: 'Digital Photography'
-  }
-]);
+const featuredArtworks = ref<Artwork[]>([]);
 
-// Define the Artwork interface
-interface Artwork {
-  id: string;
-  title: string;
-  artist: string;
-  description?: string;
-  imageUrl: string;
-  hall?: string;
-  year?: number;
-  medium?: string;
-}
+
+onMounted(async () => {
+  try {
+    const artworks = await artworkService.getFeaturedArtworks(6);
+    featuredArtworks.value = artworks;
+  } catch (error) {
+    console.error('Error loading featured artworks:', error);
+  }
+});
 
 function exploreGallery() {
   // Navigate to gallery
@@ -116,7 +54,7 @@ function viewArtworkDetails(artwork: Artwork) {
           @click="viewArtworkDetails(artwork)"
         >
           <div class="renaissance-card-header">
-            <img :src="artwork.imageUrl" :alt="artwork.title" class="w-full h-64 object-cover rounded-t-lg" />
+            <img :src="artwork.assets.original" :alt="artwork.title" class="w-full h-64 object-cover rounded-t-lg" />
           </div>
           <div class="renaissance-card-body">
             <h3 class="font-serif text-xl text-text mb-2">{{ artwork.title }}</h3>
