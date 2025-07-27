@@ -277,6 +277,13 @@ body {
   border-color: var(--primary-color);
 }
 
+.renaissance-badge.mood {
+  background: var(--background-tertiary);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  font-style: italic;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .renaissance-btn {

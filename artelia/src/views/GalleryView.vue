@@ -103,17 +103,8 @@ import { ref, computed, onMounted } from 'vue';
 import GalleryGrid from '@/components/Gallery/GalleryGrid.vue';
 import GalleryList from '@/components/Gallery/GalleryList.vue';
 import ArtworkModal from '@/components/Gallery/ArtworkModal.vue';
+import { artworkService, type Artwork } from '@/services/artworkService';
 
-interface Artwork {
-  id: string;
-  title: string;
-  artist: string;
-  description: string;
-  imageUrl: string;
-  hall?: string;
-  year?: number;
-  medium?: string;
-}
 
 const artworks = ref<Artwork[]>([]);
 const loading = ref(true);
@@ -159,35 +150,48 @@ function openArtworkModal(artwork: Artwork) {
   selectedArtwork.value = artwork;
 }
 
-// Load artworks from the art-vault directory
+// Load artworks using the artwork service
 onMounted(async () => {
-  // In a real app, this would be an API call
-  // For now, we'll create sample data based on the art-vault files
-  
-  // Simulate loading delay
-  setTimeout(() => {
-    const artworkData: Artwork[] = [];
-    
-    // Generate 20 sample artworks based on the files in art-vault
-    for (let i = 1; i <= 20; i++) {
-      const halls = ['renaissance', 'contemporary', 'chiaroscuro'];
-      const randomHall = halls[Math.floor(Math.random() * halls.length)];
-      const randomYear = 2020 + Math.floor(Math.random() * 5);
-      
-      artworkData.push({
-        id: i.toString(),
-        title: `Artwork ${i}`,
-        artist: `Artist ${Math.ceil(i/3)}`,
-        description: 'This exquisite piece exemplifies the confluence of Renaissance techniques with contemporary digital artistry. The chiaroscuro lighting and classical composition pay homage to the masters, while the subject matter speaks to modern sensibilities.',
-        imageUrl: `/art-vault/bitch-${i}.jpeg`,
-        hall: randomHall,
-        year: randomYear,
-        medium: 'Digital Art'
-      });
-    }
-    
-    artworks.value = artworkData;
+  try {
+    const allArtworks = await artworkService.getAllArtworks();
+    // Map artwork data to include hall and other metadata
+    artworks.value = allArtworks.map(artwork => ({
+      ...artwork,
+      imageUrl: artwork.assets.original,
+      hall: getHallFromMood(artwork.metadata.mood),
+      year: artwork.year || 2024,
+      medium: artwork.medium || 'Digital Art'
+    }));
+  } catch (error) {
+    console.error('Error loading artworks:', error);
+  } finally {
     loading.value = false;
-  }, 1000);
+  }
 });
+
+// Helper function to map mood to hall
+function getHallFromMood(mood: string): string {
+  const moodToHall: Record<string, string> = {
+    'mysterious': 'chiaroscuro',
+    'reflective': 'renaissance',
+    'empowering': 'contemporary',
+    'serene': 'renaissance',
+    'expressive': 'contemporary',
+    'dreamy': 'renaissance',
+    'tranquil': 'renaissance',
+    'calm': 'contemporary',
+    'gentle': 'renaissance',
+    'nostalgic': 'renaissance',
+    'futuristic': 'contemporary',
+    'dynamic': 'contemporary',
+    'wondrous': 'chiaroscuro',
+    'peaceful': 'renaissance',
+    'vibrant': 'contemporary',
+    'inspirational': 'contemporary',
+    'elegant': 'renaissance',
+    'surreal': 'chiaroscuro',
+    'melancholy': 'chiaroscuro'
+  };
+  return moodToHall[mood] || 'contemporary';
+}
 </script>

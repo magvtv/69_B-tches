@@ -16,7 +16,7 @@
         <div class="artwork-image">
           <AntiScrapeLayer protection-level="paranoid">
             <ProtectedImage
-              :image-url="artwork.imageUrl"
+              :image-url="artwork.assets.original"
               :width="600"
               :height="800"
               protection-level="paranoid"
@@ -126,19 +126,8 @@ import { useRoute, RouterLink } from 'vue-router';
 import RenaissanceButton from '@/components/UI/RenaissanceButton.vue';
 import ProtectedImage from '@/components/Protection/ProtectedImage.vue';
 import AntiScrapeLayer from '@/components/Protection/AntiScrapeLayer.vue';
+import { artworkService, type Artwork } from '@/services/artworkService';
 
-interface Artwork {
-  id: string;
-  title: string;
-  artist: string;
-  description: string;
-  year: number;
-  medium: string;
-  dimensions?: string;
-  price?: number;
-  imageUrl: string;
-  hall?: string;
-}
 
 const route = useRoute();
 const loading = ref(true);
@@ -150,24 +139,14 @@ const zoomLevel = ref(1);
 onMounted(async () => {
   const artworkId = route.params.id as string;
   
-  // Simulate API call
-  setTimeout(() => {
-    // In a real app, this would be an API call
-    artwork.value = {
-      id: artworkId,
-      title: 'Renaissance Reimagined',
-      artist: 'Digital Master',
-      description: 'This exquisite piece exemplifies the confluence of Renaissance techniques with contemporary digital artistry. The chiaroscuro lighting and classical composition pay homage to the masters, while the subject matter speaks to modern sensibilities.',
-      year: 2024,
-      medium: 'Digital Art',
-      dimensions: '800x600px',
-      price: 50000,
-      imageUrl: `/art-vault/bitch-${(parseInt(artworkId) % 20) + 1}.jpeg`,
-      hall: 'Renaissance'
-    };
-    
+  try {
+    const result = await artworkService.getArtwork(artworkId);
+    artwork.value = result;
+  } catch (error) {
+    console.error('Error loading artwork:', error);
+  } finally {
     loading.value = false;
-  }, 1000);
+  }
 });
 
 function formatPrice(price: number): string {
