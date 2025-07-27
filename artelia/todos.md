@@ -36,5 +36,9 @@
 
 
 
-the featured photos on @HomeView.vue seem to be cut from above... could we render them better? perhaps contain?
-there is a yellow borderbox when hovering on the menu elements... can we remove it and have that simple dash at the bottom 
+# TECHNICAL DEBT
+- [] improve how the artwork modal renders on smaller screens. allow user to zoomin and zoomout as well.
+- [] correct the zooming functionality, image is currently spilling out of the page
+
+i want to improve the 'featured artworks' section on @/artelia/src/views/HomeView.vue 
+i want the photos to be the background of the card component and have the details up top of the card
