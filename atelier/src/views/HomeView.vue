@@ -19,6 +19,14 @@ const featuredArtworks = ref([
     description: 'Classical composition meets contemporary vision',
     imageUrl: '/art-vault/bitch-2.jpeg',
     hall: 'renaissance'
+  }, 
+  {
+    id: '3',
+    title: 'Contemporary Feminism',
+    artist: 'Contemporary Artist',
+    description: 'A powerful exploration of modern femininity',
+    imageUrl: '/art-vault/bitch-3.jpeg',
+    hall: 'contemporary'
   }
 ]);
 
