@@ -157,7 +157,6 @@ onMounted(async () => {
     // Map artwork data to include hall and other metadata
     artworks.value = allArtworks.map(artwork => ({
       ...artwork,
-      imageUrl: artwork.assets.original,
       hall: getHallFromMood(artwork.metadata.mood),
       year: artwork.year || 2024,
       medium: artwork.medium || 'Digital Art'
