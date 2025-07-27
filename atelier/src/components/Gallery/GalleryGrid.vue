@@ -1,15 +1,20 @@
 <template>
-  <div class="gallery-container">
-    <div v-if="loading" class="gallery-loading">
-      <div class="loading-spinner"></div>
+  <div class="w-full">
+    <div v-if="loading" class="flex flex-col items-center justify-center py-16 text-text-muted">
+      <div class="w-10 h-10 border-3 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
       <p>Loading exquisite artworks...</p>
     </div>
     
-    <div v-else-if="artworks.length === 0" class="empty-gallery">
+    <div v-else-if="artworks.length === 0" class="py-16 text-center text-text-muted italic w-full border border-dashed border-border rounded-lg">
       <p>No artworks available in this hall.</p>
     </div>
     
-    <div v-else class="gallery-grid" :class="{ 'compact': compact }">
+    <div v-else class="grid gap-8 md:gap-6 justify-items-center" 
+         :class="[
+           compact ? 
+             'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 
+             'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+         ]">
       <ArtworkCard
         v-for="artwork in artworks"
         :key="artwork.id"
@@ -26,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineProps, defineEmits } from 'vue';
+import { ref, computed } from 'vue';
 import ArtworkCard from './ArtworkCard.vue';
 
 interface Artwork {
@@ -82,82 +87,3 @@ function selectArtwork(artwork: Artwork) {
   emit('select-artwork', artwork);
 }
 </script>
-
-<style scoped>
-.gallery-container {
-  width: 100%;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
-  justify-items: center;
-}
-
-.gallery-grid.compact {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.gallery-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 0;
-  color: var(--text-muted);
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(212, 175, 55, 0.3);
-  border-radius: 50%;
-  border-top-color: var(--primary-color);
-  animation: spin 1s ease-in-out infinite;
-  margin-bottom: 1rem;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.empty-gallery {
-  padding: 4rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-style: italic;
-  width: 100%;
-  border: 1px dashed var(--border-color);
-  border-radius: 8px;
-}
-
-@media (max-width: 1200px) {
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-  
-  .gallery-grid.compact {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-  
-  .gallery-grid.compact {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery-grid, .gallery-grid.compact {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

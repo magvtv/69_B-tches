@@ -1,6 +1,11 @@
 <template>
-  <div class="artwork-card" @click="$emit('click', artwork)">
-    <div class="artwork-frame">
+  <div 
+    class="relative w-full max-w-sm mx-auto transition-all duration-300 cursor-pointer group"
+    :style="{ height: `${height + (showMeta ? 100 : 80)}px` }"
+    @click="$emit('click', artwork)"
+  >
+    <div class="relative w-full overflow-hidden border-b border-border shadow-renaissance bg-background-tertiary rounded-t-lg"
+         :style="{ height: `${height}px` }">
       <ProtectedImage
         :image-url="artwork.imageUrl"
         :width="width"
@@ -8,25 +13,29 @@
         :protection-level="protectionLevel"
         :show-watermark="showWatermark"
       />
-      <div class="artwork-hover-overlay">
-        <span class="view-text">View Details</span>
+      <div class="absolute inset-0 flex items-center justify-center bg-black/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <span class="px-6 py-2 text-lg font-serif text-primary border border-primary rounded">View Details</span>
       </div>
     </div>
-    <div class="artwork-info">
-      <h3 class="artwork-title">{{ artwork.title }}</h3>
-      <p class="artwork-artist serif-text">{{ artwork.artist }}</p>
+    
+    <div class="p-4 bg-background-tertiary rounded-b-lg">
+      <h3 class="font-serif text-lg text-text mb-1">{{ artwork.title }}</h3>
+      <p class="font-serif text-sm italic text-primary">{{ artwork.artist }}</p>
       
-      <div v-if="showMeta" class="artwork-meta">
-        <span v-if="artwork.year" class="meta-item">{{ artwork.year }}</span>
-        <span v-if="artwork.medium" class="meta-item">{{ artwork.medium }}</span>
-        <span v-if="artwork.hall" class="hall-tag">{{ artwork.hall }}</span>
+      <div v-if="showMeta" class="flex flex-wrap gap-2 mt-3">
+        <span v-if="artwork.year" class="px-2 py-0.5 text-xs text-text-muted bg-background-secondary rounded">{{ artwork.year }}</span>
+        <span v-if="artwork.medium" class="px-2 py-0.5 text-xs text-text-muted bg-background-secondary rounded">{{ artwork.medium }}</span>
+        <span v-if="artwork.hall" class="px-2 py-0.5 text-xs text-primary border border-primary bg-transparent rounded">{{ artwork.hall }}</span>
       </div>
     </div>
+    
+    <!-- Gold accent on hover -->
+    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transition-all duration-300 transform -translate-x-1/2 group-hover:w-4/5"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+
 import ProtectedImage from '@/components/Protection/ProtectedImage.vue';
 
 interface Artwork {
@@ -70,132 +79,3 @@ const props = defineProps({
 
 defineEmits(['click']);
 </script>
-
-<style scoped>
-.artwork-card {
-  position: relative;
-  width: v-bind(width + 'px');
-  height: v-bind('height + (showMeta ? 100 : 80) + "px"'); /* Extra height for info */
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--background-tertiary);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  margin: 1rem;
-}
-
-.artwork-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-}
-
-.artwork-frame {
-  position: relative;
-  width: 100%;
-  height: v-bind(height + 'px');
-  overflow: hidden;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.artwork-hover-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.artwork-card:hover .artwork-hover-overlay {
-  opacity: 1;
-}
-
-.view-text {
-  color: var(--primary-color);
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  border: 1px solid var(--primary-color);
-  padding: 0.5rem 1.5rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.artwork-card:hover .view-text {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.artwork-info {
-  padding: 1rem;
-  background: var(--background-tertiary);
-}
-
-.artwork-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem 0;
-  color: var(--text-color);
-}
-
-.artwork-artist {
-  font-size: 0.9rem;
-  margin: 0;
-  color: var(--primary-color);
-  font-style: italic;
-}
-
-.artwork-meta {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.meta-item {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  background: var(--background-secondary);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-}
-
-.hall-tag {
-  font-size: 0.7rem;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  background: transparent;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-}
-
-/* Gold accent on hover */
-.artwork-card::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--primary-color);
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.artwork-card:hover::after {
-  width: 80%;
-}
-
-@media (max-width: 768px) {
-  .artwork-card {
-    width: 100%;
-    max-width: 350px;
-    margin: 1rem auto;
-  }
-}
-</style>
