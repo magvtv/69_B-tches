@@ -16,43 +16,48 @@
       <nav class="hidden lg:flex items-center gap-8">
         <RouterLink
           to="/"
-          class="font-body text-lg text-text hover:text-primary transition-colors duration-300"
-          :class="{ 'text-primary border-b-2 border-primary': $route.path === '/' }"
+          class="nav-link font-body text-lg text-text hover:text-primary transition-colors duration-300 relative pb-1"
+          :class="{ 'text-primary': $route.path === '/' }"
         >
           Home
+          <span class="nav-underline" :class="{ 'active': $route.path === '/' }"></span>
         </RouterLink>
         
         <RouterLink
           to="/gallery"
-          class="font-body text-lg text-text hover:text-primary transition-colors duration-300"
-          :class="{ 'text-primary border-b-2 border-primary': $route.path.startsWith('/gallery') }"
+          class="nav-link font-body text-lg text-text hover:text-primary transition-colors duration-300 relative pb-1"
+          :class="{ 'text-primary': $route.path.startsWith('/gallery') }"
         >
           Gallery
+          <span class="nav-underline" :class="{ 'active': $route.path.startsWith('/gallery') }"></span>
         </RouterLink>
         
         <RouterLink
           to="/about"
-          class="font-body text-lg text-text hover:text-primary transition-colors duration-300"
-          :class="{ 'text-primary border-b-2 border-primary': $route.path === '/about' }"
+          class="nav-link font-body text-lg text-text hover:text-primary transition-colors duration-300 relative pb-1"
+          :class="{ 'text-primary': $route.path === '/about' }"
         >
           About
+          <span class="nav-underline" :class="{ 'active': $route.path === '/about' }"></span>
         </RouterLink>
         
         <RouterLink
           to="/membership"
-          class="font-body text-lg text-text hover:text-primary transition-colors duration-300"
-          :class="{ 'text-primary border-b-2 border-primary': $route.path === '/membership' }"
+          class="nav-link font-body text-lg text-text hover:text-primary transition-colors duration-300 relative pb-1"
+          :class="{ 'text-primary': $route.path === '/membership' }"
         >
           Membership
+          <span class="nav-underline" :class="{ 'active': $route.path === '/membership' }"></span>
         </RouterLink>
         
         <div class="flex items-center gap-4 ml-4 pl-4 border-l border-border">
           <RouterLink
             to="/auth/login"
-            class="font-body text-lg text-text hover:text-primary transition-colors duration-300"
-            :class="{ 'text-primary border-b-2 border-primary': $route.path === '/auth/login' }"
+            class="nav-link font-body text-lg text-text hover:text-primary transition-colors duration-300 relative pb-1"
+            :class="{ 'text-primary': $route.path === '/auth/login' }"
           >
             Login
+            <span class="nav-underline" :class="{ 'active': $route.path === '/auth/login' }"></span>
           </RouterLink>
           
           <RouterLink
@@ -323,5 +328,33 @@ onUnmounted(() => {
 
 .sticky-header.scrolled::before {
   opacity: 1;
+}
+
+/* Navigation link styles */
+.nav-link {
+  outline: none !important;
+}
+
+.nav-link:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover .nav-underline {
+  width: 100%;
+}
+
+.nav-underline.active {
+  width: 100%;
 }
 </style>
