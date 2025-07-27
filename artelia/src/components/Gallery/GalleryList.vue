@@ -46,17 +46,8 @@
 <script setup lang="ts">
 
 import ProtectedImage from '@/components/Protection/ProtectedImage.vue';
+import type { Artwork } from '@/services/artworkService';
 
-interface Artwork {
-  id: string;
-  title: string;
-  artist: string;
-  description: string;
-  imageUrl: string;
-  hall?: string;
-  year?: number;
-  medium?: string;
-}
 
 const props = defineProps<{
   artworks: Artwork[]

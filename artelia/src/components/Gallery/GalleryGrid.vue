@@ -33,17 +33,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import ArtworkCard from './ArtworkCard.vue';
+import type { Artwork } from '@/services/artworkService';
 
-interface Artwork {
-  id: string;
-  title: string;
-  artist: string;
-  description?: string;
-  imageUrl: string;
-  hall?: string;
-  year?: number;
-  medium?: string;
-}
 
 const props = defineProps({
   artworks: {

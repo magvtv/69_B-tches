@@ -63,6 +63,7 @@ function viewArtworkDetails(artwork: Artwork) {
             <div class="flex gap-2 mt-4">
               <span v-if="artwork.year" class="renaissance-badge">{{ artwork.year }}</span>
               <span v-if="artwork.medium" class="renaissance-badge secondary">{{ artwork.medium }}</span>
+              <span v-if="artwork.metadata?.mood" class="renaissance-badge mood">{{ artwork.metadata.mood }}</span>
             </div>
           </div>
         </div>
