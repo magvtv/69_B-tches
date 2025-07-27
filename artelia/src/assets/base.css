@@ -31,11 +31,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Focus styles for accessibility */
-:focus {
-  outline: 2px solid var(--primary-color, #d4af37);
-  outline-offset: 2px;
-}
 
 /* Selection styles */
 ::selection {
