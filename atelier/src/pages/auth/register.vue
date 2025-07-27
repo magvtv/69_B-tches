@@ -1,64 +1,70 @@
 <template>
-  <div class="auth-page">
-    <div class="auth-container">
-      <div class="auth-card">
-        <h1>Register</h1>
-        <p class="auth-subtitle">Join the Atelier community</p>
+  <div class="min-h-screen flex items-center justify-center py-16 px-4">
+    <div class="w-full max-w-md">
+      <div class="bg-background-tertiary p-8 rounded-2xl shadow-renaissance border border-border">
+        <h1 class="text-3xl text-center mb-2 text-text font-serif">Register</h1>
+        <p class="text-center text-text-muted mb-8">Join the Atelier community</p>
         
-        <form @submit.prevent="handleRegister" class="auth-form">
-          <div class="form-group">
-            <label for="name">Full Name</label>
+        <form @submit.prevent="handleRegister" class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-text mb-2">Full Name</label>
             <input
               id="name"
               v-model="name"
               type="text"
               required
               placeholder="Enter your full name"
+              class="renaissance-input w-full"
             />
           </div>
           
-          <div class="form-group">
-            <label for="email">Email</label>
+          <div>
+            <label for="email" class="block text-sm font-medium text-text mb-2">Email</label>
             <input
               id="email"
               v-model="email"
               type="email"
               required
               placeholder="Enter your email"
+              class="renaissance-input w-full"
             />
           </div>
           
-          <div class="form-group">
-            <label for="password">Password</label>
+          <div>
+            <label for="password" class="block text-sm font-medium text-text mb-2">Password</label>
             <input
               id="password"
               v-model="password"
               type="password"
               required
               placeholder="Enter your password"
+              class="renaissance-input w-full"
             />
           </div>
           
-          <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
+          <div>
+            <label for="confirmPassword" class="block text-sm font-medium text-text mb-2">Confirm Password</label>
             <input
               id="confirmPassword"
               v-model="confirmPassword"
               type="password"
               required
               placeholder="Confirm your password"
+              class="renaissance-input w-full"
             />
           </div>
           
-          <div class="form-actions">
-            <RenaissanceButton type="submit" :disabled="loading || !passwordsMatch">
+          <div class="pt-4">
+            <RenaissanceButton type="submit" variant="primary" class="w-full" :disabled="loading || !passwordsMatch">
               {{ loading ? 'Creating account...' : 'Create Account' }}
             </RenaissanceButton>
           </div>
         </form>
         
-        <div class="auth-links">
-          <RouterLink to="/auth/login">Already have an account? Login</RouterLink>
+        <div class="mt-8 space-y-3 text-center">
+          <RouterLink to="/auth/login" class="block text-sm text-primary hover:text-primary-light transition-colors">
+            Already have an account? Login
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -108,97 +114,4 @@ async function handleRegister() {
     loading.value = false;
   }
 }
-</script>
-
-<style scoped>
-.auth-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--background-light) 0%, var(--background-dark) 100%);
-  padding: 2rem;
-}
-
-.auth-container {
-  width: 100%;
-  max-width: 400px;
-}
-
-.auth-card {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.auth-card h1 {
-  text-align: center;
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
-}
-
-.auth-subtitle {
-  text-align: center;
-  color: #666;
-  margin-bottom: 2rem;
-}
-
-.auth-form {
-  margin-bottom: 2rem;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: var(--text-color);
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-}
-
-.form-actions {
-  margin-top: 2rem;
-}
-
-.auth-links {
-  text-align: center;
-}
-
-.auth-links a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.auth-links a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 480px) {
-  .auth-page {
-    padding: 1rem;
-  }
-  
-  .auth-card {
-    padding: 2rem;
-  }
-}
-</style> 
+</script> 
