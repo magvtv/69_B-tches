@@ -1,20 +1,23 @@
 <template>
   <div 
-    class="protected-image-container" 
+    class="relative overflow-hidden rounded"
     :style="{ width: `${width}px`, height: `${height}px` }"
     @contextmenu.prevent
     @dragstart.prevent
     @selectstart.prevent
   >
-    <canvas ref="canvasRef" :width="width" :height="height" class="artwork-canvas" />
+    <canvas ref="canvasRef" :width="width" :height="height" class="block w-full h-full" />
     
-    <div class="protection-overlay" :class="{ active: protectionActive }"></div>
+    <div 
+      class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-500 ease-in-out bg-pattern-protection"
+      :class="{ 'opacity-100': protectionActive }"
+    ></div>
     
-    <div v-if="showWatermark" class="watermark">
+    <div v-if="showWatermark" class="absolute bottom-2.5 right-2.5 font-serif text-sm text-primary opacity-30 pointer-events-none transform -rotate-15 shadow-sm">
       <span>Atelier</span>
     </div>
     
-    <div v-if="debug" class="protection-level-indicator">
+    <div v-if="debug" class="absolute top-2.5 left-2.5 bg-black/50 text-primary px-2 py-1 rounded text-xs pointer-events-none">
       {{ protectionLevel }}
     </div>
   </div>
@@ -202,58 +205,9 @@ function applySegmentation(ctx: CanvasRenderingContext2D) {
 }
 </script>
 
-<style scoped>
-.protected-image-container {
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.artwork-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.protection-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+<style>
+/* Add this to your global CSS or in a component where it's needed */
+.bg-pattern-protection {
   background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 5v1H5V0zm1 5v1H5v-1h1z'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.protection-overlay.active {
-  opacity: 1;
-}
-
-.watermark {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  color: var(--primary-color);
-  opacity: 0.3;
-  pointer-events: none;
-  transform: rotate(-15deg);
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-.protection-level-indicator {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(0, 0, 0, 0.5);
-  color: var(--primary-color);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  pointer-events: none;
 }
 </style>

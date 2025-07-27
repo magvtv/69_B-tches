@@ -1,6 +1,6 @@
 <template>
   <div
-    class="anti-scrape-layer"
+    class="relative w-full h-full select-none"
     @contextmenu.prevent
     @dragstart.prevent
     @selectstart.prevent
@@ -10,15 +10,18 @@
     @keydown="trackKeyboardBehavior"
   >
     <slot />
-    <div class="protection-overlay" :class="{ active: isProtectionActive }"></div>
-    <div v-if="showWatermark" class="watermark">
+    <div 
+      class="absolute inset-0 pointer-events-none bg-pattern-protection transition-opacity duration-300"
+      :class="{ 'opacity-100': isProtectionActive, 'opacity-0': !isProtectionActive }"
+    ></div>
+    <div v-if="showWatermark" class="absolute bottom-2.5 right-2.5 font-serif text-sm text-primary opacity-30 pointer-events-none transform -rotate-15 shadow-sm">
       <span>Atelier</span>
     </div>
-    <div v-if="showWarning" class="scrape-warning">
-      <div class="warning-content">
-        <div class="warning-icon">⚠️</div>
-        <p>Suspicious behavior detected.</p>
-        <p class="warning-detail">This artwork is protected against unauthorized copying.</p>
+    <div v-if="showWarning" class="absolute inset-0 bg-black/80 flex items-center justify-center z-50 animate-fadeIn">
+      <div class="bg-background-secondary border border-primary p-8 rounded-lg text-center max-w-[80%]">
+        <div class="text-3xl mb-4">⚠️</div>
+        <p class="mb-2">Suspicious behavior detected.</p>
+        <p class="text-sm text-text-muted">This artwork is protected against unauthorized copying.</p>
       </div>
     </div>
   </div>
@@ -152,79 +155,13 @@ function handleGlobalKeydown(event: KeyboardEvent) {
 }
 </script>
 
-<style scoped>
-.anti-scrape-layer {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.protection-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 5v1H5V0zm1 5v1H5v-1h1z'/%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.protection-overlay.active {
-  opacity: 1;
-}
-
-.watermark {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  color: var(--primary-color);
-  opacity: 0.3;
-  pointer-events: none;
-  transform: rotate(-15deg);
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-.scrape-warning {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  animation: fadeIn 0.3s ease;
-}
-
-.warning-content {
-  background: var(--background-secondary);
-  border: 1px solid var(--primary-color);
-  padding: 2rem;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 80%;
-}
-
-.warning-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.warning-detail {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-}
-
+<style>
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease;
 }
 </style>

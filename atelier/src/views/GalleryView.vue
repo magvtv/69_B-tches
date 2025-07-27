@@ -1,60 +1,79 @@
 <template>
-  <div class="gallery-view">
-    <div class="gallery-header">
+  <div class="min-h-screen">
+    <div class="bg-background-secondary py-12 md:py-16 mb-8 border-b border-border">
       <div class="container">
-        <h1 class="gallery-title">Atelier Digital Art Sanctuary</h1>
-        <p class="gallery-subtitle serif-text">A curated collection of contemporary feminist art with Renaissance aesthetics</p>
+        <h1 class="font-serif text-4xl md:text-5xl text-primary font-bold tracking-wide text-center mb-4">
+          Atelier Digital Art Sanctuary
+        </h1>
+        <p class="font-serif text-lg text-text-muted max-w-3xl mx-auto text-center mb-8">
+          A curated collection of contemporary feminine art with Renaissance aesthetics
+        </p>
         
-        <div class="gallery-filters">
-          <div class="filter-group">
-            <label for="hall-filter">Hall:</label>
-            <select id="hall-filter" v-model="selectedHall" class="renaissance-select">
-              <option value="all">All Halls</option>
-              <option value="renaissance">Renaissance</option>
-              <option value="contemporary">Contemporary</option>
-              <option value="chiaroscuro">Chiaroscuro</option>
-            </select>
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 p-4 bg-background-tertiary rounded-lg border border-border">
+          <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+            <div class="flex items-center gap-2 w-full md:w-auto">
+              <label for="hall-filter" class="text-text-muted text-sm">Hall:</label>
+              <select 
+                id="hall-filter" 
+                v-model="selectedHall" 
+                class="bg-gray-900 text-white border border-gray-600 px-4 py-2 rounded font-serif cursor-pointer transition-all duration-300 hover:border-yellow-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 w-full md:w-auto"
+              >
+                <option value="all">All Halls</option>
+                <option value="renaissance">Renaissance</option>
+                <option value="contemporary">Contemporary</option>
+                <option value="chiaroscuro">Chiaroscuro</option>
+              </select>
+            </div>
+            
+            <div class="flex items-center gap-2 w-full md:w-auto">
+              <label for="sort-filter" class="text-text-muted text-sm">Sort By:</label>
+              <select 
+                id="sort-filter" 
+                v-model="sortBy" 
+                class="bg-gray-900 text-white border border-gray-600 px-4 py-2 rounded font-serif cursor-pointer transition-all duration-300 hover:border-yellow-500 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 w-full md:w-auto"
+              >
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="title">Title</option>
+                <option value="artist">Artist</option>
+              </select>
+            </div>
           </div>
           
-          <div class="filter-group">
-            <label for="sort-filter">Sort By:</label>
-            <select id="sort-filter" v-model="sortBy" class="renaissance-select">
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="title">Title</option>
-              <option value="artist">Artist</option>
-            </select>
-          </div>
-          
-          <div class="view-toggle">
+          <div class="flex gap-2 self-center md:self-auto">
             <button 
-              class="view-toggle-btn" 
-              :class="{ active: viewMode === 'grid' }"
+              class="w-10 h-10 flex items-center justify-center bg-gray-900 text-gray-400 border border-gray-600 rounded transition-all duration-300"
+              :class="{ 'bg-yellow-500 text-gray-900 border-yellow-500': viewMode === 'grid' }"
               @click="viewMode = 'grid'"
             >
-              <span class="toggle-icon">▦</span>
+              <span class="text-xl">▦</span>
             </button>
             <button 
-              class="view-toggle-btn" 
-              :class="{ active: viewMode === 'list' }"
+              class="w-10 h-10 flex items-center justify-center bg-gray-900 text-gray-400 border border-gray-600 rounded transition-all duration-300"
+              :class="{ 'bg-yellow-500 text-gray-900 border-yellow-500': viewMode === 'list' }"
               @click="viewMode = 'list'"
             >
-              <span class="toggle-icon">≡</span>
+              <span class="text-xl">≡</span>
             </button>
           </div>
         </div>
       </div>
     </div>
     
-    <div class="gallery-content container">
-      <div v-if="loading" class="gallery-loading">
-        <div class="loading-spinner"></div>
+    <div class="container py-8">
+      <div v-if="loading" class="flex flex-col items-center justify-center py-16 text-text-muted">
+        <div class="w-10 h-10 border-3 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
         <p>Loading exquisite artworks...</p>
       </div>
       
-      <div v-else-if="filteredArtworks.length === 0" class="gallery-empty">
+      <div v-else-if="filteredArtworks.length === 0" class="text-center py-16 text-text-muted">
         <p>No artworks found in this hall.</p>
-        <button class="renaissance-btn" @click="resetFilters">View All Halls</button>
+        <button 
+          class="mt-4 px-6 py-3 bg-transparent border border-primary text-primary rounded-md font-serif transition-all duration-300 hover:bg-primary hover:text-background-primary"
+          @click="resetFilters"
+        >
+          View All Halls
+        </button>
       </div>
       
       <GalleryGrid 
@@ -172,181 +191,3 @@ onMounted(async () => {
   }, 1000);
 });
 </script>
-
-<style scoped>
-.gallery-view {
-  min-height: 100vh;
-}
-
-.gallery-header {
-  background: var(--background-secondary);
-  padding: 3rem 0 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.gallery-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-align: center;
-}
-
-.gallery-subtitle {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  max-width: 700px;
-  margin: 0 auto 2rem;
-  text-align: center;
-}
-
-.gallery-filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  padding: 1rem;
-  background: var(--background-tertiary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-}
-
-.filter-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.filter-group label {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.renaissance-select {
-  background: var(--background-primary);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-family: 'Playfair Display', serif;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.renaissance-select:hover {
-  border-color: var(--primary-color);
-}
-
-.renaissance-select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
-}
-
-.view-toggle {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.view-toggle-btn {
-  background: var(--background-primary);
-  color: var(--text-muted);
-  border: 1px solid var(--border-color);
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.view-toggle-btn.active {
-  background: var(--primary-color);
-  color: var(--background-primary);
-  border-color: var(--primary-color);
-}
-
-.toggle-icon {
-  font-size: 1.2rem;
-}
-
-.gallery-content {
-  padding: 2rem 0;
-}
-
-.gallery-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 0;
-  color: var(--text-muted);
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(212, 175, 55, 0.3);
-  border-radius: 50%;
-  border-top-color: var(--primary-color);
-  animation: spin 1s ease-in-out infinite;
-  margin-bottom: 1rem;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.gallery-empty {
-  text-align: center;
-  padding: 4rem 0;
-  color: var(--text-muted);
-}
-
-.renaissance-btn {
-  background: transparent;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  font-family: 'Playfair Display', serif;
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.renaissance-btn:hover {
-  background: var(--primary-color);
-  color: var(--background-primary);
-}
-
-@media (max-width: 768px) {
-  .gallery-filters {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
-  }
-  
-  .filter-group {
-    justify-content: space-between;
-  }
-  
-  .view-toggle {
-    align-self: center;
-    margin-top: 0.5rem;
-  }
-  
-  .gallery-title {
-    font-size: 2rem;
-  }
-  
-  .gallery-subtitle {
-    font-size: 1rem;
-  }
-}
-</style>
