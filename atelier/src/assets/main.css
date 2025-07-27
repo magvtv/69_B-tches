@@ -40,6 +40,10 @@
   --gradient-copper: linear-gradient(135deg, #b87333 0%, #8b4513 100%);
   --gradient-highlight: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(184, 115, 51, 0.1) 100%);
   
+  /* Font families */
+  --font-family-body: 'Cormorant Garamond', serif;
+  --font-family-display: 'Cinzel', serif;
+  
   /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -60,6 +64,7 @@
 body {
   background: var(--background-primary);
   color: var(--text-color);
+  font-family: var(--font-family-body);
   background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4af37' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
   background-attachment: fixed;
   margin: 0;
@@ -84,7 +89,7 @@ body {
   border: 1px solid var(--primary-color);
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-md);
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-family-body);
   font-size: 1rem;
   transition: all 0.3s ease;
   position: relative;
@@ -105,7 +110,7 @@ body {
   width: 0;
   height: 100%;
   background: var(--primary-color);
-  transition: all 0.3s ease;
+  transition: width 0.3s ease;
   z-index: -1;
 }
 
@@ -124,144 +129,153 @@ body {
 
 .renaissance-btn.primary:hover {
   background: var(--primary-light);
+  border-color: var(--primary-light);
 }
 
 .renaissance-btn.secondary {
+  background: var(--secondary-color);
+  color: var(--background-primary);
   border-color: var(--secondary-color);
-  color: var(--secondary-color);
 }
 
 .renaissance-btn.secondary::before {
-  background: var(--secondary-color);
+  background: var(--secondary-light);
 }
 
 /* Card styles */
 .renaissance-card {
   background: var(--background-tertiary);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 10px 30px var(--shadow-medium);
-  transition: all 0.3s ease;
   border: 1px solid var(--border-color);
-  position: relative;
-  z-index: 1;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-medium);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .renaissance-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px var(--shadow-heavy);
-  border-color: var(--border-light);
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-heavy);
+  transform: translateY(-2px);
 }
 
 .renaissance-card-header {
-  padding: var(--space-lg);
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
 }
 
 .renaissance-card-body {
-  padding: var(--space-lg);
+  color: var(--text-color);
 }
 
 .renaissance-card-footer {
-  padding: var(--space-lg);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border-color);
 }
 
-/* Form elements */
+/* Input styles */
 .renaissance-input {
   background: var(--background-secondary);
   border: 1px solid var(--border-color);
   color: var(--text-color);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
-  font-family: 'Inter', sans-serif;
-  width: 100%;
+  font-family: var(--font-family-body);
+  font-size: 1rem;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .renaissance-input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
   outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
 .renaissance-input::placeholder {
   color: var(--text-muted);
 }
 
+/* Select styles */
 .renaissance-select {
   background: var(--background-secondary);
   border: 1px solid var(--border-color);
   color: var(--text-color);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
-  font-family: 'Inter', sans-serif;
-  width: 100%;
+  font-family: var(--font-family-body);
+  font-size: 1rem;
   transition: all 0.3s ease;
+  width: 100%;
+  cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4af37' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d4af37' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
   background-repeat: no-repeat;
-  background-position: right 1rem center;
+  background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
 }
 
 .renaissance-select:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
   outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
-/* Dividers */
+/* Divider styles */
 .renaissance-divider {
   height: 1px;
   background: var(--border-color);
-  margin: var(--space-lg) 0;
+  margin: 2rem 0;
   position: relative;
 }
 
 .renaissance-divider.fancy::before {
-  content: "❧";
+  content: '';
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--background-tertiary);
-  padding: 0 var(--space-md);
-  color: var(--primary-color);
-  font-size: 1.2rem;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--gradient-gold);
+  border-radius: 1px;
 }
 
-/* Badges */
+/* Badge styles */
 .renaissance-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
   font-weight: 500;
   background: var(--primary-color);
   color: var(--background-primary);
+  border: 1px solid var(--primary-color);
 }
 
 .renaissance-badge.secondary {
   background: var(--secondary-color);
+  color: var(--background-primary);
+  border-color: var(--secondary-color);
 }
 
 .renaissance-badge.outline {
   background: transparent;
-  border: 1px solid var(--primary-color);
   color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-/* Responsive design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .renaissance-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
   }
   
   .renaissance-card-header,
-  .renaissance-card-body,
-  .renaissance-card-footer {
-    padding: var(--space-md);
+  .renaissance-card-body {
+    padding: 1rem;
   }
 }

@@ -40,9 +40,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['Playfair Display', 'serif'],
         body: ['Cormorant Garamond', 'serif'],
-        sans: ['Inter', 'sans-serif'],
         display: ['Cinzel', 'serif'],
       },
       boxShadow: {

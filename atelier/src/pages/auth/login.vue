@@ -2,7 +2,7 @@
   <div class="min-h-screen flex items-center justify-center py-16 px-4">
     <div class="w-full max-w-md">
       <div class="bg-background-tertiary p-8 rounded-2xl shadow-renaissance border border-border">
-        <h1 class="text-3xl text-center mb-2 text-text font-serif">Login</h1>
+        <h1 class="text-3xl text-center mb-2 text-text font-display">Login</h1>
         <p class="text-center text-text-muted mb-8">Welcome back to the Atelier</p>
         
         <form @submit.prevent="handleLogin" class="space-y-6">
