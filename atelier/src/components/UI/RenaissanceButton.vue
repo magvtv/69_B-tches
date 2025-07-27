@@ -1,7 +1,7 @@
 <template>
   <button 
     :class="[
-      'inline-flex items-center justify-center px-6 py-3 rounded-md font-serif text-base transition-all duration-300 cursor-pointer relative overflow-hidden z-10',
+      'inline-flex items-center justify-center px-6 py-3 rounded-md font-body text-base transition-all duration-300 cursor-pointer relative overflow-hidden z-10',
       {
         'bg-primary text-background-primary border border-primary hover:bg-primary-light hover:border-primary-light': variant === 'primary' && !outline,
         'bg-secondary text-background-primary border border-secondary hover:bg-secondary-light hover:border-secondary-light': variant === 'secondary' && !outline,
