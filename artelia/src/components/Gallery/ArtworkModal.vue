@@ -1,21 +1,22 @@
 <template>
   <Teleport to="body">
     <div v-if="visible" class="fixed inset-0 bg-black/85 flex items-center justify-center z-50 backdrop-blur-sm p-4 md:p-8" @click.self="close">
-      <div class="bg-background-secondary border border-border rounded-lg max-w-6xl w-full relative shadow-2xl overflow-hidden">
+      <div class="bg-background-secondary border border-border rounded-lg max-w-6xl w-full max-h-[90vh] relative shadow-2xl overflow-hidden">
         <button class="absolute top-6 right-6 bg-transparent border-none z-10 w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 hover:bg-primary/10" @click="close">
           <span class="text-3xl text-primary leading-none">×</span>
         </button>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2">
-          <div class="bg-gray-900 p-4 md:p-8 flex items-center justify-center">
-            <div class="relative border border-border shadow-renaissance" :style="{ transform: `scale(${zoomLevel})` }">
+        <div class="grid grid-cols-1 lg:grid-cols-2 max-h-[90vh] overflow-hidden">
+          <div class="bg-gray-900 p-4 md:p-8 flex items-center justify-center overflow-hidden">
+            <div class="relative border border-border shadow-renaissance max-w-full max-h-[70vh] overflow-hidden" :style="{ transform: `scale(${zoomLevel})` }">
               <ProtectedImage
                 :image-url="artwork.imageUrl"
-                :width="600"
-                :height="700"
+                :width="500"
+                :height="600"
                 protection-level="advanced"
                 :show-watermark="true"
                 @loaded="artworkLoaded = true"
+                class="max-w-full max-h-full object-contain"
               />
               <div v-if="!artworkLoaded" class="absolute inset-0 bg-black/70 flex items-center justify-center">
                 <div class="w-10 h-10 border-3 border-primary/30 border-t-primary rounded-full animate-spin"></div>
@@ -29,7 +30,7 @@
             </div>
           </div>
           
-          <div class="p-6 md:p-12 flex flex-col">
+          <div class="p-6 md:p-12 flex flex-col overflow-y-auto max-h-[90vh]">
             <h2 class="font-serif text-3xl md:text-4xl text-primary font-bold mb-2">{{ artwork.title }}</h2>
             <p class="font-serif text-lg text-text italic mb-8">{{ artwork.artist }}</p>
             
