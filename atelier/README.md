@@ -1,4 +1,4 @@
-# 69_B*tches: A Digital Sanctuary for Feminine Expression
+# Atelier: A Digital Sanctuary for Feminine Expression
 
 An advanced digital art platform with sophisticated anti-scraping architecture and cryptographic content protection
 
