@@ -144,6 +144,23 @@ button {
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
+/* Text color utilities */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.text-text {
+  color: var(--text-color) !important;
+}
+
+.text-text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-background-primary {
+  color: var(--background-primary) !important;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
