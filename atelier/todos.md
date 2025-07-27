@@ -1,13 +1,24 @@
-- [] Get a better logo for the project
-- [] 
 
 
 ## UI Fixes
 - [] make the auth pages show better font contrast
-- [] improve the "2025 atelier digital" section on footer to be well-centered
-- [] atelier on header component to navigate to home
-- [] change the 'explore gallery' to navigate to actual /gallery page
-- [] fix view details on hero section featured images
+- [] fix view details on hero section featured images into a carousel
+- [] need to fix the artwork modal functionality (too large a height)
+
+
+## Some Good Changes To Make
+- [] Get a better logo for the project
+- [] add relevant description to aligns to the artwork shown
+- [] remove the share artwork part
+- [] in "related artwork" there is a way the cards seem to leave a gap on the right side
+- [] add to cart feature with stripe checkout
+- [] add a feature to enable and disable view of entered password
+- [] have a manner of updating the index.html to be "Atelier | Home" "Atelier | Membership" 
+- [] currency conversion logic/algorithm
+- [] have unique id to identify each artwork (think of it like a barcode)  
+- [] need to implement clerk auth for login or registering
+- [] store the user data in a free database
+- [] create a newsletter? not sure about this
 
 
 ## Later Features
