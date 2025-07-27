@@ -65,8 +65,7 @@ class ArtworkService {
           medium: 'Digital Art',
           hall: 'Renaissance',
           price: 45000,
-          dimensions: '800x600px',
-          imageUrl: '/art-vault/bitch-1.jpeg'
+          dimensions: '800x600px'
         }
         // More fallback artworks can be added here
       ];

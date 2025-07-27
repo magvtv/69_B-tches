@@ -7,7 +7,7 @@
     <div class="relative w-full overflow-hidden border-b border-border shadow-renaissance bg-background-tertiary rounded-t-lg"
          :style="{ height: `${height}px` }">
       <ProtectedImage
-        :image-url="artwork.imageUrl"
+        :image-url="artwork.assets.original"
         :width="width"
         :height="height"
         :protection-level="protectionLevel"

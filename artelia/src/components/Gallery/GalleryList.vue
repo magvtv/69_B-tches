@@ -13,7 +13,7 @@
       >
         <div class="w-full md:w-[150px] h-[150px] overflow-hidden rounded">
           <ProtectedImage 
-            :image-url="artwork.imageUrl" 
+            :image-url="artwork.assets.original" 
             :width="150" 
             :height="150"
             protection-level="basic"

@@ -13,7 +13,7 @@
         >
           <div class="relative aspect-[16/9] overflow-hidden">
             <img 
-              :src="artwork.imageUrl" 
+              :src="artwork.assets.original" 
               :alt="artwork.title"
               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
@@ -81,17 +81,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-
-interface Artwork {
-  id: string;
-  title: string;
-  artist: string;
-  description?: string;
-  imageUrl: string;
-  hall?: string;
-  year?: number;
-  medium?: string;
-}
+import type { Artwork } from '@/services/artworkService';
 
 const props = defineProps({
   artworks: {
