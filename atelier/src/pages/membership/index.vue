@@ -1,13 +1,15 @@
 <template>
-  <div class="membership">
-    <div class="container">
-      <h1>Membership Tiers</h1>
-      <p class="membership-intro">
+  <div class="py-16 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-4xl md:text-5xl text-center mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-display">
+        Membership Tiers
+      </h1>
+      <p class="text-lg text-text-muted text-center mb-12 max-w-2xl mx-auto">
         Join our exclusive community and gain access to premium features, early access to new collections, 
         and special events.
       </p>
       
-      <div class="membership-tiers">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <MembershipTier
           v-for="tier in membershipTiers"
           :key="tier.id"
@@ -61,48 +63,4 @@ function subscribeToTier(tierId: string) {
 }
 </script>
 
-<style scoped>
-.membership {
-  padding: 4rem 0;
-  background: linear-gradient(135deg, var(--background-light) 0%, var(--background-dark) 100%);
-  min-height: 100vh;
-}
-
-.membership h1 {
-  text-align: center;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.membership-intro {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 3rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.membership-tiers {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .membership {
-    padding: 2rem 0;
-  }
-  
-  .membership-tiers {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-</style> 
+ 
