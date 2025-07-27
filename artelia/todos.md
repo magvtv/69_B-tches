@@ -34,7 +34,10 @@
 - [] Add to cart with Stripe checkout
 - [] Create a newsletter for the art drops? Not so sure about this
 
-
+## Strategic next steps  
+• Decide on backend/auth stack early (Clerk vs Supabase vs custom) because many later todos depend on it.  
+• Sketch data schema for artworks (ID, metadata, “emotional” fields) so front-end can start integrating unique IDs.  
+• Plan anti-scraping features (canvas rendering, watermarking) up front—affects component design.
 
 # TECHNICAL DEBT
 - [] improve how the artwork modal renders on smaller screens. allow user to zoomin and zoomout as well.
