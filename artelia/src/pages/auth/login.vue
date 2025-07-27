@@ -20,18 +20,16 @@
           
           <div>
             <label for="password" class="block text-sm font-medium text-text mb-2">Password</label>
-            <input
+            <PasswordInput
               id="password"
               v-model="password"
-              type="password"
-              required
               placeholder="Enter your password"
-              class="renaissance-input w-full"
+              :required="true"
             />
           </div>
           
           <div class="pt-4">
-            <RenaissanceButton type="submit" variant="primary" class="w-full" :disabled="loading">
+            <RenaissanceButton type="submit" variant="primary" class="w-full" :disabled="loading || !isFormValid">
               {{ loading ? 'Logging in...' : 'Login' }}
             </RenaissanceButton>
           </div>
@@ -51,14 +49,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import RenaissanceButton from '@/components/UI/RenaissanceButton.vue';
+import PasswordInput from '@/components/UI/PasswordInput.vue';
 
 const router = useRouter();
 const email = ref('');
 const password = ref('');
 const loading = ref(false);
+
+const isFormValid = computed(() => {
+  return email.value.trim() !== '' && password.value.trim() !== '' && 
+         email.value.includes('@') && email.value.includes('.');
+});
 
 async function handleLogin() {
   loading.value = true;

@@ -32,30 +32,29 @@
           
           <div>
             <label for="password" class="block text-sm font-medium text-text mb-2">Password</label>
-            <input
+            <PasswordInput
               id="password"
               v-model="password"
-              type="password"
-              required
               placeholder="Enter your password"
-              class="renaissance-input w-full"
+              :required="true"
             />
           </div>
           
           <div>
             <label for="confirmPassword" class="block text-sm font-medium text-text mb-2">Confirm Password</label>
-            <input
+            <PasswordInput
               id="confirmPassword"
               v-model="confirmPassword"
-              type="password"
-              required
               placeholder="Confirm your password"
-              class="renaissance-input w-full"
+              :required="true"
             />
+            <p v-if="confirmPassword && !passwordsMatch" class="text-red-500 text-sm mt-1">
+              Passwords do not match
+            </p>
           </div>
           
           <div class="pt-4">
-            <RenaissanceButton type="submit" variant="primary" class="w-full" :disabled="loading || !passwordsMatch">
+            <RenaissanceButton type="submit" variant="primary" class="w-full" :disabled="loading || !isFormValid">
               {{ loading ? 'Creating account...' : 'Create Account' }}
             </RenaissanceButton>
           </div>
@@ -75,6 +74,7 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import RenaissanceButton from '@/components/UI/RenaissanceButton.vue';
+import PasswordInput from '@/components/UI/PasswordInput.vue';
 
 const router = useRouter();
 const name = ref('');
@@ -85,6 +85,15 @@ const loading = ref(false);
 
 const passwordsMatch = computed(() => {
   return password.value && confirmPassword.value && password.value === confirmPassword.value;
+});
+
+const isFormValid = computed(() => {
+  return name.value.trim() !== '' && 
+         email.value.trim() !== '' && 
+         email.value.includes('@') && email.value.includes('.') &&
+         password.value.trim() !== '' && 
+         password.value.length >= 6 &&
+         passwordsMatch.value;
 });
 
 async function handleRegister() {
