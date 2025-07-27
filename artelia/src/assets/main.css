@@ -82,6 +82,16 @@ body {
   z-index: 1;
 }
 
+/* Smooth scrolling for sticky navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure proper spacing for sticky header */
+body {
+  padding-top: 0; /* Remove any default padding since we're using sticky positioning */
+}
+
 /* Enhanced button styles */
 .renaissance-btn {
   background: transparent;

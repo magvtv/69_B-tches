@@ -1,10 +1,14 @@
 <template>
-  <header class="bg-background-secondary border-b border-border shadow-renaissance relative z-10">
+  <header 
+    class="sticky-header bg-background-secondary border-b border-border shadow-renaissance relative z-50 transition-all duration-300"
+    :class="{ 'scrolled': isScrolled }"
+  >
     <div class="flex items-center justify-between px-4 md:px-8 py-4 max-w-7xl mx-auto">
       <!-- Logo -->
       <div class="flex items-center gap-4">
         <RouterLink to="/" class="no-underline hover:no-underline">
-          <h1 class="font-display font-bold text-2xl text-primary tracking-wide">Artelia</h1>
+          <h1 class="font-display font-bold text-2xl text-primary tracking-wide transition-all duration-300"
+              :class="{ 'text-xl': isScrolled }">Artelia</h1>
         </RouterLink>
       </div>
       
@@ -186,6 +190,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const isMobileMenuOpen = ref(false);
+const isScrolled = ref(false);
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
@@ -201,6 +206,11 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false;
   document.body.style.overflow = '';
+};
+
+// Handle scroll events for sticky navigation effects
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 50;
 };
 
 // Close menu on escape key
@@ -220,16 +230,37 @@ const handleResize = () => {
 onMounted(() => {
   document.addEventListener('keydown', handleEscape);
   window.addEventListener('resize', handleResize);
+  window.addEventListener('scroll', handleScroll);
+  
+  // Check initial scroll position
+  handleScroll();
 });
 
 onUnmounted(() => {
   document.removeEventListener('keydown', handleEscape);
   window.removeEventListener('resize', handleResize);
+  window.removeEventListener('scroll', handleScroll);
   document.body.style.overflow = '';
 });
 </script>
 
 <style scoped>
+/* Sticky Navigation Styles */
+.sticky-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.sticky-header.scrolled {
+  background: rgba(30, 30, 30, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom-color: rgba(212, 175, 55, 0.2);
+}
+
 /* Mobile Navigation Styles */
 .mobile-nav-link {
   @apply relative px-8 py-4 rounded-lg transition-all duration-300 ease-in-out;
@@ -274,5 +305,23 @@ onUnmounted(() => {
   .mobile-nav-link span {
     @apply text-2xl;
   }
+}
+
+/* Enhanced scroll effects */
+.sticky-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sticky-header.scrolled::before {
+  opacity: 1;
 }
 </style>
