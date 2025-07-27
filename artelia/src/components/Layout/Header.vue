@@ -72,7 +72,7 @@
       <!-- Mobile Menu Toggle -->
       <button
         @click="toggleMobileMenu"
-        class="lg:hidden relative w-8 h-8 flex flex-col justify-center items-center group z-50"
+        class="lg:hidden relative w-8 h-8 flex flex-col justify-center items-center group z-[60]"
         :class="{ 'menu-open': isMobileMenuOpen }"
         aria-label="Toggle mobile menu"
       >
@@ -100,10 +100,16 @@
       </button>
     </div>
     
-    <!-- Mobile Menu Overlay -->
+    <!-- Gold accent line at bottom -->
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-gold opacity-50"></div>
+  </header>
+  
+  <!-- Mobile Menu Overlay - Moved outside header to avoid z-index conflicts -->
+  <Teleport to="body">
     <div 
-      class="lg:hidden fixed inset-0 bg-background-primary/95 backdrop-blur-md z-40 transition-all duration-500 ease-in-out"
-      :class="{ 'opacity-100 pointer-events-auto': isMobileMenuOpen, 'opacity-0 pointer-events-none': !isMobileMenuOpen }"
+      v-if="isMobileMenuOpen || !isMobileMenuOpen" 
+      class="lg:hidden fixed inset-0 bg-background-primary/95 backdrop-blur-md transition-all duration-500 ease-in-out"
+      :class="{ 'opacity-100 pointer-events-auto z-[9999]': isMobileMenuOpen, 'opacity-0 pointer-events-none z-[-1]': !isMobileMenuOpen }"
       @click="closeMobileMenu"
     >
       <!-- Mobile Menu Content -->
@@ -111,6 +117,7 @@
         class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center"
         :class="{ 'translate-y-0': isMobileMenuOpen, 'translate-y-8': !isMobileMenuOpen }"
         style="transition: transform 0.5s ease-in-out 0.1s"
+        @click.stop
       >
         <!-- Decorative Border -->
         <div class="absolute inset-4 border border-primary/20 rounded-lg pointer-events-none"></div>
@@ -185,10 +192,7 @@
         <div class="absolute bottom-8 right-8 w-8 h-8 border border-primary/20 rounded-full"></div>
       </div>
     </div>
-    
-    <!-- Gold accent line at bottom -->
-    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-gold opacity-50"></div>
-  </header>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
