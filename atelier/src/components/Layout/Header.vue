@@ -51,7 +51,7 @@
           
           <RouterLink
             to="/auth/register"
-            class="renaissance-btn secondary text-sm px-4 py-2"
+            class="font-serif text-sm px-4 py-2 bg-transparent border border-primary text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300 rounded-md"
           >
             Register
           </RouterLink>
