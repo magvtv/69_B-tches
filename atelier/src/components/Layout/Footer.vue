@@ -8,7 +8,7 @@
       </div>
       
       <div class="text-center">
-        <p class="text-sm mb-2">&copy; 2025 Atelier Digital Art Sanctuary</p>
+        <p class="text-sm mb-2">&copy; 2025 Artelia Digital Art Sanctuary</p>
         <p class="font-serif italic text-primary text-sm">The Confluence of Art and the Renaissance</p>
       </div>
       
