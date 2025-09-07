@@ -36,3 +36,8 @@ coverage
 test-results/
 playwright-report/
 package-lock.json
+
+# docs/
+# docs/*.txt
+art-vault/
+.env
