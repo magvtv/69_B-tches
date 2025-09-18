@@ -28,7 +28,8 @@
 - [] a progress bar to help her track how she is moving in each challenge or level
 - [] IP restricting implementation should be in a separate file, outside the pages. be able to detect her WiFi IP address, save it and never open the experience elsewhere unless she is at home. 
 riding on that scarcity factor. get the wifi name to know this in advance
-- 
+- [] rename the game levels into better names (multi-name issues)
+
 
 ## HOT FIXES WITH THE AESTHETICS
 - [] the container content on the landing page is not looking great on tab view
