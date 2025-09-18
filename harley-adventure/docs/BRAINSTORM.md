@@ -26,14 +26,6 @@ This is *so* good — you’re basically building a **playful labyrinth that’s
 * **Playful**: More memes, silly games, funny GIFs, quirky challenges.
 * **Love-Tension**: Rewards that are flirty (a hint at something IRL), cheeky dares (“Next round: you cook for me”), or pseudo-“danger” vibes (“You’ve triggered the *Chaos Mode*. Good luck surviving me.”).
 
----
-
-### ⚡ Top-Guy Frame
-
-You don’t position this as “I built you a website” (too needy). Instead:
-
-* **Your Frame**: “I got bored, so I coded a game. You’re the test subject. If you rage-quit, I’ll mock you forever.”
-* Keeps you in playful, challenging, *effortless* mode. She feels chosen, not like you’re seeking approval.
 
 ---
 
