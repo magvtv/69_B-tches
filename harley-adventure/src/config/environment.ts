@@ -38,14 +38,14 @@ export const isDebugMode = () => config.debugMode && config.isDevelopment
 export const shouldShowDebugPanel = () => config.isDevelopment && config.tracking.showDebugPanel
 
 // Logging helper that respects environment settings
-export const debugLog = (message: string, data?: any) => {
+export const debugLog = (message: string, data?: unknown) => {
   if (isDebugMode()) {
-    console.log(`🔍 [HARLEY-TRACKING] ${message}`, data || '')
+    console.log(`[HARLEY-TRACKING] ${message}`, data || '')
   }
 }
 
-export const errorLog = (message: string, error?: any) => {
+export const errorLog = (message: string, error?: unknown) => {
   if (isDebugMode()) {
-    console.error(`❌ [HARLEY-TRACKING] ${message}`, error || '')
+    console.error(`[HARLEY-TRACKING] ${message}`, error || '')
   }
 }
