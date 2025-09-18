@@ -1,5 +1,11 @@
 {
-  "redirects": [
-    { "source": "/((?!$).*)", "destination": "/", "permanent": false }
+  "routes": [
+    { "handle": "filesystem" },
+    {
+      "src": "^/(?!$).*",
+      "status": 302,
+      "headers": { "Location": "/" },
+      "has": [{ "type": "header", "key": "accept", "value": "text/html.*" }]
+    }
   ]
 }
