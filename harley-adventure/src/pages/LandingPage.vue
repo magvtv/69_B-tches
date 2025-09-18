@@ -8,8 +8,8 @@
         </div>
       </header>
 
-      <section class="grid md:grid-cols-2 gap-8 md:gap-12 items-start text-center md:text-left">
-        <div class="md:pr-6">
+      <section class="grid md:grid-cols-2 gap-8 md:gap-12 items-start lg:items-center lg:min-h-[80vh] text-center md:text-left">
+        <div class="md:pr-6 lg:self-center">
           <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
             Welcome To The Circus
           </h2>
@@ -40,7 +40,7 @@
                   <p class="text-gray-300 text-sm">
                     A timebombed birthday quest yenye itaselfdestruct if you do not finish it by Sunday 19th October 2025.
                     Curated such that you must do it only on your home WiFi. Anywhere else, it will auto-lock you out!
-                    Besides, timebombs are your speciality.
+                    Besides, timebombs are your speciality. When to start? Nitakushow 🌚
                   </p>
                 </div>
               </li>
@@ -50,6 +50,7 @@
                   <p class="font-semibold">Everything &amp; Anything</p>
                   <p class="text-gray-300 text-sm">
                     We share a lot in common. Swali ni: How well do you remember everything &amp; anything we have shared Boo?
+                    To help you wreck the quest 🙃
                   </p>
                 </div>
               </li>
@@ -68,7 +69,7 @@
                   <p class="font-semibold">Ati Akona Playlist?</p>
                   <p class="text-gray-300 text-sm">
                     Mi nilijaribu kukusaidia from day one hii sector. Every tune you have been spinning since you met Mr. J...
-                    Zinakungoja on way or another
+                    Zinakungoja one way or another.
                   </p>
                 </div>
               </li>
@@ -78,8 +79,12 @@
                   <p class="font-semibold">Our Kind of Chaos</p>
                   <p class="text-gray-300 text-sm">
                     Candlelight dinners ama blowing up the dinner table and dancing on the ashes?
+                    <br>
                     Love letters ama whispered madness in the dark?
-                    Holding each other ama devouring each other
+                    <br>
+                    Holding each other ama devouring each other? 
+                    <br>
+                    Guess we'll never know.
                   </p>
                 </div>
               </li>
