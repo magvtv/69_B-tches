@@ -163,7 +163,7 @@ const formatTime = (milliseconds: number) => {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 * {
   margin: 0;
@@ -172,8 +172,16 @@ const formatTime = (milliseconds: number) => {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "DM Sans", sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* DM Sans utility class */
+.dm-sans {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #app {
