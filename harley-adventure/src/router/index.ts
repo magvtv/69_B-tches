@@ -8,8 +8,15 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/game',
-    name: 'Game',
-    component: () => import('@/pages/Game.vue'),
+    component: () => import('@/pages/game/index.vue'),
+    children: [
+      { path: '', name: 'Game', component: () => import('@/pages/Game.vue') },
+      { path: 'level1', name: 'Level1', component: () => import('@/pages/game/Level1.vue') },
+      { path: 'level2', name: 'Level2', component: () => import('@/pages/game/Level2.vue') },
+      { path: 'level3', name: 'Level3', component: () => import('@/pages/game/Level3.vue') },
+      { path: 'level4', name: 'Level4', component: () => import('@/pages/game/Level4.vue') },
+      { path: 'level5', name: 'Level5', component: () => import('@/pages/game/Level5.vue') },
+    ],
   },
 ]
 
@@ -19,6 +26,18 @@ export const router = createRouter({
   scrollBehavior() {
     return { top: 0 }
   },
+})
+
+// Restrict navigation on production domain: allow only root path
+router.beforeEach((to, _from, next) => {
+  const isProd = import.meta.env.PROD
+  const prodDomain = 'that-harley-circus.vercel.app'
+  const onProdDomain = typeof window !== 'undefined' && window.location.hostname === prodDomain
+  if (isProd && onProdDomain && to.path !== '/') {
+    next({ path: '/' })
+  } else {
+    next()
+  }
 })
 
 export default router
