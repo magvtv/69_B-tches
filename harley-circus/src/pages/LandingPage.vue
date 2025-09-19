@@ -21,12 +21,12 @@
             Built only for you by <a href="https://github.com/magvtv" class="text-white">Joker</a>.
           </p>
           <div class="flex justify-center md:justify-start md:mt-2">
-            <router-link
-              to="/"
+            <button
+              @click="goToDemoLevel"
               class="inline-flex items-center justify-center bg-gradient-to-r from-red-600 to-black hover:from-red-700 hover:to-gray-900 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-900/30"
             >
               Let&apos;s Bang, Puddin!
-            </router-link>
+            </button>
           </div>
         </div>
         <div class="relative md:h-full">
@@ -98,7 +98,13 @@
 </template>
 
 <script setup lang="ts">
-// Landing page is static for now
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goToDemoLevel = () => {
+  router.push('/game/level0')
+}
 </script>
 
 <style scoped>
