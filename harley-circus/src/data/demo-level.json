@@ -1,0 +1,613 @@
+{
+  "project": "Phoebe - Joker's Circus (Expanded God-Level JSON)",
+  "source_file": "WhatsApp Chat with Phoebe Mwangi.txt",
+  "levels": [
+    {
+      "level": 0,
+      "title": "Prologue — Puddin' Tease (Demo)",
+      "description": "A tight, emotional hook that proves this circus is about *her* — nicknames, tiny confessions and a couple of baited second-order traps.",
+      "estimatedTime": "10-15 minutes",
+      "difficulty": "Hard (Demo)",
+      "theme": "Nicknames, micro-confessions, motif seeding",
+      "questions": [
+        {
+          "id": 1,
+          "type": "nickname_inference",
+          "question": "I teased you as 'Tito' — you countered with a shorter, identity-savvy tag that hides in your name. Which one did you quietly bless?",
+          "options": ["Tito", "PH", "Phoebs", "Miss Wahito"],
+          "correct_answer": 1,
+          "explanation": "You chose the compact 'PH' — a nickname you liked because it already lives inside your name. :contentReference[oaicite:5]{index=5}",
+          "timeLimit": 45
+        },
+        {
+          "id": 2,
+          "type": "handle_passphrase",
+          "question": "When asked for an IG handle, you gave a playful, slightly naughty string — use it as a filename/key. Which did you give?",
+          "options": ["luv_tit.o", "phoebe_mwangi", "magvtv", "miss_wahito"],
+          "correct_answer": 0,
+          "explanation": "You offered 'luv_tit.o' — perfect as a private passphrase or file-name in the game. :contentReference[oaicite:6]{index=6}",
+          "timeLimit": 60
+        },
+        {
+          "id": 3,
+          "type": "palindrome_motif",
+          "question": "Joker used a short palindrome as a verbal motif that later got turned into a 'private exhibit' metaphor. Which palindrome was it?",
+          "options": ["war is raw", "never odd or even", "step on no pets", "madam im adam"],
+          "correct_answer": 0,
+          "explanation": "The palindrome 'war is raw' became a recurring metaphor (museum/exhibit imagery) in the chat. :contentReference[oaicite:7]{index=7}",
+          "timeLimit": 75
+        },
+        {
+          "id": 4,
+          "type": "second_order_emotion",
+          "question": "Which small, everyday trigger did Joker note would reliably make you suddenly emotional (the 'nuclear explosion' line)?",
+          "options": ["A surprise song", "Any food you love", "Seeing an old schoolmate", "A sunset photo"],
+          "correct_answer": 1,
+          "explanation": "You said that anyone who brings you food you enjoy can cause a strong emotional reaction (tears, etc.). :contentReference[oaicite:8]{index=8}",
+          "timeLimit": 60
+        },
+        {
+          "id": 5,
+          "type": "childhood_trace",
+          "question": "The class-2 juice incident: pick the classmate name that matches the scratched-face story.",
+          "options": ["Jacob Muya", "Jacob Mwangi", "Jacob Otto", "Jacob K"],
+          "correct_answer": 0,
+          "explanation": "Your memory about throwing juice and scratching a boy names Jacob Muya appears in the chat. :contentReference[oaicite:9]{index=9}",
+          "timeLimit": 75
+        },
+        {
+          "id": 6,
+          "type": "micro_bake",
+          "question": "Which humble baked item did you claim you could make perfectly (a tactile reward hint)?",
+          "options": ["Chip cookies or flapjacks", "Cheesecake", "Croissants", "Brownies"],
+          "correct_answer": 0,
+          "explanation": "You mentioned chip cookies or flapjacks as your baking specialty — use this as a selfie-for-reward mechanic. :contentReference[oaicite:10]{index=10}",
+          "timeLimit": 50
+        },
+        {
+          "id": 7,
+          "type": "edited_text_clue",
+          "question": "Joker likes to 'breadcrumb' a future payoff by promising a 'director's cut' if you're patient — which phrase exactly hinted at this long-game tease?",
+          "options": ["'maybe one day you'll get the director's cut'", "'I'll reveal everything now'", "'no spoilers'", "'the director is gone'"],
+          "correct_answer": 0,
+          "explanation": "The promise 'if you're patient maybe one day you'll get the director's cut' appears in chat and is ideal as a replay incentive. :contentReference[oaicite:11]{index=11}",
+          "timeLimit": 50
+        },
+        {
+          "id": 8,
+          "type": "view_once_mechanic",
+          "question": "Which breadcrumb phrase did Joker explicitly tie to 'one-time' reveals (perfect for single-frame puzzles)?",
+          "options": ["viewed once", "saved forever", "public reel", "pinned note"],
+          "correct_answer": 0,
+          "explanation": "The 'viewed once' motif was used as a breadcrumb — perfect for clues that must be solved instantly. :contentReference[oaicite:12]{index=12}",
+          "timeLimit": 60
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Prologue Bonus — Tiny Director's Cut",
+        "description": "Collect three micro-words from different prologue messages to create a private tagline.",
+        "task": "Assemble a 3-word tag (one word from three different timestamps).",
+        "hidden_message": "luv_tit.o war meatons",
+        "timeLimit": 240
+      },
+      "completion_message": "Demo cleared. You either remembered us — or you're scarily good at guessing. 🎪",
+      "unlock_requirement": "Solve all 8 questions"
+    },
+
+    {
+      "level": 1,
+      "title": "Level 1 — Gotham Mischief",
+      "description": "Late-night banter, teasing lines, stickers and the small lies we tell. Questions force inference about tone, edits, and what was left unsaid.",
+      "estimatedTime": "12-20 minutes",
+      "difficulty": "Very Hard",
+      "theme": "Late-night persona, edits, sticker-play",
+      "questions": [
+        {
+          "id": 101,
+          "type": "tone_identify",
+          "question": "After a jokey 'threesome' mention, Phoebe framed the idea with a specific tone. Which of these best captures her wording?",
+          "options": ["'Let them remain as mysteries' with laughter", "'Count me in!'", "'Never in my life'", "'A serious discussion'"],
+          "correct_answer": 0,
+          "explanation": "She wrote 'Threesomes are crazyyy let them remain as mysteries' — laugh-marked and teasing. :contentReference[oaicite:13]{index=13}",
+          "timeLimit": 45
+        },
+        {
+          "id": 102,
+          "type": "sticker_metadata",
+          "question": "Which playful tag did you use in the chat when signing off that Phoebe echoed back as 'Goodnight jokerr'?",
+          "options": ["miss wahito", "Harley Quinn", "PH", "Tito"],
+          "correct_answer": 0,
+          "explanation": "You signed off 'night night, miss wahito' and Phoebe replied 'Goodnight jokerr'. Use this as a paired-sound pass. :contentReference[oaicite:14]{index=14}",
+          "timeLimit": 30
+        },
+        {
+          "id": 103,
+          "type": "implied_choice",
+          "question": "When Joker called her more 'Margot Robbie' than 'SZA', what did that imply in theme-design terms?",
+          "options": ["Harley archetype fits her better", "She prefers R&B aesthetics", "She dislikes acting", "She wanted a haircut"],
+          "correct_answer": 0,
+          "explanation": "The quip 'maybe you're less of sza more of margot robbie. harley suits you tho.' places her in the Harley visual trope. :contentReference[oaicite:15]{index=15}",
+          "timeLimit": 40
+        },
+        {
+          "id": 104,
+          "type": "attach_type",
+          "question": "Which file type did Phoebe frequently send in late-night responses (a clue you can use to present a voice-note mini-puzzle)?",
+          "options": ["PTT (.opus) voice notes", "Large mp4 videos only", "Plain text only", "GIFs only"],
+          "correct_answer": 0,
+          "explanation": "Multiple PTT (.opus) voice notes appear across timestamps — ideal for audio-based micro-puzzles. :contentReference[oaicite:16]{index=16}",
+          "timeLimit": 40
+        },
+        {
+          "id": 105,
+          "type": "edited_message_inference",
+          "question": "Which habit of yours did Phoebe comment on as 'strange' (you later edited the line) — and she teased you about it?",
+          "options": ["late-night overthinking", "public posting frequency", "cooking skills", "walking speed"],
+          "correct_answer": 0,
+          "explanation": "You discussed late-night thinking and edits; Phoebe reacted to your 'deep-dive' and night musings. :contentReference[oaicite:17]{index=17}",
+          "timeLimit": 60
+        },
+        {
+          "id": 106,
+          "type": "micro_confession",
+          "question": "Which small, guilty action did you admit that becomes a playful forfeit line?",
+          "options": ["Eating the cake early at a party", "Stealing the remote", "Skipping a meeting", "Losing keys"],
+          "correct_answer": 0,
+          "explanation": "You confessed to sampling cake early — a fun 'forfeit' animation when she answers wrong. :contentReference[oaicite:18]{index=18}",
+          "timeLimit": 50
+        },
+        {
+          "id": 107,
+          "type": "double_hint",
+          "question": "Phoebe laughed 'umeanza mapema!' after a nickname tease. In second-order terms, this tells you what about her acceptance of teasing?",
+          "options": ["She loves playful escalation", "She is offended", "She ignores jokes", "She is formal"],
+          "correct_answer": 0,
+          "explanation": "The 'umeanza mapema!' reply shows she enjoys the tease and will escalate playfully. Good for hint style choices. :contentReference[oaicite:19]{index=19}",
+          "timeLimit": 40
+        },
+        {
+          "id": 108,
+          "type": "sticker_clue",
+          "question": "Which persona does Phoebe favor in sticker form, which you can use to trigger thematic confetti?",
+          "options": ["Joker", "Batman", "Harley only", "Superman"],
+          "correct_answer": 0,
+          "explanation": "She explicitly picks Joker stickers / persona in the chat as a go-to. Use Joker visuals to reward. :contentReference[oaicite:20]{index=20}",
+          "timeLimit": 30
+        },
+        {
+          "id": 109,
+          "type": "meta_sequence",
+          "question": "Which three micro-elements together (from late-night threads) would best signal the start of a 'view-once' reveal in the UI?",
+          "options": [
+            "palindrome line + PTT sent + 'viewed once' hint",
+            "sticker only + emoji + 'public'",
+            "IG handle share + profile pic + 'public'",
+            "location share + group status + 'save'"
+          ],
+          "correct_answer": 0,
+          "explanation": "The palindrome + voice note (PTT) + 'viewed once' breadcrumb pattern recurs and can trigger single-frame reveals. :contentReference[oaicite:21]{index=21} :contentReference[oaicite:22]{index=22} :contentReference[oaicite:23]{index=23}",
+          "timeLimit": 90
+        },
+        {
+          "id": 110,
+          "type": "second_order_choice",
+          "question": "Which line would Phoebe likely call 'overstated' if you used it as a big public caption?",
+          "options": ["'Effort is my love language'", "'I love sunsets'", "'I hate cake'", "'I never lie'"],
+          "correct_answer": 0,
+          "explanation": "The 'effort' line is intimate and better kept private; it's referenced as a personal love-language phrase. :contentReference[oaicite:24]{index=24}",
+          "timeLimit": 60
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Sticker Midnight Raid",
+        "description": "Identify the exact sticker filename/date from a short gallery breadcrumb to unlock a cosmetic.",
+        "task": "Pick the sticker (from timestamps) Joker said was 'caught on Google Meet'.",
+        "timeLimit": 180
+      },
+      "completion_message": "You survived the streetlights. Gotham claps. Carnival lights are already spinning.",
+      "unlock_requirement": "Solve 9 of 10 questions"
+    },
+
+    {
+      "level": 2,
+      "title": "Level 2 — Carnival of Chaos (Sound, Clips & Playlists)",
+      "description": "Audio snippets, playlist sequencing, trailer references and patient-listening constraints — many traps are time-based or punish 'skipping'.",
+      "estimatedTime": "20-30 minutes",
+      "difficulty": "Very Hard",
+      "theme": "Music memory, trailers, patience mechanics",
+      "questions": [
+        {
+          "id": 201,
+          "type": "audio_recognition",
+          "question": "Which artist did Phoebe ask about when you hint-teased a playlist (the small, named artist)?",
+          "options": ["Mereba", "SZA", "Rihanna", "Martin Garrix"],
+          "correct_answer": 0,
+          "explanation": "She specifically asks 'Has someone been listening to Mereba?' after you nudge a playlist. Use a short Mereba clip for recognition. :contentReference[oaicite:25]{index=25}",
+          "timeLimit": 45
+        },
+        {
+          "id": 202,
+          "type": "no_skip_constraint",
+          "question": "You demanded a 'no-skips' patience test on a playlist. Which exact instruction did you give?",
+          "options": [
+            "Listen to all songs — no skips",
+            "Shuffle immediately",
+            "Listen only to 30 seconds of each",
+            "Play one track then stop"
+          ],
+          "correct_answer": 0,
+          "explanation": "The chat contains the explicit 'can you listen to all the songs … no skips' line — a gameplay constraint to enforce patience. :contentReference[oaicite:26]{index=26}",
+          "timeLimit": 120
+        },
+        {
+          "id": 203,
+          "type": "trailer_hint",
+          "question": "Joker suggested an animated series to start with as a 'safe' intro — which was it?",
+          "options": ["Blood of Zeus", "Dota: Dragon's Blood", "Arcane", "Love, Death & Robots"],
+          "correct_answer": 0,
+          "explanation": "He recommended 'Blood of Zeus' (as the accessible entry) — good for an animation micro-teaser. :contentReference[oaicite:27]{index=27}",
+          "timeLimit": 50
+        },
+        {
+          "id": 204,
+          "type": "anime_shout",
+          "question": "Which Dota character did Phoebe loudly call out (use the shout as a sound-cue)?",
+          "options": ["Davion", "Invoker", "Zeus", "Pudge"],
+          "correct_answer": 0,
+          "explanation": "She shouts 'Davion!!!!' in the thread — a crisp audio thumbnail for a micro-challenge. :contentReference[oaicite:28]{index=28}",
+          "timeLimit": 30
+        },
+        {
+          "id": 205,
+          "type": "clip_ordering",
+          "question": "Arrange these three listening rules into the order Joker implied across messages: (A) no skips, (B) listen full song, (C) don't rush. Which order?",
+          "options": ["C · B · A", "A · B · C", "B · A · C", "C · A · B"],
+          "correct_answer": 0,
+          "explanation": "The meta-lick: he hints to 'don't rush' (context), then stresses listening full, then enforces 'no skips' as a rule — read chronologically. :contentReference[oaicite:29]{index=29}",
+          "timeLimit": 90
+        },
+        {
+          "id": 206,
+          "type": "hidden_clip",
+          "question": "Which offhand phrase did you say that could be used to mask an audio watermark (tiny proof of listening)?",
+          "options": ["'the breeze grew a fire'", "'happy vibes'", "'touched grass'", "'director's cut'"],
+          "correct_answer": 0,
+          "explanation": "The phrase 'the breeze grew a fire' appears as playful lyric imagery and works well as an inaudible watermark tag. :contentReference[oaicite:30]{index=30}",
+          "timeLimit": 60
+        },
+        {
+          "id": 207,
+          "type": "context_swap",
+          "question": "Phoebe once reacted 'Has someone been listening to Mereba?'. What does this reveal about her likely playlist mood?",
+          "options": ["Curious & open to low-key finds", "Prefers mainstream pop only", "Hates acoustic music", "Only likes instrumentals"],
+          "correct_answer": 0,
+          "explanation": "Her curiosity about Mereba signals a taste for introspective/low-key finds — useful when choosing audio clips for puzzles. :contentReference[oaicite:31]{index=31}",
+          "timeLimit": 45
+        },
+        {
+          "id": 208,
+          "type": "audio_clip_transform",
+          "question": "Which line could Joker distort into a 3-second hook to be used as a 'heard-it' unlock (it was already quoted)?",
+          "options": ["'High off life by martin garrix ft. bonn'", "'I hate mornings'", "'See you later'", "'I love sushi'"],
+          "correct_answer": 0,
+          "explanation": "You named 'High Off Life' explicitly — distort a 3s clip to be recognized. :contentReference[oaicite:32]{index=32}",
+          "timeLimit": 40
+        },
+        {
+          "id": 209,
+          "type": "skip_penalty_design",
+          "question": "Design question: if a player 'skips' a required track, what game action did Joker suggest (in spirit) that would suit your motif?",
+          "options": ["Level reset with mocking taunt", "A gentle nudge with no penalty", "Grant extra hint", "Auto-complete the level"],
+          "correct_answer": 0,
+          "explanation": "The chat tone supports dramatic mockery on mistakes — a full reset with Joker taunt fits the theme. Use this to enforce 'no skips'. :contentReference[oaicite:33]{index=33}",
+          "timeLimit": 60
+        },
+        {
+          "id": 210,
+          "type": "bonus_music",
+          "question": "Which small detail from the conversation gives you a perfect extra-hint token (the 'watch phrase')?",
+          "options": ["'touched grass' edit line", "'public post' mention", "'director's cut' tease", "'view once'"],
+          "correct_answer": 0,
+          "explanation": "The 'touched grass' edit is a tiny signature phrase that can be repurposed as a side-challenge token. :contentReference[oaicite:34]{index=34}",
+          "timeLimit": 45
+        },
+        {
+          "id": 211,
+          "type": "chronicle_order",
+          "question": "Which of these is the best ordering for the playlist micro-quest (inferred from chat sequence)?",
+          "options": ["Mention → Ask → Play (no-skips)", "Play → Ask → Mention", "Skip → Play → Comment", "Ask → Skip → Mention"],
+          "correct_answer": 0,
+          "explanation": "The chat shows an intentional flow: you mention the playlist, she asks about artists, then you demand listening order/no-skips. :contentReference[oaicite:35]{index=35}",
+          "timeLimit": 75
+        },
+        {
+          "id": 212,
+          "type": "meta_clue",
+          "question": "Which tiny phrase would you burn into an audio spectrogram so only Phoebe would spot it (inspired by chat wording)?",
+          "options": ["'luv_tit.o'", "'war is raw'", "'miss wahito'", "'buttman'"],
+          "correct_answer": 1,
+          "explanation": "'war is raw' is short, unique and appeared as a motif — great for hiding in a spectrogram as a micro-clue. :contentReference[oaicite:36]{index=36}",
+          "timeLimit": 90
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Jukebox Chaos — Order of Mentions",
+        "description": "Arrange 6 short distorted clips into the exact order they were first teased across the chat.",
+        "task": "Reconstruct chronological mention-order using short clips.",
+        "timeLimit": 420
+      },
+      "completion_message": "You tamed the jukebox — but the diamonds are watching.",
+      "unlock_requirement": "Solve 9 of 12 questions OR 7 + bonus"
+    },
+
+    {
+      "level": 3,
+      "title": "Level 3 — Diamonds Are a Girl's Best Friend (Craft & Private Frames)",
+      "description": "Sleek puzzles about craft identity, private frames (viewed once), and long-game teasers. Expect multi-step inference and tiny image-forensics tasks.",
+      "estimatedTime": "18-30 minutes",
+      "difficulty": "Very Hard → God",
+      "theme": "Identity, private content, director's cut",
+      "questions": [
+        {
+          "id": 301,
+          "type": "profession_inference",
+          "question": "Phoebe claimed a craft (she downplayed 'software engineering' but named a specific tool). Which craft was that?",
+          "options": ["UI/UX Designer", "Backend Engineer", "Marketing", "No-code Builder"],
+          "correct_answer": 0,
+          "explanation": "She mentions using Figma and refers to design work — confirming UI/UX. :contentReference[oaicite:37]{index=37}",
+          "timeLimit": 45
+        },
+        {
+          "id": 302,
+          "type": "view_once_engine",
+          "question": "Which in-chat motif is labeled as an exhibit that 'isn't meant for public view' and should be used for single-reveal images?",
+          "options": ["'viewed once' exhibits", "pinned posts", "status updates", "public albums"],
+          "correct_answer": 0,
+          "explanation": "The phrase 'viewed once' and exhibit metaphor appear as a deliberate single-use reveal mechanic. :contentReference[oaicite:38]{index=38}",
+          "timeLimit": 60
+        },
+        {
+          "id": 303,
+          "type": "director_reward",
+          "question": "What is the long-play incentive Joker offered as a reward to the patient player?",
+          "options": ["Director's cut", "Instant prize", "Public shoutout", "Monetary tip"],
+          "correct_answer": 0,
+          "explanation": "He teases a 'director's cut' as a delayed payoff for patience. :contentReference[oaicite:39]{index=39}",
+          "timeLimit": 40
+        },
+        {
+          "id": 304,
+          "type": "private_frame_assembly",
+          "question": "You want a 'private frame' puzzle: which three chat elements best assemble one (pick the triplet)?",
+          "options": [
+            "palindrome quote + PTT clip + 'viewed once' breadcrumb",
+            "IG handle + public post + emoji",
+            "sticker only + GIF + location",
+            "profile pic + story repost + timestamp"
+          ],
+          "correct_answer": 0,
+          "explanation": "The palindrome + voice note + 'viewed once' pattern is used in chat for private reveals. :contentReference[oaicite:40]{index=40} :contentReference[oaicite:41]{index=41} :contentReference[oaicite:42]{index=42}",
+          "timeLimit": 120
+        },
+        {
+          "id": 305,
+          "type": "food_trigger_inference",
+          "question": "Which pastry/food location gets the 'emotional nuclear explosion' treatment (hint: opposite a known fast joint)?",
+          "options": ["Opposite Meatons pastries counter", "Mall food court", "Home kitchen", "Park bench cafe"],
+          "correct_answer": 0,
+          "explanation": "The 'opposite Meatons' pastries counter / choco-fudge spot is referenced as a sentimental trigger. :contentReference[oaicite:43]{index=43}",
+          "timeLimit": 120
+        },
+        {
+          "id": 306,
+          "type": "craft_token",
+          "question": "Which one-line proof (from chat) confirms Phoebe uses Figma (use as a UI-surface touchpoint)?",
+          "options": ["'I use figma'", "'I use photoshop only'", "'I don't use design tools'", "'I only write copy'"],
+          "correct_answer": 0,
+          "explanation": "She explicitly states 'I use figma' — use it to theme UI puzzle surfaces. :contentReference[oaicite:44]{index=44}",
+          "timeLimit": 30
+        },
+        {
+          "id": 307,
+          "type": "director_clip_assembly",
+          "question": "Which micro-task best unlocks the 'director's cut' teaser early (by design)?",
+          "options": ["Assemble 3 voice-note clips in chronological order", "Share a public post", "Like a menu item", "Watch a trailer twice"],
+          "correct_answer": 0,
+          "explanation": "The Director's Tease can be unlocked by assembling voice-note clips — hinted by the PTT-heavy chat. :contentReference[oaicite:45]{index=45}",
+          "timeLimit": 240
+        },
+        {
+          "id": 308,
+          "type": "meta_image_forensics",
+          "question": "If you crop a private photo into a diamond-shaped grid (Harley motif), which chat clue helps you choose the crop anchor point?",
+          "options": ["the 'war is raw' motif (center piece)", "time of day", "random selection", "file size"],
+          "correct_answer": 0,
+          "explanation": "The 'war is raw' palindrome is used as an anchor for 'exhibit' imagery; center the crop on that motif. :contentReference[oaicite:46]{index=46}",
+          "timeLimit": 90
+        },
+        {
+          "id": 309,
+          "type": "second_order_phrase",
+          "question": "Which multi-word phrase from the chat doubles as an excellent hint and as a reward title?",
+          "options": ["'effort is my love language'", "'I hate cake'", "'public gallery\"", "'no spoilers'"],
+          "correct_answer": 0,
+          "explanation": "The intimate line 'effort is my love language' appears in the chat — both hint and emotional reward title. :contentReference[oaicite:47]{index=47}",
+          "timeLimit": 60
+        },
+        {
+          "id": 310,
+          "type": "replay_incentive",
+          "question": "Which promise should you show on repeat-play to entice another run (the chat's delayed payoff)?",
+          "options": ["Director's cut", "Instant money", "Public leaderboard", "Game DLC"],
+          "correct_answer": 0,
+          "explanation": "The 'director's cut' tease is the perfect replay incentive — it was explicitly mentioned in-chat. :contentReference[oaicite:48]{index=48}",
+          "timeLimit": 40
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Director's Tease — Private Frame Assembly",
+        "description": "Piece together three voice clips and a single 'viewed once' image to reveal the director's cut teaser phrase.",
+        "task": "Assemble audio + image in the original order.",
+        "timeLimit": 480
+      },
+      "completion_message": "Diamonds twinkle — but the final lair still holds teeth.",
+      "unlock_requirement": "Complete 8 of 10 main questions"
+    },
+
+    {
+      "level": 4,
+      "title": "Final — Puddin' Trouble (Boss: Convergence & IRL Proof)",
+      "description": "All threads converge: combined-triplet keys, IRL photo verification, long-text decodes and a real-world pastry/food proof. This is god-level: multi-step + upload requirement.",
+      "estimatedTime": "30-60 minutes",
+      "difficulty": "God-Level",
+      "theme": "Convergence, IRL proof, master passphrase",
+      "questions": [
+        {
+          "id": 401,
+          "type": "compound_combine",
+          "question": "Pick the exact trio that matches Phoebe's chat identity: (nickname · school · intimate phrase).",
+          "options": [
+            "PH · Elizabeth Academy · Effort is my love language",
+            "Miss Wahito · Karen C Girls · Quality time",
+            "Tito · St. Hannah's · Physical gifts",
+            "PH · Karen Girls High · Words of affirmation"
+          ],
+          "correct_answer": 0,
+          "explanation": "Chat confirms 'PH', 'Elizabeth Academy' and 'effort' as the intimate phrasing. Use this triple as a key. :contentReference[oaicite:49]{index=49} :contentReference[oaicite:50]{index=50} :contentReference[oaicite:51]{index=51}",
+          "timeLimit": 240
+        },
+        {
+          "id": 402,
+          "type": "passphrase_riddle",
+          "question": "Combine the palindrome motif + sunset mention + the pastries location into a single passphrase token. Which matches the chat's implied master key?",
+          "options": [
+            "war•sunset•meatons",
+            "love•dawn•pastry",
+            "director•cut•fudge",
+            "effort•night•bakery"
+          ],
+          "correct_answer": 0,
+          "explanation": "The 'war is raw' motif, repeated sunset imagery, and 'opposite Meatons' pastry hint appear across threads — they form the intended passphrase. :contentReference[oaicite:52]{index=52} :contentReference[oaicite:53]{index=53}",
+          "timeLimit": 300
+        },
+        {
+          "id": 403,
+          "type": "irl_verification_logic",
+          "question": "Which IRL photo best satisfies the 'proof-of-finish' rules Joker hinted at (use for upload validation)?",
+          "options": [
+            "Phoebe + choco-fudge at opposite Meatons pastries (smile visible, time stamp)",
+            "Random sunset selfie (no pastry)",
+            "Screenshot of playlist with skip enabled",
+            "Old group selfie from 2019"
+          ],
+          "correct_answer": 0,
+          "explanation": "The chat references pastries opposite Meatons and emotional 'choco-fudge' proof — the boss requires a real photo at that spot. :contentReference[oaicite:54]{index=54}",
+          "timeLimit": 600
+        },
+        {
+          "id": 404,
+          "type": "text_deconstruction",
+          "question": "A long late-night sentence was called a 'time-waster'. Which tiny phrase should you pull as the secret watermark (2–4 words)?",
+          "options": ["Harley 3 AM circus", "Wake early work", "Say nothing", "Big city lights"],
+          "correct_answer": 0,
+          "explanation": "The example 'Harley loves to code at 3 AM ... circus of debugging ... semicolon CSS' yields 'Harley 3 AM circus' as a compact watermark. Use it for a bonus reveal. :contentReference[oaicite:55]{index=55}",
+          "timeLimit": 300
+        },
+        {
+          "id": 405,
+          "type": "meta_irony",
+          "question": "In the final taunt, Joker once self-named a ridiculous alter ego in the chat. Which was it?",
+          "options": ["Buttman", "The Clown Prince", "Night Joker", "Puddin Protector"],
+          "correct_answer": 0,
+          "explanation": "You jokingly called yourself 'Buttman' in a flirt — perfect for a final ridiculous taunt. :contentReference[oaicite:56]{index=56}",
+          "timeLimit": 45
+        },
+        {
+          "id": 406,
+          "type": "sequence_unlock",
+          "question": "To open the final chest, which two pieces must be supplied together?",
+          "options": [
+            "IG handle (identity) + master passphrase (palindrome+sunset+Meatons)",
+            "Figma file + a screenshot",
+            "Three voice notes + a public post",
+            "A group selfie + playlist"
+          ],
+          "correct_answer": 0,
+          "explanation": "Combine the IG handle 'luv_tit.o' and the derived master passphrase as identity + key to unlock the final reveal. :contentReference[oaicite:57]{index=57} :contentReference[oaicite:58]{index=58}",
+          "timeLimit": 600
+        },
+        {
+          "id": 407,
+          "type": "text_positioning",
+          "question": "If you take a 47-word counting challenge from a long filler sentence in chat, which kind of word was used as the intended punch (the example answer used earlier)?",
+          "options": ["a nature word (sunset)", "a numerical word", "a conjunction", "a punctuation mark"],
+          "correct_answer": 0,
+          "explanation": "The crafted filler used 'sunset' as the 47th-word punch — it's a recurring image in the messages. :contentReference[oaicite:59]{index=59}",
+          "timeLimit": 180
+        },
+        {
+          "id": 408,
+          "type": "multi_step_logic",
+          "question": "Which two chat traits together most strongly predict Phoebe will answer a memory question correctly?",
+          "options": [
+            "Strong emotional recall + repeated signoffs (night jokerr)",
+            "Public posting + silence",
+            "Many group chats + few private messages",
+            "High posting frequency + short replies"
+          ],
+          "correct_answer": 0,
+          "explanation": "The chat shows she remembers emotionally charged food/concrete events and uses repeated playful signoffs — both indicate strong recall on intimate items. :contentReference[oaicite:60]{index=60} :contentReference[oaicite:61]{index=61}",
+          "timeLimit": 90
+        },
+        {
+          "id": 409,
+          "type": "final_breaker",
+          "question": "Boss breaker — which tiny pair would you embed in the image metadata to be readable only after upload (two-word watermark)?",
+          "options": ["luv_tit.o war", "public post", "director cut", "viewed once"],
+          "correct_answer": 0,
+          "explanation": "Embedding 'luv_tit.o war' ties identity + motif and is a stealthy meta-watermark matching the conversation. :contentReference[oaicite:62]{index=62} :contentReference[oaicite:63]{index=63}",
+          "timeLimit": 300
+        },
+        {
+          "id": 410,
+          "type": "all_or_nothing_upload",
+          "question": "Which combination triggers the final reveal (correct answers + valid IRL photo)?",
+          "options": [
+            "All boss questions correct + choco-fudge photo at opposite Meatons + master passphrase",
+            "Any three correct answers + sunset screenshot",
+            "Public post tag + one correct answer + voice note",
+            "Figma file + director's cut phrase only"
+          ],
+          "correct_answer": 0,
+          "explanation": "The final unlock requires correct boss answers AND the IRL choco-fudge photo + passphrase — a real-world proof to close the loop. :contentReference[oaicite:64]{index=64} :contentReference[oaicite:65]{index=65}",
+          "timeLimit": 900
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Ultimate Time Waster — Boss Edition",
+        "description": "A long-string decode across 7 timestamps — grab words by position to form the final hidden phrase.",
+        "task": "Extract words at specified positions from 7 messages (engine supplies positions).",
+        "hidden_message": "luv_tit.o war sunset meatons director cut",
+        "timeLimit": 1200
+      },
+      "completion_message": "Boss cleared: if Phoebe uploads the choco-fudge proof and the master passphrase, the big reveal (IRL surprise or certificate) triggers. Otherwise — chaos. 🎪💥",
+      "unlock_requirement": "All boss questions correct + valid IRL photo upload that matches the rules"
+    }
+  ],
+  "global_hint_policy": {
+    "hints_per_level": 2,
+    "unlock_conditions": "Hints unlock after two wrong attempts OR by spending a 'token' earned via optional micro-tasks (e.g., listening to a 30s clip). Hints quote short supportive/funny lines from the chat and are presented in-character (Harley sweet or Joker taunt). Example: 'effort is my love language' as a gentle nudge. :contentReference[oaicite:66]{index=66}",
+    "hint_style": "Hints escalate: first is soft (Phoebe quote), second is snarky (Joker-taunt) and costs a token or level-time penalty."
+  },
+  "rewards": {
+    "visual": ["Harley lipstick confetti animation", "Joker-card explosion reveal", "downloadable certificate: 'Phoebe — Harley Queen of the Circus'"],
+    "social": ["Shareable WhatsApp image (optional)", "Final IRL surprise trigger (admin controlled)"]
+  },
+  "completion_message": "This expanded god-level JSON is tuned for second-order thinking: combination keys, audio/image micro-forensics, long-text decodes and an IRL proof. Everything here is drawn directly from your chat export so the answers feel unmistakably private. Good luck — Joker would be proud. :contentReference[oaicite:67]{index=67} :contentReference[oaicite:68]{index=68} :contentReference[oaicite:69]{index=69}",
+  "notes": "Key chat anchors used while constructing this content: nickname choices (PH, miss wahito), IG handle (luv_tit.o), school confessions (Elizabeth Academy & fence/snack story), palindrome motif 'war is raw' and 'viewed once' breadcrumbing, music mentions (Mereba, High Off Life by Martin Garrix ft. Bonn), pastry/choco-fudge / 'opposite Meatons' references, multiple PTT voice notes, and late-night teasing lines (threesome joke, 'Goodnight jokerr', 'Buttman'). All were pulled from the uploaded WhatsApp log. :contentReference[oaicite:70]{index=70} :contentReference[oaicite:71]{index=71} :contentReference[oaicite:72]{index=72} :contentReference[oaicite:73]{index=73} :contentReference[oaicite:74]{index=74}"
+}

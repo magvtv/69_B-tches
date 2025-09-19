@@ -1,0 +1,876 @@
+{
+  "project": "Harley - Joker's Circus (god-level JSON)",
+  "source_file": "WhatsApp Chat with Phoebe Mwangi.txt",
+  "levels": [
+    {
+      "level": 0,
+      "title": "Prologue — The Partial Circus Experience",
+      "description": "Your Joker's trailer: no levels combined into  our shared memories, jokes, and inside references. This is a taste of the experience.",
+      "estimatedTime": "4 minutes",
+      "difficulty": "Very Easy",
+      "theme": "Complete journey: nicknames, memories, music & craft",
+      "questions": [
+        {
+          "id": 1,
+          "type": "nickname",
+          "question": "When I teased you with 'Tito', what slick nickname did you rescue and claim as your own?",
+          "options": [
+            "PH",
+            "Wahito",
+            "Miss Wahito",
+            "Tito (forever)"
+          ],
+          "correct_answer": 0,
+          "explanation": "You picked 'PH' (short for Phoebe) and called it cool — it's the tiny identity flex that becomes a recurring tag.",
+          "timeLimit": 45
+        },
+        {
+          "id": 2,
+          "type": "ig_handle",
+          "question": "Which cheeky Instagram handle did Harley give when asked for her IG?",
+          "options": [
+            "luv_tit.o",
+            "phoebe_mwangi",
+            "magvtv",
+            "miss_wahito"
+          ],
+          "correct_answer": 0,
+          "explanation": "She gave 'luv_tit.o' as her handle — memorable and mischievous. Use this as a passphrase or filename in a level.",
+          "timeLimit": 60
+        },
+        {
+          "id": 3,
+          "type": "school_memory",
+          "question": "Head girl by day, snack-smuggler by recess — which school was Harley talking about?",
+          "options": [
+            "St. Hannah's Girls",
+            "Karen C Girls",
+            "Elizabeth Academy",
+            "Karen Girls High"
+          ],
+          "correct_answer": 2,
+          "explanation": "Elizabeth Academy — the perfect 'fox in sheep's clothing' anecdote to use as a personality puzzle.",
+          "timeLimit": 90
+        },
+        {
+          "id": 4,
+          "type": "childhood_mischief",
+          "question": "Which poor classmate got the juice-bottle fury (and a scratch) from young Harley?",
+          "options": [
+            "Jacob Muya",
+            "Jacob Mwangi",
+            "Jacob Kimani",
+            "Jacob Otieno"
+          ],
+          "correct_answer": 0,
+          "explanation": "Jacob Muya — a tiny violent legend from class 2. This can fuel a 'timeline vs truth' puzzle.",
+          "timeLimit": 75
+        },
+        {
+          "id": 5,
+          "type": "love_language",
+          "question": "Harley dropped a line about her 'love language' — how did she phrase it first?",
+          "options": [
+            "Effort is my love language",
+            "Quality time",
+            "Physical touch",
+            "Words of affirmation"
+          ],
+          "correct_answer": 0,
+          "explanation": "She literally said 'effort is my love language' — an emotional lever you can use as a hint bank.",
+          "timeLimit": 60
+        },
+        {
+          "id": 6,
+          "type": "wordplay",
+          "question": "Which palindrome did Joker invoke as an artful motif in the chat?",
+          "options": [
+            "war is raw",
+            "madam im adam",
+            "never odd or even",
+            "step on no pets"
+          ],
+          "correct_answer": 0,
+          "explanation": "'war is raw' — used as both wordplay and a theme (exhibits, 'viewed once', private art). Great for a visual / image-reveal puzzle.",
+          "timeLimit": 75
+        },
+        {
+          "id": 7,
+          "type": "location_clue",
+          "question": "When asked for a meetup spot, Harley said it's 'opposite' which place?",
+          "options": [
+            "Meatons",
+            "Quickmatt",
+            "Boerwors section",
+            "The pastries counter"
+          ],
+          "correct_answer": 0,
+          "explanation": "Opposite Meatons — perfect for a Level → IRL photo verification step (take your choco fudge proof!).",
+          "timeLimit": 60
+        },
+        {
+          "id": 8,
+          "type": "timing_tease",
+          "question": "In the chat you bread-crumbed 'viewed once' moments. What phrase did you connect it to as a hint?",
+          "options": [
+            "The best exhibits aren't meant for public view",
+            "Open season",
+            "Public gallery",
+            "Shared everywhere"
+          ],
+          "correct_answer": 0,
+          "explanation": "‘The best exhibits aren't meant for public view’ ties to the 'viewed once' breadcrumb motif — ideal for 'hidden frame' puzzles.",
+          "timeLimit": 90
+        },
+        {
+          "id": 101,
+          "type": "response_recall",
+          "question": "When Joker joked about threesomes, how did Harley react in the chat?",
+          "options": [
+            "'Let them remain as mysteries' (laughing)",
+            "Full agreement and enthusiasm",
+            "Immediate rejection",
+            "Heavy lecture about fidelity"
+          ],
+          "correct_answer": 0,
+          "explanation": "She laughed it off: 'Threesomes are crazyyy let them remain as mysteries' — perfect for a 'red herring' choice in a carnival wheel.",
+          "timeLimit": 60
+        },
+        {
+          "id": 102,
+          "type": "signoff",
+          "question": "You said 'night night, miss wahito' — what did Harley cheekily reply?",
+          "options": [
+            "Goodnight jokerr",
+            "Sleep tight PH",
+            "K signoff",
+            "Bye tito"
+          ],
+          "correct_answer": 0,
+          "explanation": "She replied 'Goodnight jokerr' — a micro emotional payoff used to reinforce the Joker/Harley theatricality.",
+          "timeLimit": 30
+        },
+        {
+          "id": 103,
+          "type": "sticker_preference",
+          "question": "Which sticker preference did Harley reveal in her sticker gallery comment?",
+          "options": [
+            "Joker (she said joker more)",
+            "Buttman",
+            "Batman",
+            "No preference"
+          ],
+          "correct_answer": 0,
+          "explanation": "She liked Joker stickers more — use this to personalize the UI (Joker-themed confetti when she succeeds).",
+          "timeLimit": 30
+        },
+        {
+          "id": 104,
+          "type": "confession_recall",
+          "question": "What embarrassing confession did Joker admit about a past home birthday party?",
+          "options": [
+            "I ate the cake before the celebrant",
+            "I forgot to bring the gift",
+            "I fell asleep on the job",
+            "I ruined the playlist"
+          ],
+          "correct_answer": 0,
+          "explanation": "He admits tasting/sampling the cake early — an amusing confession that you can wrap as a 'forfeit' animation.",
+          "timeLimit": 60
+        },
+        {
+          "id": 105,
+          "type": "comparison",
+          "question": "In a compliment/quip, which actress did Joker say Phoebe resembles more of?",
+          "options": [
+            "SZA",
+            "M. Robbie",
+            "Meryl Streep",
+            "Zendaya"
+          ],
+          "correct_answer": 1,
+          "explanation": "She got a Harley comparison — a perfect justification for theme-locking her avatar as Harley in this level.",
+          "timeLimit": 45
+        },
+        {
+          "id": 106,
+          "type": "meta_hint",
+          "question": "Which tiny, recurring tag of private content did the Joker say he'd breadcrumb across the chat?",
+          "options": [
+            "'viewed once' messages",
+            "Public posts",
+            "Group statuses",
+            "Pinned messages"
+          ],
+          "correct_answer": 0,
+          "explanation": "The 'viewed once' motif is a breadcrumb mechanism in your chats and can power 'one-time frame' reveals.",
+          "timeLimit": 90
+        },
+        {
+          "id": 201,
+          "type": "music_clip",
+          "question": "Which low-key artist did Harley ask about in the playlist conversation?",
+          "options": [
+            "Mereba",
+            "SZA",
+            "Rihanna",
+            "Beyoncé"
+          ],
+          "correct_answer": 0,
+          "explanation": "Mereba appears as a low-key find Harley mentions. Use a 5s audio clip of Mereba as a recognizer challenge.",
+          "timeLimit": 50
+        },
+        {
+          "id": 202,
+          "type": "ordering",
+          "question": "You teased 'the breeze grew a fire' — which instruction accompanied it?",
+          "options": [
+            "Listen to all songs no skips",
+            "Only listen to the first song",
+            "Shuffle and enjoy",
+            "Skip the tracks you dislike"
+          ],
+          "correct_answer": 0,
+          "explanation": "You asked her to play 'the breeze grew a fire' in full — perfect for a strict-ordering mini-puzzle.",
+          "timeLimit": 120
+        },
+        {
+          "id": 203,
+          "type": "animation_choice",
+          "question": "Which animated series did Joker recommend to start with (as a safer intro)?",
+          "options": [
+            "Blood of Zeus",
+            "Dota: Dragon's Blood",
+            "Pantheon",
+            "Conjuring (not an animation)"
+          ],
+          "correct_answer": 0,
+          "explanation": "Blood of Zeus was suggested as an intro; use a short cryptic clip from its trailer in the UI.",
+          "timeLimit": 60
+        },
+        {
+          "id": 204,
+          "type": "anime_fan",
+          "question": "Harley guessed which 'Dota' character as favourite in a playful quiz?",
+          "options": [
+            "Davion",
+            "Invoker",
+            "Zeus",
+            "Pudge"
+          ],
+          "correct_answer": 0,
+          "explanation": "Davion was her shout — a good short audio/visual 'who said it' microchallenge.",
+          "timeLimit": 40
+        },
+        {
+          "id": 205,
+          "type": "song_identify",
+          "question": "Which track name did Joker drop as an example in the playlist talk?",
+          "options": [
+            "High Off Life (Martin Garrix ft. Bonn)",
+            "Blinding Lights",
+            "Sunset Lover",
+            "Breeze Grew A Fire (collection)"
+          ],
+          "correct_answer": 0,
+          "explanation": "The track was name-checked. Use a distorted 4–6 second clip for recognition.",
+          "timeLimit": 50
+        },
+        {
+          "id": 206,
+          "type": "bonus_music",
+          "question": "Which listening instruction did Joker give as a test of patience that can be used as a 'no-skips' micro-rule?",
+          "options": [
+            "Listen to a playlist with no skips",
+            "Shuffle on random",
+            "Listen only to first 3 tracks",
+            "Only instrumental tracks"
+          ],
+          "correct_answer": 0,
+          "explanation": "That 'no-skips' rule becomes a gameplay constraint: if she skips, the level marks as 'unsolved' until replayed.",
+          "timeLimit": 90
+        },
+        {
+          "id": 301,
+          "type": "profession",
+          "question": "Harley downplayed 'software engineer' — what craft did she explicitly say she practices?",
+          "options": [
+            "UI/UX Designer",
+            "Backend Engineer",
+            "QA Tester",
+            "No-code Builder"
+          ],
+          "correct_answer": 0,
+          "explanation": "She identifies with UI/UX design (Figma mention confirms it) — great for UX-themed puzzle visuals.",
+          "timeLimit": 60
+        },
+        {
+          "id": 302,
+          "type": "director_cut",
+          "question": "What promise did Joker drop if Harley was patient enough (use as a long-game unlock)?",
+          "options": [
+            "Director's cut",
+            "Immediate reveal",
+            "Public post",
+            "Nothing to see here"
+          ],
+          "correct_answer": 0,
+          "explanation": "The 'director's cut' is your long-term reward tease — perfect for an incentive to replay and earn hints.",
+          "timeLimit": 45
+        },
+        {
+          "id": 303,
+          "type": "private_gallery",
+          "question": "Which recurring motif did Joker call an exhibit that 'isn't meant for public view'?",
+          "options": [
+            "'Viewed once' exhibits",
+            "Public gallery",
+            "Pinned photos",
+            "Reposted memories"
+          ],
+          "correct_answer": 0,
+          "explanation": "Use 'viewed once' as a mechanic for single-reveal clues (images that vanish unless solved immediately).",
+          "timeLimit": 90
+        },
+        {
+          "id": 304,
+          "type": "food_memory",
+          "question": "Harley said she bakes one item nobody else can touch — what was it?",
+          "options": [
+            "Chip cookies or flapjacks",
+            "Cheesecake",
+            "Meat pies",
+            "Croissants"
+          ],
+          "correct_answer": 0,
+          "explanation": "Use this for a tactile reward — 'baked treat' GIF unlocks if she submits a smiling selfie.",
+          "timeLimit": 75
+        },
+        {
+          "id": 305,
+          "type": "platform",
+          "question": "Which design tool did Harley confirm she uses?",
+          "options": [
+            "Figma",
+            "Adobe XD",
+            "Sketch",
+            "Canva"
+          ],
+          "correct_answer": 0,
+          "explanation": "Figma — use this to theme UI elements (Figma-like canvas as a puzzle surface).",
+          "timeLimit": 40
+        },
+        {
+          "id": 306,
+          "type": "wordplay_exhibit",
+          "question": "Which phrase did Harley react to that led to the 'museum' metaphor Joker used?",
+          "options": [
+            "'War is raw' palindrome",
+            "'Love is war'",
+            "'Public exhibit'",
+            "'Time is money'"
+          ],
+          "correct_answer": 0,
+          "explanation": "'War is raw' links directly to the 'exhibits not for public view' bit — ideally used for an image-in-pieces puzzle.",
+          "timeLimit": 90
+        },
+        {
+          "id": 401,
+          "type": "compound",
+          "question": "Boss combo — pick the exact trio (nickname, school, love-language) that matches Harley's chat profile.",
+          "options": [
+            "PH · Elizabeth Academy · Effort is my love language",
+            "Wahito · St. Hannah's Girls · Quality time",
+            "Miss Wahito · Karen C Girls · Words of affirmation",
+            "Tito · Karen Girls High · Physical gifts"
+          ],
+          "correct_answer": 0,
+          "explanation": "The right combination is PH + Elizabeth Academy + 'effort' (which later ties to physical touch). This is the boss triple-key.",
+          "timeLimit": 180
+        },
+        {
+          "id": 402,
+          "type": "riddle",
+          "question": "Decode Joker's final breadcrumb: combine the palindrome, the sunset motif and the cafe clue to select the secret passphrase.",
+          "options": [
+            "war•sunset•meatons",
+            "love•dawn•quickmatt",
+            "director•cut•gallery",
+            "effort•night•pastries"
+          ],
+          "correct_answer": 0,
+          "explanation": "The passphrase combines the palindrome + sunset motif + Meatons location into a single key phrase: 'war•sunset•meatons'. Use it to unlock the IRL final clue.",
+          "timeLimit": 240
+        },
+        {
+          "id": 403,
+          "type": "irl_verification",
+          "question": "What real-world photo would verify completion of the scavenger step Joker hinted at?",
+          "options": [
+            "Phoebe + choco-fudge at the 'opposite Meatons' pastries counter (hands+smile visible)",
+            "A random selfie with a sunset background (no pastries)",
+            "A screenshot of the playlist with 'no-skips' disabled",
+            "An audio voicemail of 'Goodnight jokerr'"
+          ],
+          "correct_answer": 0,
+          "explanation": "The intended proof is a photo at the pastries / choco fudge spot (opposite Meatons) — the IRL trophy for finishing the quest.",
+          "timeLimit": 600
+        },
+        {
+          "id": 404,
+          "type": "final_taunt",
+          "question": "In an earlier late-night joke, Joker self-appointed a ridiculous superhero name — what was it?",
+          "options": [
+            "Buttman",
+            "Night Joker",
+            "The Clown Prince",
+            "Puddin Protector"
+          ],
+          "correct_answer": 0,
+          "explanation": "He jokingly called himself 'buttman' — use that as the last taunt before the big reveal animation.",
+          "timeLimit": 45
+        },
+        {
+          "id": 405,
+          "type": "all_or_nothing",
+          "question": "Boss closure: to unlock the final prize you must correctly answer this and *upload* the IRL proof (photo) — which two items form the master key?",
+          "options": [
+            "luv_tit.o (IG handle) + war•sunset•meatons (passphrase)",
+            "PH + director's cut (vague promise)",
+            "Jacob Muya + 'viewed once'",
+            "Figma file + 'effort is my love language'"
+          ],
+          "correct_answer": 0,
+          "explanation": "Master key uses her IG handle as identity proof and the combined passphrase (palindrome+sunset+meatons) to validate both digital and IRL ties. This is meant to feel very 'This could only be ours.'",
+          "timeLimit": 600
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Demo Bonus — The Tiny Director's Cut",
+        "description": "A tiny patience test: find the three words I hid across three messages that form a private tagline.",
+        "task": "Collect the words from the message stamps: one word from 'war is raw', one from an IG reply, one from 'opposite meatons'.",
+        "hidden_message": "war luv_tit.o meatons",
+        "timeLimit": 240
+      },
+      "completion_message": "Incredible! You've conquered the entire circus in one go. You're officially the Harley Queen of this chaotic realm. 🎪👑",
+      "unlock_requirement": "Solve all 31 questions across the complete experience"
+    },
+    {
+      "level": 1,
+      "title": "Level 1 — Gotham Mischief",
+      "description": "Warmup tests escalate: nicknames, flirt jabs, snack-raid memories, and 'bedtime' signatures.",
+      "estimatedTime": "12-18 minutes",
+      "difficulty": "Hard",
+      "theme": "Identity play, late-night banter",
+      "questions": [
+        {
+          "id": 101,
+          "type": "response_recall",
+          "question": "When Joker joked about threesomes, how did Harley react in the chat?",
+          "options": [
+            "'Let them remain as mysteries' (laughing)",
+            "Full agreement and enthusiasm",
+            "Immediate rejection",
+            "Heavy lecture about fidelity"
+          ],
+          "correct_answer": 0,
+          "explanation": "She laughed it off: 'Threesomes are crazyyy let them remain as mysteries' — perfect for a 'red herring' choice in a carnival wheel.",
+          "timeLimit": 60
+        },
+        {
+          "id": 102,
+          "type": "signoff",
+          "question": "You said 'night night, miss wahito' — what did Harley cheekily reply?",
+          "options": [
+            "Goodnight jokerr",
+            "Sleep tight PH",
+            "K signoff",
+            "Bye tito"
+          ],
+          "correct_answer": 0,
+          "explanation": "She replied 'Goodnight jokerr' — a micro emotional payoff used to reinforce the Joker/Harley theatricality.",
+          "timeLimit": 30
+        },
+        {
+          "id": 103,
+          "type": "sticker_preference",
+          "question": "Which sticker preference did Harley reveal in her sticker gallery comment?",
+          "options": [
+            "Joker (she said joker more)",
+            "Buttman",
+            "Batman",
+            "No preference"
+          ],
+          "correct_answer": 0,
+          "explanation": "She liked Joker stickers more — use this to personalize the UI (Joker-themed confetti when she succeeds).",
+          "timeLimit": 30
+        },
+        {
+          "id": 104,
+          "type": "confession_recall",
+          "question": "What embarrassing confession did Joker admit about a past home birthday party?",
+          "options": [
+            "I ate the cake before the celebrant",
+            "I forgot to bring the gift",
+            "I fell asleep on the job",
+            "I ruined the playlist"
+          ],
+          "correct_answer": 0,
+          "explanation": "He admits tasting/sampling the cake early — an amusing confession that you can wrap as a 'forfeit' animation.",
+          "timeLimit": 60
+        },
+        {
+          "id": 105,
+          "type": "comparison",
+          "question": "In a compliment/quip, which actress did Joker say Harley resembles more of?",
+          "options": [
+            "SZA",
+            "M. Robbie",
+            "Meryl Streep",
+            "Zendaya"
+          ],
+          "correct_answer": 1,
+          "explanation": "She got a Harley comparison — a perfect justification for theme-locking her avatar as Harley in this level.",
+          "timeLimit": 45
+        },
+        {
+          "id": 106,
+          "type": "meta_hint",
+          "question": "Which tiny, recurring tag of private content did the Joker say he'd breadcrumb across the chat?",
+          "options": [
+            "'viewed once' messages",
+            "Public posts",
+            "Group statuses",
+            "Pinned messages"
+          ],
+          "correct_answer": 0,
+          "explanation": "The 'viewed once' motif is a breadcrumb mechanism in your chats and can power 'one-time frame' reveals.",
+          "timeLimit": 90
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Midnight Sticker Hunt",
+        "description": "Find the single sticker file (from the chat) that Joker says was 'caught on Google Meet' — use that sticker as a level key.",
+        "task": "Identify the sticker filename/date from the gallery messages.",
+        "timeLimit": 180
+      },
+      "completion_message": "Gotham chuckles — you passed the streetlights. The carnival awaits.",
+      "unlock_requirement": "All Level 1 questions solved"
+    },
+    {
+      "level": 2,
+      "title": "Level 2 — Carnival of Chaos (Sound & Screen)",
+      "description": "Audio snippets, anime trailers, and playlist puzzles — reorder, recognize, and resist spoilers.",
+      "estimatedTime": "15-25 minutes",
+      "difficulty": "Hard → Very Hard",
+      "theme": "Music, trailers, inside-taste",
+      "questions": [
+        {
+          "id": 201,
+          "type": "music_clip",
+          "question": "Which low-key artist did Harley ask about in the playlist conversation?",
+          "options": [
+            "Mereba",
+            "SZA",
+            "Rihanna",
+            "Beyoncé"
+          ],
+          "correct_answer": 0,
+          "explanation": "Mereba appears as a low-key find Harley mentions. Use a 5s audio clip of Mereba as a recognizer challenge.",
+          "timeLimit": 50
+        },
+        {
+          "id": 202,
+          "type": "ordering",
+          "question": "You teased 'the breeze grew a fire' — which instruction accompanied it?",
+          "options": [
+            "Listen to all songs no skips",
+            "Only listen to the first song",
+            "Shuffle and enjoy",
+            "Skip the tracks you dislike"
+          ],
+          "correct_answer": 0,
+          "explanation": "You asked her to play 'the breeze grew a fire' in full — perfect for a strict-ordering mini-puzzle.",
+          "timeLimit": 120
+        },
+        {
+          "id": 203,
+          "type": "animation_choice",
+          "question": "Which animated series did Joker recommend to start with (as a safer intro)?",
+          "options": [
+            "Blood of Zeus",
+            "Dota: Dragon's Blood",
+            "Pantheon",
+            "Conjuring (not an animation)"
+          ],
+          "correct_answer": 0,
+          "explanation": "Blood of Zeus was suggested as an intro; use a short cryptic clip from its trailer in the UI.",
+          "timeLimit": 60
+        },
+        {
+          "id": 204,
+          "type": "anime_fan",
+          "question": "Harley guessed which 'Dota' character as favourite in a playful quiz?",
+          "options": [
+            "Davion",
+            "Invoker",
+            "Zeus",
+            "Pudge"
+          ],
+          "correct_answer": 0,
+          "explanation": "Davion was her shout — a good short audio/visual 'who said it' microchallenge.",
+          "timeLimit": 40
+        },
+        {
+          "id": 205,
+          "type": "song_identify",
+          "question": "Which track name did Joker drop as an example in the playlist talk?",
+          "options": [
+            "High Off Life (Martin Garrix ft. Bonn)",
+            "Blinding Lights",
+            "Sunset Lover",
+            "Breeze Grew A Fire (collection)"
+          ],
+          "correct_answer": 0,
+          "explanation": "The track was name-checked. Use a distorted 4–6 second clip for recognition.",
+          "timeLimit": 50
+        },
+        {
+          "id": 206,
+          "type": "bonus_music",
+          "question": "Which listening instruction did Joker give as a test of patience that can be used as a 'no-skips' micro-rule?",
+          "options": [
+            "Listen to a playlist with no skips",
+            "Shuffle on random",
+            "Listen only to first 3 tracks",
+            "Only instrumental tracks"
+          ],
+          "correct_answer": 0,
+          "explanation": "That 'no-skips' rule becomes a gameplay constraint: if she skips, the level marks as 'unsolved' until replayed.",
+          "timeLimit": 90
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Jukebox Chaos",
+        "description": "Arrange 6 short clips into the order they were first mentioned across the conversation (no skips allowed).",
+        "task": "Reconstruct the playlist order from memory + audio cues.",
+        "timeLimit": 300
+      },
+      "completion_message": "You navigated the carnival jukebox. Music memory: check.",
+      "unlock_requirement": "Solve 5 of 6 questions OR solve 4 + bonus"
+    },
+    {
+      "level": 3,
+      "title": "Level 3 — Diamonds & Director's Cuts",
+      "description": "Sleek puzzles: professional identity, private galleries, and the 'director's cut' tease. This level rewards patience and attention to phrasing.",
+      "estimatedTime": "18-30 minutes",
+      "difficulty": "Very Hard",
+      "theme": "Identity, craft & private exhibits",
+      "questions": [
+        {
+          "id": 301,
+          "type": "profession",
+          "question": "Harley downplayed 'software engineer' — what craft did she explicitly say she practices?",
+          "options": [
+            "UI/UX Designer",
+            "Backend Engineer",
+            "QA Tester",
+            "No-code Builder"
+          ],
+          "correct_answer": 0,
+          "explanation": "She identifies with UI/UX design (Figma mention confirms it) — great for UX-themed puzzle visuals.",
+          "timeLimit": 60
+        },
+        {
+          "id": 302,
+          "type": "director_cut",
+          "question": "What promise did Joker drop if Harley was patient enough (use as a long-game unlock)?",
+          "options": [
+            "Director's cut",
+            "Immediate reveal",
+            "Public post",
+            "Nothing to see here"
+          ],
+          "correct_answer": 0,
+          "explanation": "The 'director's cut' is your long-term reward tease — perfect for an incentive to replay and earn hints.",
+          "timeLimit": 45
+        },
+        {
+          "id": 303,
+          "type": "private_gallery",
+          "question": "Which recurring motif did Joker call an exhibit that 'isn't meant for public view'?",
+          "options": [
+            "'Viewed once' exhibits",
+            "Public gallery",
+            "Pinned photos",
+            "Reposted memories"
+          ],
+          "correct_answer": 0,
+          "explanation": "Use 'viewed once' as a mechanic for single-reveal clues (images that vanish unless solved immediately).",
+          "timeLimit": 90
+        },
+        {
+          "id": 304,
+          "type": "food_memory",
+          "question": "Harley said she bakes one item nobody else can touch — what was it?",
+          "options": [
+            "Chip cookies or flapjacks",
+            "Cheesecake",
+            "Meat pies",
+            "Croissants"
+          ],
+          "correct_answer": 0,
+          "explanation": "Use this for a tactile reward — 'baked treat' GIF unlocks if she submits a smiling selfie.",
+          "timeLimit": 75
+        },
+        {
+          "id": 305,
+          "type": "platform",
+          "question": "Which design tool did Harley confirm she uses?",
+          "options": [
+            "Figma",
+            "Adobe XD",
+            "Sketch",
+            "Canva"
+          ],
+          "correct_answer": 0,
+          "explanation": "Figma — use this to theme UI elements (Figma-like canvas as a puzzle surface).",
+          "timeLimit": 40
+        },
+        {
+          "id": 306,
+          "type": "wordplay_exhibit",
+          "question": "Which phrase did Harley react to that led to the 'museum' metaphor Joker used?",
+          "options": [
+            "'War is raw' palindrome",
+            "'Love is war'",
+            "'Public exhibit'",
+            "'Time is money'"
+          ],
+          "correct_answer": 0,
+          "explanation": "'War is raw' links directly to the 'exhibits not for public view' bit — ideally used for an image-in-pieces puzzle.",
+          "timeLimit": 90
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "Director's Tease — The Private Frame",
+        "description": "Assemble three micro-clips from voice notes to reveal the 'director's cut' phrase.",
+        "task": "Piece the clips in the original chronological order (clips come from 3 distinct voice notes).",
+        "timeLimit": 360
+      },
+      "completion_message": "Nice. Diamonds shimmer — but the last act still bites.",
+      "unlock_requirement": "Complete at least 5 of 6 main questions"
+    },
+    {
+      "level": 4,
+      "title": "Final — Puddin' Trouble (Boss)",
+      "description": "The boss combines multiple threads: nickname identity, school rebellion, playlist patience, 'viewed once' mechanics, and the IRL choco-fudge test.",
+      "estimatedTime": "25-45 minutes",
+      "difficulty": "God-Level",
+      "theme": "Convergence: memory + action",
+      "questions": [
+        {
+          "id": 401,
+          "type": "compound",
+          "question": "Boss combo — pick the exact trio (nickname, school, love-language) that matches Harley's chat profile.",
+          "options": [
+            "PH · Elizabeth Academy · Effort is my love language",
+            "Wahito · St. Hannah's Girls · Quality time",
+            "Miss Wahito · Karen C Girls · Words of affirmation",
+            "Tito · Karen Girls High · Physical gifts"
+          ],
+          "correct_answer": 0,
+          "explanation": "The right combination is PH + Elizabeth Academy + 'effort' (which later ties to physical touch). This is the boss triple-key.",
+          "timeLimit": 180
+        },
+        {
+          "id": 402,
+          "type": "riddle",
+          "question": "Decode Joker's final breadcrumb: combine the palindrome, the sunset motif and the cafe clue to select the secret passphrase.",
+          "options": [
+            "war•sunset•meatons",
+            "love•dawn•quickmatt",
+            "director•cut•gallery",
+            "effort•night•pastries"
+          ],
+          "correct_answer": 0,
+          "explanation": "The passphrase combines the palindrome + sunset motif + Meatons location into a single key phrase: 'war•sunset•meatons'. Use it to unlock the IRL final clue.",
+          "timeLimit": 240
+        },
+        {
+          "id": 403,
+          "type": "irl_verification",
+          "question": "What real-world photo would verify completion of the scavenger step Joker hinted at?",
+          "options": [
+            "Phoebe + choco-fudge at the 'opposite Meatons' pastries counter (hands+smile visible)",
+            "A random selfie with a sunset background (no pastries)",
+            "A screenshot of the playlist with 'no-skips' disabled",
+            "An audio voicemail of 'Goodnight jokerr'"
+          ],
+          "correct_answer": 0,
+          "explanation": "The intended proof is a photo at the pastries / choco fudge spot (opposite Meatons) — the IRL trophy for finishing the quest.",
+          "timeLimit": 600
+        },
+        {
+          "id": 404,
+          "type": "final_taunt",
+          "question": "In an earlier late-night joke, Joker self-appointed a ridiculous superhero name — what was it?",
+          "options": [
+            "Buttman",
+            "Night Joker",
+            "The Clown Prince",
+            "Puddin Protector"
+          ],
+          "correct_answer": 0,
+          "explanation": "He jokingly called himself 'buttman' — use that as the last taunt before the big reveal animation.",
+          "timeLimit": 45
+        },
+        {
+          "id": 405,
+          "type": "all_or_nothing",
+          "question": "Boss closure: to unlock the final prize you must correctly answer this and *upload* the IRL proof (photo) — which two items form the master key?",
+          "options": [
+            "luv_tit.o (IG handle) + war•sunset•meatons (passphrase)",
+            "PH + director's cut (vague promise)",
+            "Jacob Muya + 'viewed once'",
+            "Figma file + 'effort is my love language'"
+          ],
+          "correct_answer": 0,
+          "explanation": "Master key uses her IG handle as identity proof and the combined passphrase (palindrome+sunset+meatons) to validate both digital and IRL ties. This is meant to feel very 'This could only be ours.'",
+          "timeLimit": 600
+        }
+      ],
+      "bonus_round": {
+        "enabled": true,
+        "title": "The Ultimate Time Waster (Boss Edition)",
+        "description": "A long text decode that pulls lines from different late-night messages into a single secret phrase.",
+        "task": "Find the hidden message across 7 timestamps: take the 2nd word of timestamp A, 5th of B, 1st of C… (engine handles positions).",
+        "hidden_message": "luv_tit.o war sunset meatons director",
+        "timeLimit": 900
+      },
+      "completion_message": "If Harley uploads the choco-fudge proof with the master passphrase and the IG tag, the final reveal is triggered (IRL surprise or downloadable certificate).",
+      "unlock_requirement": "All boss questions correct + IRL photo upload matching the proof rules"
+    }
+  ],
+  "global_hint_policy": {
+    "hints_per_level": 2,
+    "unlock_conditions": "Hints unlock after two wrong attempts or by spending a 'side-challenge' token (earn tokens by completing optional micro-tasks).",
+    "hint_style": "Hints are formed from actual supportive/funny lines in the chat and are presented in-character (Harley sweet / Joker taunt). Example hint snippet: 'effort is my love language' used as a gentle nudge."
+  },
+  "rewards": {
+    "visual": [
+      "animated confetti (Harley lipstick + Joker cards)",
+      "downloadable certificate: 'Phoebe — Harley Quinn of the Circus'"
+    ],
+    "social": [
+      "shareable WhatsApp image with score (optional)",
+      "final IRL surprise trigger (admin controlled)"
+    ]
+  },
+  "completion_message": "You built a god-level, private, chaotic quest that only Harley can navigate. Win = emotional payoff. Fail = Joker flips the board. Either way — it's unforgettable. 🎪💥",
+  "notes": "This JSON draws lines and quotes directly from your uploaded chat. Relevant source snippets used while crafting clues include the IG handle (luv_tit.o), nickname choices (PH / miss wahito), school confessions (Elizabeth Academy / head girl / fence-snack story), palindrome 'war is raw', 'viewed once' breadcrumb notes, 'opposite meatons' meetup references, music/playlist comments (the breeze grew a fire, Mereba), and late-night persona/jokes (threesome jokes, 'buttman'). All pulled from the chat file you provided."
+}
