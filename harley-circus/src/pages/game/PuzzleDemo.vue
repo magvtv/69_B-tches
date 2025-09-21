@@ -121,7 +121,7 @@
 import { ref } from 'vue'
 import PuzzleLevel from '../../components/PuzzleLevel.vue'
 import GameLayout from '../../layouts/GameLayout.vue'
-import { PuzzlePieceIcon, PlayIcon, ArrowPathIcon } from '@heroicons/vue/24/solid'
+import { PlayIcon, ArrowPathIcon } from '@heroicons/vue/24/solid'
 
 const puzzleRef = ref<InstanceType<typeof PuzzleLevel> | null>(null)
 // Quiz-related variables commented out for now
