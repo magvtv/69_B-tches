@@ -36,6 +36,15 @@
               <PlayIcon class="h-4 w-4" />
               <span>Demo Level</span>
             </router-link>
+            
+            <router-link 
+              to="/game/puzzle-demo" 
+              class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
+              :class="$route.path === '/game/puzzle-demo' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/30' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
+            >
+              <PuzzlePieceIcon class="h-4 w-4" />
+              <span>Puzzle Demo</span>
+            </router-link>
           </nav>
 
           <!-- Mobile Menu Button -->
@@ -70,6 +79,16 @@
               <PlayIcon class="h-5 w-5" />
               <span>Demo Level</span>
             </router-link>
+            
+            <router-link 
+              to="/game/puzzle-demo" 
+              @click="mobileMenuOpen = false"
+              class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors dm-sans"
+              :class="$route.path === '/game/puzzle-demo' ? 'bg-purple-600/20 text-purple-300' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
+            >
+              <PuzzlePieceIcon class="h-5 w-5" />
+              <span>Puzzle Demo</span>
+            </router-link>
           </nav>
         </div>
       </div>
@@ -92,7 +111,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { HomeIcon, PlayIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/solid'
+import { HomeIcon, PlayIcon, Bars3Icon, XMarkIcon, PuzzlePieceIcon } from '@heroicons/vue/24/solid'
 
 // Component name for Vue linting
 defineOptions({
