@@ -43,16 +43,10 @@
         </div>
       </div>
 
-      <!-- Timer -->
-      <div v-if="timeLeft > 0" class="text-center mb-8">
-        <div class="inline-flex items-center gap-3 bg-red-600/20 border border-red-600/30 px-6 py-3 rounded-full">
-          <ClockIcon class="h-5 w-5 text-red-400" />
-          <span class="text-xl font-bold text-red-200 dm-sans">{{ formatTime(timeLeft) }}</span>
-        </div>
-      </div>
+      <!-- Timer removed - answer at your own pace -->
 
       <!-- Question Display -->
-      <div v-if="!quizCompleted && !bonusRound && currentQuestion" class="bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-red-600/20">
+      <div v-if="!quizCompleted && currentQuestion" class="bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-red-600/20">
         <div class="mb-8">
           <h2 class="text-2xl font-bold mb-6 dm-sans text-center">{{ currentQuestion.question }}</h2>
         </div>
@@ -110,48 +104,14 @@
               @click="nextQuestion"
               class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-lg font-bold transition-colors dm-sans flex items-center gap-2"
             >
-              <span>{{ currentQuestionIndex < levelData.questions.length - 1 ? 'Next Question' : 'Start Bonus Round' }}</span>
+              <span>{{ currentQuestionIndex < levelData.questions.length - 1 ? 'Next Question' : 'Complete Quiz' }}</span>
               <ArrowRightIcon class="h-4 w-4" />
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Bonus Round -->
-      <div v-if="bonusRound && !quizCompleted" class="bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-red-600/20">
-        <div class="text-center mb-8">
-          <GiftIcon class="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-          <h2 class="text-3xl font-bold mb-4 dm-sans text-yellow-400">{{ levelData.bonus_round.title }}</h2>
-          <p class="text-gray-300 dm-sans">{{ levelData.bonus_round.description }}</p>
-        </div>
-        
-        <div class="bg-gray-800/30 rounded-xl p-6 mb-8 border border-gray-600/30">
-          <h3 class="text-xl font-bold mb-4 dm-sans flex items-center gap-2">
-            <DocumentTextIcon class="h-5 w-5 text-gray-400" />
-            Your Mission
-          </h3>
-          <p class="text-gray-300 dm-sans leading-relaxed">{{ levelData.bonus_round.task }}</p>
-        </div>
-
-        <div class="space-y-6">
-          <div>
-            <input
-              v-model="bonusAnswer"
-              type="text"
-              placeholder="Enter your answer here..."
-              class="w-full p-4 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:border-red-400 focus:outline-none dm-sans"
-            />
-          </div>
-          <button
-            @click="submitBonusAnswer"
-            :disabled="!bonusAnswer.trim()"
-            class="w-full bg-yellow-600 hover:bg-yellow-700 disabled:bg-gray-600 disabled:cursor-not-allowed px-8 py-4 rounded-xl font-bold transition-colors dm-sans flex items-center justify-center gap-2"
-          >
-            <PaperAirplaneIcon class="h-5 w-5" />
-            Submit Bonus Answer
-          </button>
-        </div>
-      </div>
+      <!-- Bonus Round removed -->
 
       <!-- Completion Screen -->
       <div v-if="quizCompleted" class="text-center bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-red-600/20">
@@ -216,19 +176,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { quizService, type QuizLevel } from '@/services/quizService'
 import GameLayout from '@/layouts/GameLayout.vue'
 import {
-  ClockIcon,
   ChartBarIcon,
   CheckCircleIcon,
   XCircleIcon,
   ArrowRightIcon,
-  GiftIcon,
-  DocumentTextIcon,
-  PaperAirplaneIcon,
   TrophyIcon,
   ArrowPathIcon,
   ExclamationTriangleIcon,
@@ -247,47 +203,18 @@ const levelData = ref<QuizLevel | null>(null)
 const currentQuestionIndex = ref(0)
 const selectedAnswer = ref<number | null>(null)
 const correctAnswers = ref(0)
-const timeLeft = ref(0)
 const quizCompleted = ref(false)
-const bonusRound = ref(false)
-const bonusAnswer = ref('')
-const timer = ref<number | null>(null)
 const loading = ref(true)
 
 // Computed
 const currentQuestion = computed(() => levelData.value?.questions[currentQuestionIndex.value])
 
 // Methods
-const startTimer = (seconds: number) => {
-  timeLeft.value = seconds
-  timer.value = window.setInterval(() => {
-    timeLeft.value--
-    if (timeLeft.value <= 0) {
-      clearInterval(timer.value!)
-      timeUp()
-    }
-  }, 1000)
-}
-
-const timeUp = () => {
-  selectedAnswer.value = -1 // Mark as time up
-  // Auto-advance after showing the correct answer
-  setTimeout(() => {
-    nextQuestion()
-  }, 3000)
-}
-
-const formatTime = (seconds: number) => {
-  const mins = Math.floor(seconds / 60)
-  const secs = seconds % 60
-  return `${mins}:${secs.toString().padStart(2, '0')}`
-}
 
 const selectAnswer = (answerIndex: number) => {
   if (selectedAnswer.value !== null || !currentQuestion.value) return
   
   selectedAnswer.value = answerIndex
-  clearInterval(timer.value!)
   
   if (answerIndex === currentQuestion.value.correct_answer) {
     correctAnswers.value++
@@ -300,21 +227,10 @@ const nextQuestion = () => {
   if (currentQuestionIndex.value < levelData.value.questions.length - 1) {
     currentQuestionIndex.value++
     selectedAnswer.value = null
-    if (currentQuestion.value) {
-      startTimer(currentQuestion.value.timeLimit)
-    }
   } else {
-    // Start bonus round
-    bonusRound.value = true
-    startTimer(levelData.value.bonus_round.timeLimit)
+    // Complete the quiz
+    quizCompleted.value = true
   }
-}
-
-const submitBonusAnswer = () => {
-  if (!levelData.value) return
-  
-  clearInterval(timer.value!)
-  quizCompleted.value = true
 }
 
 const restartQuiz = () => {
@@ -322,11 +238,6 @@ const restartQuiz = () => {
   selectedAnswer.value = null
   correctAnswers.value = 0
   quizCompleted.value = false
-  bonusRound.value = false
-  bonusAnswer.value = ''
-  if (currentQuestion.value) {
-    startTimer(currentQuestion.value.timeLimit)
-  }
 }
 
 const goToNextLevel = () => {
@@ -338,18 +249,9 @@ onMounted(async () => {
   try {
     levelData.value = await quizService.loadLevel(0)
     loading.value = false
-    if (currentQuestion.value) {
-      startTimer(currentQuestion.value.timeLimit)
-    }
   } catch (error) {
     console.error('Failed to load level 0:', error)
     loading.value = false
-  }
-})
-
-onUnmounted(() => {
-  if (timer.value) {
-    clearInterval(timer.value)
   }
 })
 </script>
