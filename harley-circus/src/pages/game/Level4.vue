@@ -3,9 +3,9 @@
     <div class="max-w-4xl mx-auto p-6 text-white">
       <div class="text-center mb-12">
         <h2 class="text-4xl font-bold mb-4 dm-sans text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
-          Level 4: Decrypt the Date
+          Level 4: Kama Sutra Enigma
         </h2>
-        <p class="text-lg text-gray-300 dm-sans">Chronological puzzle with meta-data</p>
+        <p class="text-lg text-gray-300 dm-sans">Unlock the intimate secrets of our connection</p>
       </div>
       
       <div class="bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-red-600/20 text-center">
