@@ -43,7 +43,7 @@
               :class="$route.path === '/game/puzzle-demo' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/30' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
             >
               <PuzzlePieceIcon class="h-4 w-4" />
-              <span>Puzzle Demo</span>
+              <span>Demo Puzzle</span>
             </router-link>
           </nav>
 
@@ -87,7 +87,7 @@
               :class="$route.path === '/game/puzzle-demo' ? 'bg-purple-600/20 text-purple-300' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
             >
               <PuzzlePieceIcon class="h-5 w-5" />
-              <span>Puzzle Demo</span>
+              <span>Demo Puzzle</span>
             </router-link>
           </nav>
         </div>

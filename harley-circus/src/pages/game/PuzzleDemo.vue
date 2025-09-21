@@ -89,12 +89,12 @@
             <div>
               <h4 class="text-lg font-bold mb-4 dm-sans text-red-400">Currency System:</h4>
               <ul class="space-y-2 text-sm dm-sans text-gray-300">
-                <li>• ⚡ Under 30s: 1000 currency (Lightning Fast!)</li>
-                <li>• 🔥 30-60s: 800 currency (Incredible Speed!)</li>
-                <li>• 💪 1-2min: 600 currency (Excellent Work!)</li>
-                <li>• 👍 2-3min: 400 currency (Nice Job!)</li>
-                <li>• 👌 3-4min: 200 currency (Well Done!)</li>
-                <li>• 💪 Time's up: 50 currency (Keep Trying!)</li>
+                <li>• Under 30s: 1000 pts</li>
+                <li>• 30-60s: 800 pts</li>
+                <li>• 1-2min: 600 pts</li>
+                <li>• 2-3min: 400 pts</li>
+                <li>• 3-4min: 200 pts</li>
+                <li>• Time's up: 50 pts</li>
               </ul>
             </div>
           </div>
