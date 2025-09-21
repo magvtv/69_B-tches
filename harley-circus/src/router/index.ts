@@ -41,6 +41,11 @@ const routes: RouteRecordRaw[] = [
     name: 'Level5',
     component: () => import('@/pages/game/Level5.vue'),
   },
+  {
+    path: '/game/puzzle-demo',
+    name: 'PuzzleDemo',
+    component: () => import('@/pages/game/PuzzleDemo.vue'),
+  },
 ]
 
 export const router = createRouter({
