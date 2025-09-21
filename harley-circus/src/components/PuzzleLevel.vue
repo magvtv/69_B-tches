@@ -150,8 +150,9 @@
               </div>
             </div>
             <div class="mb-6">
-              <div class="text-4xl font-bold text-red-400 dm-sans">{{ score }}</div>
-              <div class="text-sm text-gray-300 dm-sans">Final Score</div>
+              <div class="text-4xl font-bold text-yellow-400 dm-sans">{{ score }}</div>
+              <div class="text-sm text-gray-300 dm-sans">Points Earned</div>
+              <div class="text-xs text-gray-400 dm-sans mt-1">Use this currency to unlock hints in difficult levels!</div>
             </div>
             <div class="p-6 bg-red-600/20 rounded-xl border border-red-500/30">
               <p class="text-sm italic text-gray-300 dm-sans">{{ getPerformanceMessage() }}</p>
@@ -159,7 +160,7 @@
           </div>
 
           <button 
-            @click="$emit('level-complete')"
+            @click="$emit('level-complete', score)"
             class="bg-gradient-to-r from-red-600 to-black hover:from-red-700 hover:to-gray-900 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-900/30 dm-sans"
           >
             Continue the Adventure →
@@ -185,10 +186,10 @@ import {
   ChatBubbleLeftRightIcon
 } from '@heroicons/vue/24/solid'
 
-// const emit = defineEmits<{
-//   'level-complete': []
-//   'quiz-trigger': [moves: number, time: number]
-// }>()
+const emit = defineEmits<{
+  'level-complete': [currencyEarned: number]
+  'quiz-trigger': [moves: number, time: number]
+}>()
 
 // Puzzle state
 const puzzleTiles = ref<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 0]) // 0 represents empty space
@@ -225,12 +226,44 @@ const formattedTimeRemaining = computed(() => {
 })
 
 const score = computed(() => {
-  if (moves.value === 0) return 0
-  // Score starts at 0 and increments based on performance
-  const moveBonus = Math.max(0, 50 - moves.value) * 10 // Bonus for fewer moves
-  const timeBonus = Math.max(0, timeLimit.value - currentTime.value) * 2 // Bonus for faster completion
-  const baseScore = 100 // Base points for completing
-  return baseScore + moveBonus + timeBonus
+  if (moves.value === 0 || !puzzleCompleted.value) return 0
+  
+  // Time-based scoring system (faster = more points)
+  const completionTime = currentTime.value
+  const maxTime = timeLimit.value // 4 minutes = 240 seconds
+  
+  // Base currency points (scaled for meaningful amounts)
+  let currencyPoints = 0
+  
+  // Speed bonus tiers (the faster you solve, the more currency you earn)
+  if (completionTime <= 30) {
+    // Lightning fast (under 30 seconds) - Maximum currency
+    currencyPoints = 1000
+  } else if (completionTime <= 60) {
+    // Very fast (30-60 seconds) - High currency
+    currencyPoints = 800
+  } else if (completionTime <= 120) {
+    // Fast (1-2 minutes) - Good currency
+    currencyPoints = 600
+  } else if (completionTime <= 180) {
+    // Average (2-3 minutes) - Decent currency
+    currencyPoints = 400
+  } else if (completionTime <= 240) {
+    // Slow but completed (3-4 minutes) - Basic currency
+    currencyPoints = 200
+  } else {
+    // Time's up - Minimal currency
+    currencyPoints = 50
+  }
+  
+  // Move efficiency bonus (fewer moves = more currency)
+  const moveEfficiency = Math.max(0, 50 - moves.value) // Optimal is around 20-30 moves
+  const moveBonus = Math.min(moveEfficiency * 5, 200) // Max 200 bonus points
+  
+  // Final currency calculation
+  const finalCurrency = currencyPoints + moveBonus
+  
+  return finalCurrency
 })
 
 // TODO: Replace with image-based tiles when ready
@@ -302,6 +335,15 @@ const checkPuzzleComplete = () => {
   if (isComplete) {
     puzzleCompleted.value = true
     stopTimer()
+    
+    // Store currency in localStorage for use in other levels
+    const currencyEarned = score.value
+    const currentCurrency = parseInt(localStorage.getItem('puzzleCurrency') || '0')
+    const newTotal = currentCurrency + currencyEarned
+    localStorage.setItem('puzzleCurrency', newTotal.toString())
+    
+    // Emit the currency earned for immediate feedback
+    emit('level-complete', currencyEarned)
   }
 }
 
@@ -327,16 +369,21 @@ const checkProgressMessages = () => {
   }
 }
 
-// Performance message based on final score
+// Performance message based on currency earned
 const getPerformanceMessage = () => {
-  if (score.value >= 900) {
-    return "Legendary! Harley the Puzzle Queen reigns supreme! 👑"
-  } else if (score.value >= 700) {
-    return "Not bad, but I'd still win. Good effort though! 😏"
-  } else if (score.value >= 500) {
-    return "Well... at least you're cute. Practice makes perfect! 💕"
+  const currencyEarned = score.value
+  if (currencyEarned >= 1000) {
+    return "Mad Fast! Sawa basi puzzle master! Use this wisely in difficult levels!"
+  } else if (currencyEarned >= 800) {
+    return "Naona Uko Chonjo! High points earned - you're ready for the toughest challenges!"
+  } else if (currencyEarned >= 600) {
+    return "Eish! No Joking! Good points earned - you've got solid puzzle skills!"
+  } else if (currencyEarned >= 400) {
+    return "Si mbaya. Si mbaya! Decent points earned - keep practicing for better rewards!"
+  } else if (currencyEarned >= 200) {
+    return "Umetry! Basic points earned - speed up for bigger rewards next time!"
   } else {
-    return "Oof... maybe stick to what you're good at? 😂"
+    return "Itabidi Umetrain Jamani! Low points earned - wahenga husema practice makes perfect?"
   }
 }
 
