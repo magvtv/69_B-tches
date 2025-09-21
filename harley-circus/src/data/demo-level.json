@@ -41,7 +41,11 @@
           "id": 4,
           "type": "second_order_emotion",
           "question": "Which small, everyday trigger did Joker note would reliably make you suddenly emotional (the 'nuclear explosion' line)?",
-          "options": ["A surprise song", "Any food you love", "Seeing an old schoolmate", "A sunset photo"],
+          "options": [
+            "A surprise song", 
+            "Any food you love", 
+            "Seeing an old schoolmate", 
+            "A sunset photo"],
           "correct_answer": 1,
           "explanation": "You said that anyone who brings you food you enjoy can cause a strong emotional reaction (tears, etc.). :contentReference[oaicite:8]{index=8}",
           "timeLimit": 60

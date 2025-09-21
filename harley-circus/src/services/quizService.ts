@@ -9,14 +9,7 @@ export interface QuizQuestion {
   timeLimit: number
 }
 
-export interface BonusRound {
-  enabled: boolean
-  title: string
-  description: string
-  task: string
-  hidden_message: string
-  timeLimit: number
-}
+// BonusRound interface removed
 
 export interface QuizLevel {
   level: number
@@ -26,9 +19,24 @@ export interface QuizLevel {
   difficulty: string
   theme: string
   questions: QuizQuestion[]
-  bonus_round: BonusRound
   completion_message: string
   unlock_requirement: string
+}
+
+export interface ConsolidatedQuizData {
+  project: string
+  questions: QuizQuestion[]
+  completion_message: string
+  unlock_requirement: string
+  global_hint_policy: {
+    hints_per_level: number
+    unlock_conditions: string
+    hint_style: string
+  }
+  rewards: {
+    visual: string[]
+    social: string[]
+  }
 }
 
 class QuizService {
@@ -69,14 +77,22 @@ class QuizService {
     }
 
     try {
-      // Load from demo-level.json for level 0, fallback to individual files for others
+      // Load from demo-level-old.json for level 0 (now consolidated)
       if (levelNumber === 0) {
         const demoData = await import(`../data/demo-level-old.json`)
-        const demoLevels = demoData.default.levels
-        const quizLevel = demoLevels.find(level => level.level === levelNumber) as QuizLevel
+        const consolidatedData = demoData.default as ConsolidatedQuizData
         
-        if (!quizLevel) {
-          throw new Error(`Level ${levelNumber} not found in demo-level.json`)
+        // Create a QuizLevel from the consolidated data
+        const quizLevel: QuizLevel = {
+          level: 0,
+          title: "Prologue — The Partial Circus Experience",
+          description: "Hey Babe. PH says you need to and inside references. This is a just taste of the experience.",
+          estimatedTime: "4 minutes",
+          difficulty: "Very Easy",
+          theme: "Complete journey: nicknames, memories, music & craft",
+          questions: consolidatedData.questions,
+          completion_message: consolidatedData.completion_message,
+          unlock_requirement: consolidatedData.unlock_requirement
         }
         
         // Shuffle options for all questions to make the quiz less predictable
