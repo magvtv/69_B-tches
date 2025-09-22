@@ -230,7 +230,6 @@ const score = computed(() => {
   
   // Time-based scoring system (faster = more points)
   const completionTime = currentTime.value
-  const maxTime = timeLimit.value // 4 minutes = 240 seconds
   
   // Base currency points (scaled for meaningful amounts)
   let currencyPoints = 0
@@ -341,6 +340,13 @@ const checkPuzzleComplete = () => {
     const currentCurrency = parseInt(localStorage.getItem('puzzleCurrency') || '0')
     const newTotal = currentCurrency + currencyEarned
     localStorage.setItem('puzzleCurrency', newTotal.toString())
+    
+    // Store timing details for demo display
+    const elapsedSeconds = currentTime.value
+    const remainingSeconds = Math.max(0, timeLimit.value - elapsedSeconds)
+    localStorage.setItem('puzzleLastElapsedSeconds', elapsedSeconds.toString())
+    localStorage.setItem('puzzleLastRemainingSeconds', remainingSeconds.toString())
+    localStorage.setItem('puzzleLastElapsedFormatted', formattedTime.value)
     
     // Emit the currency earned for immediate feedback
     emit('level-complete', currencyEarned)
