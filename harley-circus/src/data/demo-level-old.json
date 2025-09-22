@@ -1,0 +1,162 @@
+{
+  "project": "Harley Circus ARG",
+  "questions": [
+    {
+      "id": 1,
+      "type": "nickname",
+      "question": "When I teased you with 'Tito', what slick nickname did you rescue and claim as your own?",
+      "options": [
+        "PH",
+        "Phoebs",
+        "Miss Wahito",
+        "Tito (forever)"
+      ],
+      "correct_answer": 0,
+      "explanation": "You picked 'PH' and called it cool — it's the tiny identity flex that becomes a recurring tag.",
+      "timeLimit": 10
+    },
+    {
+      "id": 2,
+      "type": "second_order_emotion",
+      "question": "Which small, everyday trigger did Joker note would reliably make you suddenly emotional (the 'nuclear explosion' line)?",
+      "options": [
+        "A surprise song",
+        "Any food you love",
+        "Seeing an old schoolmate",
+        "A sunset photo"
+      ],
+      "correct_answer": 1,
+      "explanation": "You said that anyone who brings you food you enjoy can cause a strong emotional reaction (tears, etc.).",
+      "timeLimit": 10
+    },
+    {
+      "id": 3,
+      "type": "tone_identify",
+      "question": "After a jokey 'threesome' mention, you framed the idea with a specific tone. Which of these best captures your wording?",
+      "options": [
+        "Laugh-marked and teasing",
+        "Serious and direct",
+        "Grateful and grateful",
+        "Emotional and vulnerable"
+      ],
+      "correct_answer": 0,
+      "explanation": "You wrote 'Threesomes are crazyyy let them remain as mysteries'",
+      "timeLimit": 10
+    },
+    {
+      "id": 4,
+      "type": "childhood_mischief",
+      "question": "Which poor classmate got the juice-bottle fury (and a scratch) from young Harley?",
+      "options": [
+        "Jacob Muya",
+        "Jacob Mwangi",
+        "Jacob Kimani",
+        "Jacob Otieno"
+      ],
+      "correct_answer": 0,
+      "explanation": "Jacob Muya — a tiny violent legend from class 2.",
+      "timeLimit": 10
+    },
+    {
+      "id": 5,
+      "type": "love_language",
+      "question": "Harley dropped a line about her 'love language' — how did she phrase it first?",
+      "options": [
+        "Effort",
+        "Quality time",
+        "Physical touch",
+        "Words of affirmation"
+      ],
+      "correct_answer": 0,
+      "explanation": "You literally said 'effort is my love language' — an emotional lever you can use as a hint bank.",
+      "timeLimit": 10
+    },
+    {
+      "id": 6,
+      "type": "wordplay",
+      "question": "Which palindrome did Joker invoke as an artful motif in the chat?",
+      "options": [
+        "war is raw",
+        "madam im adam",
+        "never odd or even",
+        "step on no pets"
+      ],
+      "correct_answer": 0,
+      "explanation": "'war is raw' — used as both wordplay and a theme (exhibits, 'viewed once', private art). Great for a visual / image-reveal puzzle.",
+      "timeLimit": 10
+    },
+    {
+      "id": 7,
+      "type": "location_clue",
+      "question": "When I asked for a meetup spot, you sent a pin. You said the place is opposite...",
+      "options": [
+        "Meatons",
+        "Quickmatt",
+        "Smocha spot",
+        "Ricada apartments"
+      ],
+      "correct_answer": 0,
+      "explanation": "Ulisema, hauko home uko kwa riacada villa; hadi ukauliza kama naijua",
+      "timeLimit": 10
+    },
+    {
+      "id": 8,
+      "type": "timing_tease",
+      "question": "In the chat, I bread-crumbed 'viewed once' moments. What phrase did you connect it to as a hint?",
+      "options": [
+        "Exhibits not for public view",
+        "Open season on views",
+        "Public gallery",
+        "Shared specifically once"
+      ],
+      "correct_answer": 0,
+      "explanation": "'The best exhibits aren't meant for public view' ties to the 'viewed once' breadcrumb motif — ideal for 'hidden frame' puzzles.",
+      "timeLimit": 10
+    },
+    {
+      "id": 101,
+      "type": "attach_type",
+      "question": "Which file type do you frequently send in late-night responses",
+      "options": [
+        "Voice notes",
+        "Videos",
+        "Stickers",
+        "GIFs"
+      ],
+      "correct_answer": 2,
+      "explanation": "We frequently send stickers in late-night responses hahaha",
+      "timeLimit": 10
+    },
+    {
+      "id": 102,
+      "type": "scene_memory",
+      "question": "In the Birds of Prey movie, Harley treasures something before chaos strikes. What was it?",
+      "options": [
+        "A diamond",
+        "Her egg sandwich",
+        "Her bat",
+        "Joker's smile"
+      ],
+      "correct_answer": 1,
+      "explanation": "Her egg sandwich is a symbol of comfort and independence, losing it is peak heartbreak",
+      "timeLimit": 10
+    }
+  ],
+  "completion_message": "Incredible! You've conquered the entire circus in one go. You're officially the Harley Queen of this chaotic realm. 🎪👑",
+  "unlock_requirement": "Solve all 10 questions across the complete experience",
+  "global_hint_policy": {
+    "hints_per_level": 2,
+    "unlock_conditions": "Hints unlock after two wrong attempts or by spending a 'side-challenge' token (earn tokens by completing optional micro-tasks).",
+    "hint_style": "Hints are formed from actual supportive/funny lines in the chat and are presented in-character (Harley sweet / Joker taunt). Example hint snippet: 'effort is my love language' used as a gentle nudge."
+  },
+  "rewards": {
+    "visual": [
+      "animated confetti (Harley lipstick + Joker cards)",
+      "downloadable certificate: 'Phoebe — Harley Quinn of the Circus'"
+    ],
+    "social": [
+      "shareable WhatsApp image with score (optional)",
+      "final IRL surprise trigger (admin controlled)"
+    ]
+  }
+}
