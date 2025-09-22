@@ -10,9 +10,14 @@
           </h1>
           <p class="text-xl text-gray-200 dm-sans">Test the 3x3 sliding puzzle with move & time tracking</p>
           
-          <!-- Currency Display -->
-          <div class="mt-4 inline-flex items-center gap-2 bg-yellow-600/20 border border-yellow-600/30 px-4 py-2 rounded-full">
-            <span class="text-yellow-200 dm-sans">Total Points: {{ totalCurrency }}</span>
+          <!-- Currency & Time Display -->
+          <div class="mt-4 flex flex-col items-center gap-2">
+            <div class="inline-flex items-center gap-2 bg-yellow-600/20 border border-yellow-600/30 px-4 py-2 rounded-full">
+              <span class="text-yellow-200 dm-sans">Total Points: {{ totalCurrency }}</span>
+            </div>
+            <div class="inline-flex items-center gap-2 bg-red-600/20 border border-red-600/30 px-4 py-2 rounded-full" v-if="lastRemainingTime">
+              <span class="text-red-200 dm-sans">Time: {{ lastRemainingTime }}</span>
+            </div>
           </div>
         </div>
 
@@ -126,13 +131,41 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import PuzzleLevel from '../../components/PuzzleLevel.vue'
 import GameLayout from '../../layouts/GameLayout.vue'
 import { PlayIcon, ArrowPathIcon } from '@heroicons/vue/24/solid'
 
 const puzzleRef = ref<InstanceType<typeof PuzzleLevel> | null>(null)
 const totalCurrency = ref(parseInt(localStorage.getItem('puzzleCurrency') || '0'))
+const lastFinishTime = ref<string | null>(null)
+const lastRemainingTime = ref<string | null>(null)
+
+const loadLastTimes = () => {
+  const formatted = localStorage.getItem('puzzleLastElapsedFormatted')
+  lastFinishTime.value = formatted
+  // Compute remaining from 4:00 - elapsed, or use stored remaining seconds
+  const remainingSecondsRaw = localStorage.getItem('puzzleLastRemainingSeconds')
+  let remainingSeconds = remainingSecondsRaw ? parseInt(remainingSecondsRaw) : null
+  if (remainingSeconds === null || isNaN(remainingSeconds)) {
+    const elapsedSecondsRaw = localStorage.getItem('puzzleLastElapsedSeconds')
+    const elapsedSeconds = elapsedSecondsRaw ? parseInt(elapsedSecondsRaw) : NaN
+    if (!isNaN(elapsedSeconds)) {
+      remainingSeconds = Math.max(0, 240 - elapsedSeconds)
+    }
+  }
+  if (remainingSeconds !== null && !isNaN(remainingSeconds)) {
+    const minutes = Math.floor(remainingSeconds / 60)
+    const seconds = remainingSeconds % 60
+    lastRemainingTime.value = `${minutes}:${seconds.toString().padStart(2, '0')}`
+  } else {
+    lastRemainingTime.value = null
+  }
+}
+
+onMounted(() => {
+  loadLastTimes()
+})
 
 // Quiz-related variables commented out for now
 // const showQuizModal = ref(false)
@@ -151,6 +184,8 @@ const handleLevelComplete = (currencyEarned: number) => {
   
   // Update the currency display
   totalCurrency.value = parseInt(localStorage.getItem('puzzleCurrency') || '0')
+  // Update last finish time display
+  loadLastTimes()
   
   // Show currency earned notification
   alert(`🎉 Puzzle Complete!\n\nCurrency Earned: ${currencyEarned}\nTotal Currency: ${totalCurrency.value}\n\nUse this currency to unlock hints in difficult levels!`)
