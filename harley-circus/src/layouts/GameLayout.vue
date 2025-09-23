@@ -9,7 +9,7 @@
             <router-link to="/" class="flex items-center gap-3 group">
               <img src="/images/logos/harley-quinn-logo.png" alt="Harley Quinn Logo" class="h-8 w-8 object-contain group-hover:scale-110 transition-transform duration-200" />
               <div>
-                <h1 class="text-3xl text-white font-extrabold">Harley</h1>
+                <h1 class="text-2xl text-white font-extrabold">Harley</h1>
               </div>
             </router-link>
           </div>
@@ -21,7 +21,7 @@
               class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
               :class="$route.path === '/levels' ? 'bg-red-600/20 text-red-300 border border-red-500/30' : 'text-gray-300 hover:text-red-300 hover:bg-red-600/10'"
             >
-              <HomeIcon class="h-4 w-4" />
+              <CakeIcon class="h-4 w-4" />
               <span>Levels</span>
             </router-link>
             
@@ -63,7 +63,7 @@
               class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors dm-sans"
               :class="$route.path === '/levels' ? 'bg-red-600/20 text-red-300' : 'text-gray-300 hover:text-red-300 hover:bg-red-600/10'"
             >
-              <HomeIcon class="h-5 w-5" />
+              <CakeIcon class="h-5 w-5" />
               <span>Levels</span>
             </router-link>
             
@@ -108,7 +108,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { HomeIcon, PlayIcon, Bars3BottomRightIcon, XMarkIcon, PuzzlePieceIcon } from '@heroicons/vue/24/solid'
+import { CakeIcon, Bars3BottomRightIcon, XMarkIcon} from '@heroicons/vue/24/solid'
+
+// import { HomeIcon, PlayIcon Bars3BottomRightIcon, XMarkIcon, PuzzlePieceIcon } from '@heroicons/vue/24/solid'
 
 // Component name for Vue linting
 defineOptions({
