@@ -20,7 +20,7 @@
           <!-- Navigation -->
           <nav class="hidden md:flex items-center gap-6">
             <router-link 
-              to="/game" 
+              to="/levels" 
               class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
               :class="$route.path === '/game' ? 'bg-red-600/20 text-red-300 border border-red-500/30' : 'text-gray-300 hover:text-red-300 hover:bg-red-600/10'"
             >
@@ -29,21 +29,21 @@
             </router-link>
             
             <router-link 
-              to="/game/level0" 
+              to="/demo/quiz" 
               class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
               :class="$route.path === '/game/level0' ? 'bg-yellow-600/20 text-yellow-300 border border-yellow-500/30' : 'text-gray-300 hover:text-yellow-300 hover:bg-yellow-600/10'"
             >
               <PlayIcon class="h-4 w-4" />
-              <span>Demo Level</span>
+              <span>Demo Quiz</span>
             </router-link>
             
             <router-link 
-              to="/game/puzzle-demo" 
+              to="/demo/puzzle" 
               class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
               :class="$route.path === '/game/puzzle-demo' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/30' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
             >
               <PuzzlePieceIcon class="h-4 w-4" />
-              <span>Puzzle Demo</span>
+              <span>Demo Puzzle</span>
             </router-link>
           </nav>
 
