@@ -7,12 +7,9 @@
           <!-- Logo/Brand -->
           <div class="flex items-center gap-3">
             <router-link to="/" class="flex items-center gap-3 group">
-              <img src="/images/logos/harley-quinn-logo.png" alt="Harley Quinn Logo" class="h-10 w-10 object-contain group-hover:scale-110 transition-transform duration-200" />
+              <img src="/images/logos/harley-quinn-logo.png" alt="Harley Quinn Logo" class="h-8 w-8 object-contain group-hover:scale-110 transition-transform duration-200" />
               <div>
-                <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 dm-sans">
-                  Harley
-                </h1>
-                <p class="text-xs text-gray-400 dm-sans">Welcome To The Circus</p>
+                <h1 class="text-3xl text-white font-extrabold">Harley</h1>
               </div>
             </router-link>
           </div>
@@ -22,29 +19,29 @@
             <router-link 
               to="/levels" 
               class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
-              :class="$route.path === '/game' ? 'bg-red-600/20 text-red-300 border border-red-500/30' : 'text-gray-300 hover:text-red-300 hover:bg-red-600/10'"
+              :class="$route.path === '/levels' ? 'bg-red-600/20 text-red-300 border border-red-500/30' : 'text-gray-300 hover:text-red-300 hover:bg-red-600/10'"
             >
               <HomeIcon class="h-4 w-4" />
               <span>Levels</span>
             </router-link>
             
-            <router-link 
+            <!-- <router-link 
               to="/demo/quiz" 
               class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
-              :class="$route.path === '/game/level0' ? 'bg-yellow-600/20 text-yellow-300 border border-yellow-500/30' : 'text-gray-300 hover:text-yellow-300 hover:bg-yellow-600/10'"
+              :class="$route.path === '/demo/quiz' ? 'bg-yellow-600/20 text-yellow-300 border border-yellow-500/30' : 'text-gray-300 hover:text-yellow-300 hover:bg-yellow-600/10'"
             >
               <PlayIcon class="h-4 w-4" />
               <span>Demo Quiz</span>
-            </router-link>
+            </router-link> -->
             
-            <router-link 
+            <!-- <router-link 
               to="/demo/puzzle" 
               class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors dm-sans text-sm"
-              :class="$route.path === '/game/puzzle-demo' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/30' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
+              :class="$route.path === '/demo/puzzle' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/30' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
             >
               <PuzzlePieceIcon class="h-4 w-4" />
               <span>Demo Puzzle</span>
-            </router-link>
+            </router-link> -->
           </nav>
 
           <!-- Mobile Menu Button -->
@@ -52,7 +49,7 @@
             @click="mobileMenuOpen = !mobileMenuOpen"
             class="md:hidden p-2 rounded-lg text-gray-300 hover:text-red-300 hover:bg-red-600/10 transition-colors"
           >
-            <Bars3Icon v-if="!mobileMenuOpen" class="h-6 w-6" />
+            <Bars3BottomRightIcon v-if="!mobileMenuOpen" class="h-6 w-6" />
             <XMarkIcon v-else class="h-6 w-6" />
           </button>
         </div>
@@ -61,34 +58,34 @@
         <div v-if="mobileMenuOpen" class="md:hidden mt-4 pt-4 border-t border-red-600/30">
           <nav class="flex flex-col gap-2">
             <router-link 
-              to="/game" 
+              to="/levels" 
               @click="mobileMenuOpen = false"
               class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors dm-sans"
-              :class="$route.path === '/game' ? 'bg-red-600/20 text-red-300' : 'text-gray-300 hover:text-red-300 hover:bg-red-600/10'"
+              :class="$route.path === '/levels' ? 'bg-red-600/20 text-red-300' : 'text-gray-300 hover:text-red-300 hover:bg-red-600/10'"
             >
               <HomeIcon class="h-5 w-5" />
-              <span>Levels Hub</span>
+              <span>Levels</span>
             </router-link>
             
-            <router-link 
-              to="/game/level0" 
+            <!-- <router-link 
+              to="/demo/quiz" 
               @click="mobileMenuOpen = false"
               class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors dm-sans"
               :class="$route.path === '/game/level0' ? 'bg-yellow-600/20 text-yellow-300' : 'text-gray-300 hover:text-yellow-300 hover:bg-yellow-600/10'"
             >
               <PlayIcon class="h-5 w-5" />
-              <span>Demo Level</span>
-            </router-link>
+              <span>Demo Quiz</span>
+            </router-link> -->
             
-            <router-link 
-              to="/game/puzzle-demo" 
+            <!-- <router-link 
+              to="/demo/puzzle" 
               @click="mobileMenuOpen = false"
               class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors dm-sans"
               :class="$route.path === '/game/puzzle-demo' ? 'bg-purple-600/20 text-purple-300' : 'text-gray-300 hover:text-purple-300 hover:bg-purple-600/10'"
             >
               <PuzzlePieceIcon class="h-5 w-5" />
-              <span>Puzzle Demo</span>
-            </router-link>
+              <span>Demo Puzzle</span>
+            </router-link> -->
           </nav>
         </div>
       </div>
@@ -111,7 +108,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { HomeIcon, PlayIcon, Bars3Icon, XMarkIcon, PuzzlePieceIcon } from '@heroicons/vue/24/solid'
+import { HomeIcon, PlayIcon, Bars3BottomRightIcon, XMarkIcon, PuzzlePieceIcon } from '@heroicons/vue/24/solid'
 
 // Component name for Vue linting
 defineOptions({
