@@ -119,8 +119,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import PuzzleLevel from '../../components/PuzzleLevel.vue'
-import GameLayout from '../../layouts/GameLayout.vue'
+import PuzzleLevel from '@/components/PuzzleLevel.vue'
+import GameLayout from '@/layouts/GameLayout.vue'
 import { PlayIcon, ArrowPathIcon } from '@heroicons/vue/24/solid'
 
 const puzzleRef = ref<InstanceType<typeof PuzzleLevel> | null>(null)

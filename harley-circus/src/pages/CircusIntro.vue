@@ -14,7 +14,7 @@
         <router-link
           v-for="level in levels"
           :key="level.number"
-          :to="`/game/level${level.number}`"
+          :to="`/levels/0${level.number}`"
           class="group block bg-black/40 backdrop-blur-sm border border-red-600/30 rounded-2xl p-6 hover:bg-black/50 hover:border-red-500/50 transition-all duration-300 transform hover:scale-105"
         >
           <div class="text-center">

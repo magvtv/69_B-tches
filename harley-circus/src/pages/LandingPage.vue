@@ -103,7 +103,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const goToDemoLevel = () => {
-  router.push('/game/level0')
+  router.push('/pages/DemoPage')
 }
 </script>
 
