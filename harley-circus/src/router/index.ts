@@ -58,6 +58,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/levels/[slug].vue'),
     props: true,
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/pages/error/NotFound.vue'),
+  },
 ]
 
 export const router = createRouter({
