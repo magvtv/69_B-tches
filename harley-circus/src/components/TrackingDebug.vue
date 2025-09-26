@@ -9,30 +9,30 @@
     
     <div v-if="showDebug" class="space-y-2 text-xs">
       <div>
-        <strong>Session ID:</strong> {{ userProfile.sessionId }}
+        <strong>Session ID:</strong> {{ userProfile?.sessionId || 'n/a' }}
       </div>
       
       <div>
-        <strong>Session Time:</strong> {{ formatTime(userProfile.totalSessionTime) }}
+        <strong>Session Time:</strong> {{ formatTime(userProfile?.totalSessionTime || 0) }}
       </div>
       
       <div>
         <strong>Interactions:</strong> {{ interactions.length }}
       </div>
       
-      <div v-if="userProfile.preferences?.loveLanguage?.length">
+      <div v-if="userProfile?.preferences?.loveLanguage?.length">
         <strong>Love Language Responses:</strong>
         <div class="ml-2 space-y-1">
-          <div v-for="(response, index) in userProfile.preferences.loveLanguage" :key="index">
+          <div v-for="(response, index) in userProfile!.preferences!.loveLanguage" :key="index">
             Q{{ response.questionIndex + 1 }}: {{ response.answer }}
           </div>
         </div>
       </div>
       
-      <div v-if="userProfile.preferences?.intimateMoments?.length">
+      <div v-if="userProfile?.preferences?.intimateMoments?.length">
         <strong>Intimate Moments:</strong>
         <div class="ml-2">
-          {{ userProfile.preferences.intimateMoments.join(', ') }}
+          {{ userProfile!.preferences!.intimateMoments!.join(', ') }}
         </div>
       </div>
       
@@ -59,14 +59,16 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { trackingService } from '../services/trackingService'
+import { trackingService } from '../lib/tracking/trackingService'
+
+import type { UserProfile, UserInteraction } from '../lib/tracking/trackingService'
 
 const showDebug = ref(false)
-const userProfile = ref(trackingService.getUserProfile())
-const interactions = ref(trackingService.getAllInteractions())
-const insights = ref<any>(null)
+const userProfile = ref<UserProfile>(trackingService.getUserProfile())
+const interactions = ref<UserInteraction[]>(trackingService.getAllInteractions())
+const insights = ref<{ totalEvents: number; engagementLevel?: { high?: boolean; medium?: boolean; low?: boolean }; completionPattern?: { completionRate?: number; progressionSpeed?: string } } | null>(null)
 
-const isDevelopment = computed(() => import.meta.env.VITE_APP_ENV === 'development')
+const isDevelopment = computed(() => import.meta.env.DEV)
 
 let updateInterval: number
 
@@ -114,7 +116,7 @@ const exportData = () => {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `harley-tracking-${data.sessionId}.json`
+    a.download = `harley-tracking-${data.sessionId || 'session'}.json`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
