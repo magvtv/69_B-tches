@@ -1,5 +1,12 @@
 {
-  "title": "Meme Carnival",
+  "title": "Meme Maze",
   "order": 1,
-  "slug": "01-meme-carnival"
+  "slug": "meme-maze",
+  "totalMemes": 23,
+  "description": "Swipe through 23 memes, react, and light the candles.",
+  "easterEggs": [
+    { "index": 10, "hint": "2002 / Y2K nod" },
+    { "index": 19, "hint": "🎂 19 Oct overlay" },
+    { "index": 23, "hint": "Final punchline unlocks finale" }
+  ]
 }

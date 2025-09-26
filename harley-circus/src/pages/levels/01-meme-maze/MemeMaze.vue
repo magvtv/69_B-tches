@@ -1,31 +1,50 @@
 <template>
   <GameLayout>
-    <div class="max-w-4xl mx-auto p-6 text-white">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold mb-4 dm-sans text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
-          Level 1: The Meme Maze
+    <div class="max-w-4xl mx-auto px-4 py-6 sm:p-6 md:p-8 text-white">
+      <div class="text-center mb-6 sm:mb-8">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-2 dm-sans text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
+          Level 1: Meme Maze
         </h2>
-        <p class="text-lg text-gray-300 dm-sans">Navigate through the twisted corridors of our shared humor</p>
+        <p class="text-sm sm:text-lg text-gray-300 dm-sans">23 memes. React and light the candles.</p>
       </div>
-      
-      <div class="bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-red-600/20 text-center">
-        <div class="mb-6">
-          <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-3xl">🚧</span>
+
+      <div class="bg-black/40 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-red-600/20">
+        <div class="flex items-center justify-between mb-5 sm:mb-6 gap-3">
+          <div class="text-xs sm:text-sm text-gray-400">Progress</div>
+          <div class="overflow-x-auto max-w-[65%] sm:max-w-none">
+            <div class="inline-flex">
+              <CandlesProgress :lit="candlesLit" :total="23" />
+            </div>
           </div>
-          <h3 class="text-2xl font-bold mb-4 dm-sans text-yellow-400">Coming Soon</h3>
-          <p class="text-gray-300 dm-sans mb-6">This level is still being crafted with the finest chaos</p>
         </div>
-        
-        <div class="flex justify-center gap-4">
-          <router-link 
-            to="/levels"
-            class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition-colors dm-sans flex items-center gap-2"
-          >
-            <ArrowLeftIcon class="h-4 w-4" />
-            Back to Levels
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <router-link to="/levels/meme-maze/intro" class="block bg-gray-800/60 p-5 rounded-lg border border-gray-700 hover:border-red-500/50 transition-colors">
+            <div class="font-bold mb-1">Intro</div>
+            <div class="text-sm text-gray-400">Quick rules and vibe check</div>
+          </router-link>
+          <router-link to="/levels/meme-maze/memes" class="block bg-gray-800/60 p-5 rounded-lg border border-gray-700 hover:border-red-500/50 transition-colors">
+            <div class="font-bold mb-1">Memes</div>
+            <div class="text-sm text-gray-400">Swipe and react (😂 / 😐)</div>
+          </router-link>
+          <router-link to="/levels/meme-maze/numberplay" class="block bg-gray-800/60 p-5 rounded-lg border border-gray-700 hover:border-red-500/50 transition-colors">
+            <div class="font-bold mb-1">Number Play</div>
+            <div class="text-sm text-gray-400">A teeny birthday-number hint</div>
+          </router-link>
+          <router-link to="/levels/meme-maze/finale" class="block bg-gray-800/60 p-5 rounded-lg border border-gray-700 hover:border-red-500/50 transition-colors">
+            <div class="font-bold mb-1">Finale</div>
+            <div class="text-sm text-gray-400">Claim your playful reward</div>
           </router-link>
         </div>
+      </div>
+    </div>
+
+    <!-- Mobile sticky CTA -->
+    <div class="fixed inset-x-0 bottom-0 md:hidden p-4">
+      <div class="max-w-4xl mx-auto">
+        <button @click="continueOrStart" class="w-full bg-red-600 hover:bg-red-700 px-6 py-4 rounded-xl font-bold dm-sans shadow-lg shadow-red-900/30" aria-label="Start or continue Meme Maze">
+          {{ state.currentIndex > 0 ? 'Continue' : 'Start' }}
+        </button>
       </div>
     </div>
   </GameLayout>
@@ -33,9 +52,16 @@
 
 <script setup lang="ts">
 import GameLayout from '@/layouts/GameLayout.vue'
-import { ArrowLeftIcon } from '@heroicons/vue/24/solid'
+import CandlesProgress from '@/shared/CandlesProgress.vue'
+import { useRouter } from 'vue-router'
+import { useMemeMazeStore } from '@/stores/memeMaze'
 
-// TODO: Implement level 1
+const router = useRouter()
+const { state, candlesLit } = useMemeMazeStore()
+
+function continueOrStart() {
+  router.push('/levels/meme-maze/memes')
+}
 </script>
 
 <style scoped>
