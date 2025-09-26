@@ -178,7 +178,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { quizService, type QuizLevel } from '@/services/quizService'
+import { quizService, type QuizLevel } from '@/lib/quiz/quizService'
 import GameLayout from '@/layouts/GameLayout.vue'
 import {
   ChartBarIcon,
