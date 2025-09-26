@@ -22,6 +22,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/levels/01-meme-maze/MemeMaze.vue'),
   },
   {
+    path: '/levels/meme-maze/:slug',
+    name: 'MemeMazeStep',
+    component: () => import('@/pages/levels/[slug].vue'),
+    props: true,
+  },
+  {
     path: '/levels/02',
     name: 'Level2',
     component: () => import('@/pages/levels/02-songs-origin/SongsOrigin.vue'),
@@ -46,18 +52,7 @@ const routes: RouteRecordRaw[] = [
     name: 'Levels',
     component: () => import('@/pages/CircusIntro.vue'),
   },
-  {
-    path: '/levels/:slug',
-    name: 'LevelDynamic',
-    component: () => import('@/pages/levels/[slug].vue'),
-    props: true,
-  },
-  {
-    path: '/game/levels/:slug',
-    name: 'GameLevelDynamic',
-    component: () => import('@/pages/levels/[slug].vue'),
-    props: true,
-  },
+  // Removed generic dynamic routes to avoid conflict with meme-maze slug routes
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
@@ -78,7 +73,9 @@ router.beforeEach((to, _from, next) => {
   const isProd = import.meta.env.PROD
   const prodDomain = 'that-harley-circus.vercel.app'
   const onProdDomain = typeof window !== 'undefined' && window.location.hostname === prodDomain
-  if (isProd && onProdDomain && to.path !== '/') {
+  // Allow the 404 page to render for unknown routes on production
+  const isNotFound = to.matched.some(r => r.name === 'NotFound')
+  if (isProd && onProdDomain && to.path !== '/' && !isNotFound) {
     next({ path: '/' })
   } else {
     next()
