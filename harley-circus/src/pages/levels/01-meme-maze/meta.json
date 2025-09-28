@@ -1,0 +1,82 @@
+{
+  "title": "Meme Maze",
+  "order": 1,
+  "slug": "meme-maze",
+  "totalMemes": 23,
+  "description": "Swipe through 23 memes, react, and light the candles.",
+  "easterEggs": [
+    { "index": 10, "hint": "2002 / Y2K nod" },
+    { "index": 19, "hint": "🎂 19 Oct overlay" },
+    { "index": 23, "hint": "Final punchline unlocks finale" }
+  ],
+  "mathProblems": [
+    { "question": "What is 15 + 8?", "answer": 23 },
+    { "question": "What is 30 - 7?", "answer": 23 },
+    { "question": "What is 12 + 11?", "answer": 23 },
+    { "question": "What is 25 - 2?", "answer": 23 },
+    { "question": "What is 18 + 5?", "answer": 23 },
+    { "question": "What is 35 - 12?", "answer": 23 },
+    { "question": "What is 14 + 9?", "answer": 23 },
+    { "question": "What is 28 - 5?", "answer": 23 },
+    { "question": "What is 16 + 7?", "answer": 23 },
+    { "question": "What is 32 - 9?", "answer": 23 },
+    { "question": "What is 13 + 10?", "answer": 23 },
+    { "question": "What is 26 - 3?", "answer": 23 }
+  ],
+  "vibes": [
+    {
+      "id": "V00",
+      "type": "vibe_check",
+      "question": "Hey Puddin'. Joker has his jokes shortly aside. What is your vibe?",
+      "options": [
+        {
+          "id": 0,
+          "text": "Excited about this new level",
+          "explanation": "Chaos begins best when you're eager... Your vibes charged!"
+        },
+        {
+          "id": 1,
+          "text": "That song you shared last night. Somewhere. Still got me sniffling",
+          "explanation": "Music scars cut deeper than jokes... you unlocked a softer Joker-side. That's his fav song btw."
+        }
+      ],
+      "timeLimit": 10
+    },
+      {
+        "id": "V01",
+        "type": "are_you_ready",
+        "question": "The circus lights flicker... Joker taunts again. How do you reply?",
+        "options": [
+          {
+            "id": 0,
+            "text": "Bring on the madness",
+            "explanation": "The chaos crown fits, and you wear it proudly — onward to the memes!"
+          },
+          {
+            "id": 1,
+            "text": "Hold on, let me breathe first",
+            "explanation": "Patience is power, Harley. I like that about you. I smirk but let you take a pause."
+          }
+        ],
+        "timeLimit": 10
+      },
+      {
+        "id": "V02",
+        "type": "let_us_start",
+        "question": "Final vibe-check before you enter the Meme Maze... what’s your move?",
+        "options": [
+          {
+            "id": 0,
+            "text": "Light me my candles, I’m ready",
+            "explanation": "Perfect. Let’s burn bright. Remember, you said he is a bright light since you met him..."
+          },
+          {
+            "id": 1,
+            "text": "Can’t we just skip to the punchline?",
+            "explanation": "Skipping is for quitters... Joker has 'drugged' you into this Meme Maze anyway."
+          }
+        ],
+        "timeLimit": 10
+      }
+  ]
+}

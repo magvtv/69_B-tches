@@ -7,44 +7,61 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/LandingPage.vue'),
   },
   {
-    path: '/game',
-    name: 'GameHub',
-    component: () => import('@/pages/game/index.vue'),
+    path: '/test',
+    name: 'Test',
+    component: () => import('@/pages/TestPage.vue'),
   },
   {
-    path: '/game/level0',
-    name: 'Level0',
-    component: () => import('@/pages/game/Level0.vue'),
+    path: '/demo/quiz',
+    name: 'DemoQuiz',
+    component: () => import('@/pages/DemoQuiz.vue'),
   },
   {
-    path: '/game/level1',
+    path: '/demo/puzzle',
+    name: 'DemoPuzzle',
+    component: () => import('@/pages/DemoPuzzle.vue'),
+  },
+  {
+    path: '/levels/01',
     name: 'Level1',
-    component: () => import('@/pages/game/Level1.vue'),
+    component: () => import('@/pages/levels/01-meme-maze/LandingPage.vue'),
   },
   {
-    path: '/game/level2',
+    path: '/levels/meme-maze/:slug',
+    name: 'MemeMazeStep',
+    component: () => import('@/pages/levels/[slug].vue'),
+    props: true,
+  },
+  {
+    path: '/levels/02',
     name: 'Level2',
-    component: () => import('@/pages/game/Level2.vue'),
+    component: () => import('@/pages/levels/02-songs-origin/LandingPage.vue'),
   },
   {
-    path: '/game/level3',
+    path: '/levels/03',
     name: 'Level3',
-    component: () => import('@/pages/game/Level3.vue'),
+    component: () => import('@/pages/levels/03-jokes-chaos/LandingPage.vue'),
   },
   {
-    path: '/game/level4',
+    path: '/levels/04',
     name: 'Level4',
-    component: () => import('@/pages/game/Level4.vue'),
+    component: () => import('@/pages/levels/04-sutra-enigma/LandingPage.vue'),
   },
   {
-    path: '/game/level5',
+    path: '/levels/05',
     name: 'Level5',
-    component: () => import('@/pages/game/Level5.vue'),
+    component: () => import('@/pages/levels/05-final-heist/LandingPage.vue'),
   },
   {
-    path: '/game/puzzle-demo',
-    name: 'PuzzleDemo',
-    component: () => import('@/pages/game/PuzzleDemo.vue'),
+    path: '/levels',
+    name: 'Levels',
+    component: () => import('@/pages/CircusIntro.vue'),
+  },
+  // Removed generic dynamic routes to avoid conflict with meme-maze slug routes
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/pages/error/NotFound.vue'),
   },
 ]
 
@@ -61,7 +78,9 @@ router.beforeEach((to, _from, next) => {
   const isProd = import.meta.env.PROD
   const prodDomain = 'that-harley-circus.vercel.app'
   const onProdDomain = typeof window !== 'undefined' && window.location.hostname === prodDomain
-  if (isProd && onProdDomain && to.path !== '/') {
+  // Allow the 404 page to render for unknown routes on production
+  const isNotFound = to.matched.some(r => r.name === 'NotFound')
+  if (isProd && onProdDomain && to.path !== '/' && !isNotFound) {
     next({ path: '/' })
   } else {
     next()

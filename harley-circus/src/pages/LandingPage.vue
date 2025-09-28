@@ -22,13 +22,14 @@
           </p>
           <div class="flex justify-center md:justify-start md:mt-2">
             <button
-              @click="goToDemoLevel"
+              @click="goToLevels"
               class="inline-flex items-center justify-center bg-gradient-to-r from-red-600 to-black hover:from-red-700 hover:to-gray-900 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-900/30"
             >
               Let&apos;s Bang, Puddin!
             </button>
           </div>
         </div>
+        
         <div class="relative md:h-full">
           <div class="absolute inset-0 bg-white/10 rounded-3xl blur-2xl animate-pulse-slow"></div>
           <div class="relative bg-black/40 backdrop-blur-md rounded-3xl p-8 md:p-10 border border-red-600/30 md:h-full overflow-hidden">
@@ -102,8 +103,12 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const goToDemoLevel = () => {
-  router.push('/game/level0')
+// const goToDemoLevel = () => {
+//   router.push('/pages/DemoPage')
+// }
+
+const goToLevels = () => {
+  router.push('/levels')
 }
 </script>
 
