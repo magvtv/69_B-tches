@@ -13,6 +13,7 @@ interface MemeProgressState {
   vibeCheckCompleted: boolean
   memesCompleted: boolean
   numberPlayCompleted: boolean
+  numberPlayCandles: number // Track candles earned from NumberPlay
   finaleUnlocked: boolean
   finaleCompleted: boolean
   // Supabase integration
@@ -36,6 +37,7 @@ function loadState(totalMemes: number): MemeProgressState {
         vibeCheckCompleted: parsed.vibeCheckCompleted ?? false,
         memesCompleted: parsed.memesCompleted ?? false,
         numberPlayCompleted: parsed.numberPlayCompleted ?? false,
+        numberPlayCandles: parsed.numberPlayCandles ?? 0,
         finaleUnlocked: parsed.finaleUnlocked ?? false,
         finaleCompleted: parsed.finaleCompleted ?? false,
         sessionId: parsed.sessionId ?? null,
@@ -54,6 +56,7 @@ function loadState(totalMemes: number): MemeProgressState {
     vibeCheckCompleted: false,
     memesCompleted: false,
     numberPlayCompleted: false,
+    numberPlayCandles: 0,
     finaleUnlocked: false,
     finaleCompleted: false,
     sessionId: null,
@@ -68,9 +71,9 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
 
   const candlesLit = computed(() => {
     const memeCandles = state.value.reactions.filter(r => r === 'laugh').length
-    // Add 1 candle if NumberPlay is completed (representing the age answer)
-    const numberPlayCandle = state.value.numberPlayCompleted ? 1 : 0
-    return Math.min(memeCandles + numberPlayCandle, 23)
+    // Add candles earned from NumberPlay arithmetic problems
+    const numberPlayCandles = state.value.numberPlayCandles
+    return Math.min(memeCandles + numberPlayCandles, 23)
   })
   
   const isComplete = computed(() => state.value.currentIndex >= state.value.totalMemes)
@@ -244,6 +247,39 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
         debugLog('Memes completion tracked')
       } catch (error) {
         errorLog('Failed to track memes completion', error)
+      }
+    }
+  }
+
+  // Add a candle from NumberPlay
+  async function addNumberPlayCandle() {
+    if (state.value.numberPlayCandles < 23) {
+      state.value.numberPlayCandles += 1
+      // Check if all candles are now lit to unlock finale
+      if (allCandlesLit.value) {
+        state.value.finaleUnlocked = true
+      }
+
+      if (state.value.gameSessionId) {
+        try {
+          await progressService.recordInteraction(
+            state.value.gameSessionId,
+            'number_play_candle_earned',
+            { 
+              candlesLit: candlesLit.value,
+              numberPlayCandles: state.value.numberPlayCandles,
+              finaleUnlocked: state.value.finaleUnlocked,
+              timestamp: Date.now()
+            }
+          )
+
+          debugLog('Number play candle earned tracked', { 
+            candlesLit: candlesLit.value,
+            numberPlayCandles: state.value.numberPlayCandles
+          })
+        } catch (error) {
+          errorLog('Failed to track number play candle earned', error)
+        }
       }
     }
   }
@@ -458,6 +494,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
         vibeCheckCompleted: s.vibeCheckCompleted,
         memesCompleted: s.memesCompleted,
         numberPlayCompleted: s.numberPlayCompleted,
+        numberPlayCandles: s.numberPlayCandles,
         finaleUnlocked: s.finaleUnlocked,
         finaleCompleted: s.finaleCompleted,
         sessionId: s.sessionId,
@@ -478,6 +515,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
     reset,
     markVibeCheckCompleted,
     markMemesCompleted,
+    addNumberPlayCandle,
     markNumberPlayCompleted,
     markFinaleCompleted,
     unlockFinale,
