@@ -203,7 +203,7 @@ const timeLimit = ref(240) // 4 minutes in seconds
 const timeUp = ref(false)
 
 // Timer
-let timerInterval: number | null = null
+let timerInterval: NodeJS.Timeout | null = null
 
 // Computed properties
 const formattedTime = computed(() => {

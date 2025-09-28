@@ -24,7 +24,7 @@
         />
         
         <!-- Reaction Buttons -->
-        <div class="reaction-buttons">
+        <div class="reaction-buttons" v-if="!memeMazeStore.isComplete">
           <button @click="onReact('laugh')" class="react-btn laugh-btn">
             <FaceSmileIcon class="btn-icon" />
             <span class="btn-text">Got me</span>
@@ -33,6 +33,23 @@
             <FaceFrownIcon class="btn-icon" />
             <span class="btn-text">Meh</span>
           </button>
+        </div>
+        
+        <!-- Completion Message and Restart Button -->
+        <div v-if="memeMazeStore.isComplete" class="completion-section">
+          <div class="completion-message">
+            <h4>All Memes Viewed!</h4>
+            <p>You've seen {{ memes.length }} memes!</p>
+            <p class="candles-summary">{{ candlesLit }}/23 Candles Lit</p>
+          </div>
+          <div class="completion-actions">
+            <button @click="restartMemes" class="restart-btn">
+              <span>View Memes Again</span>
+            </button>
+            <button @click="() => router.push('/levels/meme-maze/number-play')" class="continue-btn">
+              <span>Go to Number Play</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -100,6 +117,10 @@ const memes = [
 ]
 
 const currentMeme = computed(() => {
+  // If we've completed all memes, show the last meme
+  if (state.currentIndex >= memes.length) {
+    return memes[memes.length - 1] || null
+  }
   return memes[state.currentIndex] || null
 })
 
@@ -113,6 +134,9 @@ function onImageLoad() {
 }
 
 async function onReact(type: 'laugh' | 'meh') {
+  // Don't process reactions if memes are already completed
+  if (memeMazeStore.isComplete) return
+  
   // Add visual feedback for the reaction
   const button = event?.target as HTMLElement
   if (button) {
@@ -143,11 +167,10 @@ async function onReact(type: 'laugh' | 'meh') {
     //   showJokerPopup()
     // }
     
-    if (memeMazeStore.isComplete) {
+    // Only auto-redirect if this was the first completion
+    if (memeMazeStore.isComplete && !state.memesCompleted) {
       markMemesCompleted()
-      setTimeout(() => {
-        router.push('/levels/meme-maze/number-play')
-      }, 1000)
+      // Don't auto-redirect anymore, let user choose
     }
   }, 300)
 }
@@ -180,22 +203,40 @@ async function onReact(type: 'laugh' | 'meh') {
 //   showPopup.value = false
 // }
 
+// Function to restart meme viewing
+function restartMemes() {
+  // Reset the current index to start from the beginning
+  state.currentIndex = 0
+  // Clear all reactions to start fresh
+  state.reactions = Array(memes.length).fill(undefined)
+  state.laughsCount = 0
+  state.memesCompleted = false
+  
+  // Reset image opacity to ensure proper display
+  if (memeImg.value) {
+    memeImg.value.style.opacity = '0'
+    setTimeout(() => {
+      if (memeImg.value) {
+        memeImg.value.style.opacity = '1'
+      }
+    }, 100)
+  }
+}
+
 // Watch for current meme changes and reset image opacity
 watch(() => state.currentIndex, async (newIndex) => {
-  if (newIndex < memes.length) {
-    // Wait for the next tick to ensure the DOM has updated
-    await nextTick()
-    
-    // Reset image opacity for the new meme
-    if (memeImg.value) {
-      memeImg.value.style.opacity = '0'
-      // Trigger the load event to show the image
-      setTimeout(() => {
-        if (memeImg.value) {
-          memeImg.value.style.opacity = '1'
-        }
-      }, 100)
-    }
+  // Always reset image opacity when index changes, even if completed
+  await nextTick()
+  
+  // Reset image opacity for the new meme
+  if (memeImg.value) {
+    memeImg.value.style.opacity = '0'
+    // Trigger the load event to show the image
+    setTimeout(() => {
+      if (memeImg.value) {
+        memeImg.value.style.opacity = '1'
+      }
+    }, 100)
   }
 })
 
@@ -352,6 +393,75 @@ watch(() => state.reactions, (newReactions) => {
   font-family: "DM Sans", sans-serif;
 }
 
+/* Completion section styles */
+.completion-section {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.completion-message {
+  margin-bottom: 2rem;
+}
+
+.completion-message h3 {
+  font-size: 1.8rem;
+  color: var(--accent-green);
+  margin-bottom: 1rem;
+  font-family: "DM Sans", sans-serif;
+}
+
+.completion-message p {
+  font-size: 1.1rem;
+  color: var(--text-white);
+  margin-bottom: 0.5rem;
+  font-family: "DM Sans", sans-serif;
+}
+
+.candles-summary {
+  font-size: 1.3rem !important;
+  color: var(--accent-green) !important;
+  font-weight: bold !important;
+}
+
+.completion-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.restart-btn, .continue-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "DM Sans", sans-serif;
+  min-width: 180px;
+}
+
+.restart-btn {
+  background: linear-gradient(45deg, var(--primary-purple), #8A2BE2);
+  color: var(--text-white);
+}
+
+.restart-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(106, 13, 173, 0.4);
+}
+
+.continue-btn {
+  background: linear-gradient(45deg, var(--accent-green), #32CD32);
+  color: var(--dark-bg);
+}
+
+.continue-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(57, 255, 20, 0.4);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .memes-container {
@@ -366,6 +476,16 @@ watch(() => state.reactions, (newReactions) => {
   .react-btn {
     width: 100%;
     max-width: 200px;
+  }
+  
+  .completion-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .restart-btn, .continue-btn {
+    width: 100%;
+    max-width: 250px;
   }
 }
 </style>
