@@ -7,6 +7,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/LandingPage.vue'),
   },
   {
+    path: '/test',
+    name: 'Test',
+    component: () => import('@/pages/TestPage.vue'),
+  },
+  {
     path: '/demo/quiz',
     name: 'DemoQuiz',
     component: () => import('@/pages/DemoQuiz.vue'),
@@ -19,7 +24,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/levels/01',
     name: 'Level1',
-    component: () => import('@/pages/levels/01-meme-maze/MemeMaze.vue'),
+    component: () => import('@/pages/levels/01-meme-maze/LandingPage.vue'),
   },
   {
     path: '/levels/meme-maze/:slug',
@@ -30,22 +35,22 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/levels/02',
     name: 'Level2',
-    component: () => import('@/pages/levels/02-songs-origin/SongsOrigin.vue'),
+    component: () => import('@/pages/levels/02-songs-origin/LandingPage.vue'),
   },
   {
     path: '/levels/03',
     name: 'Level3',
-    component: () => import('@/pages/levels/03-jokes-chaos/JokesChaos.vue'),
+    component: () => import('@/pages/levels/03-jokes-chaos/LandingPage.vue'),
   },
   {
     path: '/levels/04',
     name: 'Level4',
-    component: () => import('@/pages/levels/04-sutra-enigma/SutraEnigma.vue'),
+    component: () => import('@/pages/levels/04-sutra-enigma/LandingPage.vue'),
   },
   {
     path: '/levels/05',
     name: 'Level5',
-    component: () => import('@/pages/levels/05-final-heist/FinalHeist.vue'),
+    component: () => import('@/pages/levels/05-final-heist/LandingPage.vue'),
   },
   {
     path: '/levels',
