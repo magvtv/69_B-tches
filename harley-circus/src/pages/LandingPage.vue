@@ -29,6 +29,7 @@
             </button>
           </div>
         </div>
+        
         <div class="relative md:h-full">
           <div class="absolute inset-0 bg-white/10 rounded-3xl blur-2xl animate-pulse-slow"></div>
           <div class="relative bg-black/40 backdrop-blur-md rounded-3xl p-8 md:p-10 border border-red-600/30 md:h-full overflow-hidden">
