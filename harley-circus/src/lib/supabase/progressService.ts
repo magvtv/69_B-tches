@@ -1,4 +1,4 @@
-import { supabase, Database } from './client'
+import { supabase, type Database } from './client'
 import { debugLog, errorLog } from '../../config/environment'
 
 // Type definitions for our progress tracking

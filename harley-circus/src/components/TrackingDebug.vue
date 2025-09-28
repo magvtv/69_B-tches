@@ -70,7 +70,7 @@ const insights = ref<{ totalEvents: number; engagementLevel?: { high?: boolean; 
 
 const isDevelopment = computed(() => import.meta.env.DEV)
 
-let updateInterval: number
+let updateInterval: ReturnType<typeof setInterval>
 
 const toggleDebug = () => {
   showDebug.value = !showDebug.value
