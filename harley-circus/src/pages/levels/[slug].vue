@@ -1,51 +1,60 @@
 <template>
-  <GameLayout>
-    <component :is="levelComponent" v-if="levelComponent" :meta="levelMeta" />
-    <div v-else class="text-white p-8 text-center">
-      <p class="text-xl">Level not found: {{ slug }}</p>
+  <div class="level-container">
+    <MemeMazeIntro v-if="slug === 'vibe-check'" />
+    <MemeMazeMemes v-else-if="slug === 'memes'" />
+    <MemeMazeNumberPlay v-else-if="slug === 'number-play'" />
+    <MemeMazeFinale v-else-if="slug === 'finale'" />
+    <div v-else class="error-container">
+      <h1>Level not found: {{ slug }}</h1>
+      <p>Available levels: intro, memes, number-play, finale</p>
     </div>
-  </GameLayout>
-  
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { defineAsyncComponent } from 'vue'
-import GameLayout from '@/layouts/GameLayout.vue'
+import MemeMazeIntro from './01-meme-maze/VibeCheck.vue'
+import MemeMazeMemes from './01-meme-maze/Memes.vue'
+import MemeMazeNumberPlay from './01-meme-maze/NumberPlay.vue'
+import MemeMazeFinale from './01-meme-maze/Finale.vue'
+
+// Define component name for linting
+defineOptions({
+  name: 'LevelSlugPage'
+})
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug || ''))
-
-const levelMeta = ref<Record<string, any> | null>(null)
-const levelComponent = ref<ReturnType<typeof defineAsyncComponent> | null>(null)
-
-async function loadLevel() {
-  try {
-    // Load meta.json
-    const metaModule = await import(
-      /* @vite-ignore */ `@/pages/@game/levels/${slug.value}/meta.json`
-    )
-    levelMeta.value = metaModule.default || metaModule
-
-    // Load the level component
-    levelComponent.value = defineAsyncComponent(() =>
-      import(
-        /* @vite-ignore */ `@/pages/@game/levels/${slug.value}/index.vue`
-      )
-    )
-  } catch (_err) {
-    levelMeta.value = null
-    levelComponent.value = null
-  }
-}
-
-// Initial load and watch for slug changes
-loadLevel()
-
 </script>
 
 <style scoped>
+.level-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0D0D0D 0%, #1a0a2e 50%, #6A0DAD 100%);
+}
+
+.error-container {
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-container h1 {
+  color: #39FF14;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.error-container p {
+  color: #ccc;
+  font-size: 1.1rem;
+}
 </style>
 
 
