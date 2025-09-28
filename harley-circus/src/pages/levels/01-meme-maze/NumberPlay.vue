@@ -92,7 +92,7 @@ defineOptions({
 
 const router = useRouter()
 const memeMazeStore = useMemeMazeSupabaseStore()
-const { markNumberPlayCompleted, addNumberPlayCandle, initializeSession, recordMathResponse } = memeMazeStore
+const { markNumberPlayCompleted, addNumberPlayCandle, initializeSession } = memeMazeStore
 
 const userInput = ref('')
 const showError = ref(false)
@@ -211,14 +211,14 @@ function generateRandomArithmeticProblem() {
   return { question, answer }
 }
 
-// Get operation hint for visual feedback
-function getOperationHint(question: string) {
-  if (question.includes('+')) return 'Addition'
-  if (question.includes('-')) return 'Subtraction'
-  if (question.includes('×')) return 'Multiplication'
-  if (question.includes('÷')) return 'Division'
-  return 'Math'
-}
+// Get operation hint for visual feedback (unused but kept for future use)
+// function getOperationHint(question: string) {
+//   if (question.includes('+')) return 'Addition'
+//   if (question.includes('-')) return 'Subtraction'
+//   if (question.includes('×')) return 'Multiplication'
+//   if (question.includes('÷')) return 'Division'
+//   return 'Math'
+// }
 
 // Get operation class for color coding
 function getOperationClass(question: string) {
@@ -761,11 +761,11 @@ function handleWindowResize() {
     // Recalculate position if in full screen mode
     const viewportWidth = window.innerWidth
     const viewportHeight = window.innerHeight
-    const headerHeight = 80
+    const headerHeight = 80 // Keep space for header
     
     buttonPosition.value = {
       x: Math.min(buttonPosition.value.x, viewportWidth - 200),
-      y: Math.min(buttonPosition.value.y, viewportHeight - 100)
+      y: Math.min(buttonPosition.value.y, viewportHeight - headerHeight - 100)
     }
   }
 }
