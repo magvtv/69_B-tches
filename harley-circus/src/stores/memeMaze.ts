@@ -8,6 +8,11 @@ interface MemeProgressState {
   totalMemes: number
   laughsCount: number
   reactions: MemeReaction[]
+  vibeCheckCompleted: boolean
+  memesCompleted: boolean
+  numberPlayCompleted: boolean
+  finaleUnlocked: boolean
+  finaleCompleted: boolean
 }
 
 const STORAGE_KEY = 'meme-maze-progress-v1'
@@ -22,20 +27,42 @@ function loadState(totalMemes: number): MemeProgressState {
         totalMemes,
         laughsCount: parsed.laughsCount ?? 0,
         reactions: Array.isArray(parsed.reactions) ? parsed.reactions.slice(0, totalMemes) as MemeReaction[] : Array(totalMemes).fill(undefined),
+        vibeCheckCompleted: parsed.vibeCheckCompleted ?? false,
+        memesCompleted: parsed.memesCompleted ?? false,
+        numberPlayCompleted: parsed.numberPlayCompleted ?? false,
+        finaleUnlocked: parsed.finaleUnlocked ?? false,
+        finaleCompleted: parsed.finaleCompleted ?? false,
       }
     }
   } catch {
     // ignore for now
   }
-  return { currentIndex: 0, totalMemes, laughsCount: 0, reactions: Array(totalMemes).fill(undefined) }
+  return { 
+    currentIndex: 0, 
+    totalMemes, 
+    laughsCount: 0, 
+    reactions: Array(totalMemes).fill(undefined),
+    vibeCheckCompleted: false,
+    memesCompleted: false,
+    numberPlayCompleted: false,
+    finaleUnlocked: false,
+    finaleCompleted: false,
+  }
 }
 
 export const useMemeMazeStore = defineStore('memeMaze', () => {
   const TOTAL_MEMES = 23
   const state = ref<MemeProgressState>(loadState(TOTAL_MEMES))
 
-  const candlesLit = computed(() => state.value.reactions.filter(r => r === 'laugh').length)
+  const candlesLit = computed(() => {
+    const memeCandles = state.value.reactions.filter(r => r === 'laugh').length
+    // Add 1 candle if NumberPlay is completed (representing the age answer)
+    const numberPlayCandle = state.value.numberPlayCompleted ? 1 : 0
+    return Math.min(memeCandles + numberPlayCandle, 23)
+  })
+  
   const isComplete = computed(() => state.value.currentIndex >= state.value.totalMemes)
+  const allCandlesLit = computed(() => candlesLit.value >= 23)
 
   function react(reaction: MemeReaction) {
     if (isComplete.value) return
@@ -48,12 +75,41 @@ export const useMemeMazeStore = defineStore('memeMaze', () => {
     state.value = loadState(TOTAL_MEMES)
   }
 
+  function markVibeCheckCompleted() {
+    state.value.vibeCheckCompleted = true
+  }
+
+  function markMemesCompleted() {
+    state.value.memesCompleted = true
+  }
+
+  function markNumberPlayCompleted() {
+    state.value.numberPlayCompleted = true
+    // Check if all candles are now lit to unlock finale
+    if (allCandlesLit.value) {
+      state.value.finaleUnlocked = true
+    }
+  }
+
+  function markFinaleCompleted() {
+    state.value.finaleCompleted = true
+  }
+
+  function unlockFinale() {
+    state.value.finaleUnlocked = true
+  }
+
   watch(state, (s) => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         currentIndex: s.currentIndex,
         laughsCount: s.laughsCount,
         reactions: s.reactions,
+        vibeCheckCompleted: s.vibeCheckCompleted,
+        memesCompleted: s.memesCompleted,
+        numberPlayCompleted: s.numberPlayCompleted,
+        finaleUnlocked: s.finaleUnlocked,
+        finaleCompleted: s.finaleCompleted,
       }))
     } catch {
       // ignore
@@ -64,8 +120,14 @@ export const useMemeMazeStore = defineStore('memeMaze', () => {
     state,
     candlesLit,
     isComplete,
+    allCandlesLit,
     react,
     reset,
+    markVibeCheckCompleted,
+    markMemesCompleted,
+    markNumberPlayCompleted,
+    markFinaleCompleted,
+    unlockFinale,
   }
 })
 
