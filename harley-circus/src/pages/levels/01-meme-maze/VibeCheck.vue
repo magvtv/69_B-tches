@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMemeMazeStore } from '@/stores/memeMaze'
+import { useMemeMazeSupabaseStore } from '@/stores/memeMazeSupabase'
 import GameLayout from '@/layouts/GameLayout.vue'
 import {
   CheckCircleIcon,
@@ -77,7 +77,8 @@ defineOptions({
 })
 
 const router = useRouter()
-const memeMazeStore = useMemeMazeStore()
+const memeMazeStore = useMemeMazeSupabaseStore()
+const { markVibeCheckCompleted, initializeSession } = memeMazeStore
 
 // Vibe check data from meta.json
 const vibeQuestions = [
@@ -182,12 +183,12 @@ function redoVibeCheck() {
   isTransitioning.value = false
 }
 
-function proceedToMemes() {
+async function proceedToMemes() {
   // Add special transition effect before proceeding
   isTransitioning.value = true
   
-  // Mark vibe check as completed
-  memeMazeStore.markVibeCheckCompleted()
+  // Mark vibe check as completed with Supabase tracking
+  await markVibeCheckCompleted()
   
   // Add a brief delay for the transition effect
   setTimeout(() => {
@@ -195,7 +196,15 @@ function proceedToMemes() {
   }, 300)
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // Initialize Supabase session
+  try {
+    await initializeSession()
+    console.log('Supabase session initialized for vibe check')
+  } catch (error) {
+    console.error('Failed to initialize Supabase session:', error)
+  }
+  
   // Reset vibe check when component mounts
   redoVibeCheck()
 })
