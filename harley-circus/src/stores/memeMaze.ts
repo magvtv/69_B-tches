@@ -11,6 +11,7 @@ interface MemeProgressState {
   vibeCheckCompleted: boolean
   memesCompleted: boolean
   numberPlayCompleted: boolean
+  numberPlayCandles: number // Track candles earned from NumberPlay
   finaleUnlocked: boolean
   finaleCompleted: boolean
 }
@@ -30,6 +31,7 @@ function loadState(totalMemes: number): MemeProgressState {
         vibeCheckCompleted: parsed.vibeCheckCompleted ?? false,
         memesCompleted: parsed.memesCompleted ?? false,
         numberPlayCompleted: parsed.numberPlayCompleted ?? false,
+        numberPlayCandles: parsed.numberPlayCandles ?? 0,
         finaleUnlocked: parsed.finaleUnlocked ?? false,
         finaleCompleted: parsed.finaleCompleted ?? false,
       }
@@ -45,6 +47,7 @@ function loadState(totalMemes: number): MemeProgressState {
     vibeCheckCompleted: false,
     memesCompleted: false,
     numberPlayCompleted: false,
+    numberPlayCandles: 0,
     finaleUnlocked: false,
     finaleCompleted: false,
   }
@@ -56,9 +59,9 @@ export const useMemeMazeStore = defineStore('memeMaze', () => {
 
   const candlesLit = computed(() => {
     const memeCandles = state.value.reactions.filter(r => r === 'laugh').length
-    // Add 1 candle if NumberPlay is completed (representing the age answer)
-    const numberPlayCandle = state.value.numberPlayCompleted ? 1 : 0
-    return Math.min(memeCandles + numberPlayCandle, 23)
+    // Add candles earned from NumberPlay arithmetic problems
+    const numberPlayCandles = state.value.numberPlayCandles
+    return Math.min(memeCandles + numberPlayCandles, 23)
   })
   
   const isComplete = computed(() => state.value.currentIndex >= state.value.totalMemes)
@@ -91,6 +94,16 @@ export const useMemeMazeStore = defineStore('memeMaze', () => {
     }
   }
 
+  function addNumberPlayCandle() {
+    if (state.value.numberPlayCandles < 23) {
+      state.value.numberPlayCandles += 1
+      // Check if all candles are now lit to unlock finale
+      if (allCandlesLit.value) {
+        state.value.finaleUnlocked = true
+      }
+    }
+  }
+
   function markFinaleCompleted() {
     state.value.finaleCompleted = true
   }
@@ -108,6 +121,7 @@ export const useMemeMazeStore = defineStore('memeMaze', () => {
         vibeCheckCompleted: s.vibeCheckCompleted,
         memesCompleted: s.memesCompleted,
         numberPlayCompleted: s.numberPlayCompleted,
+        numberPlayCandles: s.numberPlayCandles,
         finaleUnlocked: s.finaleUnlocked,
         finaleCompleted: s.finaleCompleted,
       }))
@@ -126,6 +140,7 @@ export const useMemeMazeStore = defineStore('memeMaze', () => {
     markVibeCheckCompleted,
     markMemesCompleted,
     markNumberPlayCompleted,
+    addNumberPlayCandle,
     markFinaleCompleted,
     unlockFinale,
   }
