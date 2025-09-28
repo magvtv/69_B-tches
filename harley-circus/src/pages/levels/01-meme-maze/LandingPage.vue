@@ -97,12 +97,12 @@
 import GameLayout from '@/layouts/GameLayout.vue'
 import CandlesProgress from '@/shared/CandlesProgress.vue'
 import { useRouter } from 'vue-router'
-import { useMemeMazeStore } from '@/stores/memeMaze'
+import { useMemeMazeSupabaseStore } from '@/stores/memeMazeSupabase'
 import { computed } from 'vue'
 import { LockClosedIcon } from '@heroicons/vue/24/solid'
 
 const router = useRouter()
-const memeMazeStore = useMemeMazeStore()
+const memeMazeStore = useMemeMazeSupabaseStore()
 const { state, candlesLit, allCandlesLit } = memeMazeStore
 
 // Access control logic
