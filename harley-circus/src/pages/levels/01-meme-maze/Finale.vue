@@ -4,8 +4,8 @@
       <div class="content">
       <!-- Celebration Section -->
       <div class="celebration-section">
-        <h1 class="main-title">Ati Sasa Umemake It. Ni Level One Manze!</h1>
-        <div class="subtitle">23 laughs (hakuna yenye ili meh), 23 candles</div>
+        <h1 class="main-title">Ati Sasa Umemake It!</h1>
+        <div class="subtitle">23 laughs, 23 candles</div>
         
         <!-- Animated Candles -->
         <div class="candles-celebration">
@@ -24,8 +24,8 @@
           <CakeIcon class="reward-icon" />
           <h2 class="reward-title">Your First Token of Chaos</h2>
           <div class="reward-description">
-            <p>Congratulations! You've earned your first chaos token.</p>
-            <p>Redeem this for 23 hugs and back massages!</p>
+            <p>Congratulations Harley! You've earned your first chaos token.</p>
+            <p>Redeem this for 23 hugs and back + ass massages!</p>
           </div>
           
           <button @click="claimReward" class="claim-btn" v-if="!rewardClaimed">
@@ -36,7 +36,7 @@
           <div v-if="rewardClaimed" class="reward-revealed">
             <div class="reward-code">CHAOS-TOKEN-23</div>
             <div class="reward-instructions">
-              Show this code to claim your 23 hugs and back massages!
+              Show Joker this code to claim your hugs and back + ass massages!
             </div>
             
             <!-- Countdown Display -->
@@ -115,7 +115,7 @@ function startRedirectCountdown() {
       clearInterval(countdownInterval)
       redirectToLandingPage()
     }
-  }, 1000)
+  }, 2000)
 }
 
 function redirectToLandingPage() {
@@ -142,6 +142,13 @@ function confettiStyle(index: number) {
 }
 
 onMounted(() => {
+  // Check if user has completed all candles
+  if (candlesLit.value < 23) {
+    // Redirect back to NumberPlay if not all candles are lit
+    router.push('/levels/meme-maze/number-play')
+    return
+  }
+  
   // Animate candles lighting up one by one
   const candles = document.querySelectorAll('.celebration-candle')
   candles.forEach((candle, index) => {

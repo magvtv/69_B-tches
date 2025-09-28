@@ -58,7 +58,7 @@
               Number Play
               <LockClosedIcon v-if="!canAccessNumberPlay" class="ml-2 w-4 h-4 text-gray-500" />
             </div>
-            <div class="text-sm text-gray-400">A teeny tiny birthday-number hint</div>
+            <div class="text-sm text-gray-400">Count your wishes</div>
           </div>
           
           <!-- Finale - Only accessible after all previous steps -->
@@ -76,7 +76,7 @@
               Finale
               <LockClosedIcon v-if="!canAccessFinale" class="ml-2 w-4 h-4 text-gray-500" />
             </div>
-            <div class="text-sm text-gray-400">Claim your playful reward</div>
+            <div class="text-sm text-gray-400">Claim your reward</div>
           </div>
         </div>
       </div>
@@ -102,7 +102,8 @@ import { computed } from 'vue'
 import { LockClosedIcon } from '@heroicons/vue/24/solid'
 
 const router = useRouter()
-const { state, candlesLit, allCandlesLit } = useMemeMazeStore()
+const memeMazeStore = useMemeMazeStore()
+const { state, candlesLit, allCandlesLit } = memeMazeStore
 
 // Access control logic
 const canAccessMemes = computed(() => {
@@ -114,7 +115,7 @@ const canAccessNumberPlay = computed(() => {
 })
 
 const canAccessFinale = computed(() => {
-  return allCandlesLit && state.finaleUnlocked || false
+  return memeMazeStore.allCandlesLit && state.finaleUnlocked
 })
 
 function handleSectionClick(section: string) {

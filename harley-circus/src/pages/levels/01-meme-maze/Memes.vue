@@ -4,7 +4,7 @@
     <!-- Progress Bar with 23 Candles -->
     <div class="progress-section">
       <div class="flex items-center justify-center gap-2 mb-4">
-        <CandlesProgress :lit="candlesLit" :total="23" />
+        <CandlesProgress :key="`candles-${candlesLit}`" :lit="candlesLit" :total="23" />
       </div>
       <div class="progress-text" :class="{ 'text-pulse': candlesLit > 0 }">
         {{ candlesLit }}/23 Candles Lit
@@ -128,8 +128,15 @@ async function onReact(type: 'laugh' | 'meh') {
   }
   
   // Wait for fade out, then react and show next meme
-  setTimeout(() => {
+  setTimeout(async () => {
+    // Update the reaction immediately
     react(type)
+    
+    // Wait for the next tick to ensure reactivity updates
+    await nextTick()
+    
+    // Force reactivity update by accessing the computed value
+    console.log('Candles lit after reaction:', candlesLit)
     
     // Joker popup disabled - no more annoying popups!
     // if (type === 'laugh') {
@@ -191,6 +198,16 @@ watch(() => state.currentIndex, async (newIndex) => {
     }
   }
 })
+
+// Watch for candles lit changes to ensure reactivity
+watch(() => candlesLit, (newCount) => {
+  console.log('Candles lit updated:', newCount)
+}, { immediate: true })
+
+// Watch for reactions changes to ensure candles update
+watch(() => state.reactions, (newReactions) => {
+  console.log('Reactions updated:', newReactions.filter(r => r === 'laugh').length, 'laughs')
+}, { deep: true })
 
 // Remove old candle animation code since we're using CandlesProgress component
 </script>
