@@ -65,9 +65,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick } from 'vue'
+import { computed, ref, watch, nextTick, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMemeMazeStore } from '@/stores/memeMaze'
+import { useMemeMazeSupabaseStore } from '@/stores/memeMazeSupabase'
 import GameLayout from '@/layouts/GameLayout.vue'
 import CandlesProgress from '@/shared/CandlesProgress.vue'
 import {
@@ -81,8 +81,8 @@ defineOptions({
 })
 
 const router = useRouter()
-const memeMazeStore = useMemeMazeStore()
-const { state, react, candlesLit, markMemesCompleted } = memeMazeStore
+const memeMazeStore = useMemeMazeSupabaseStore()
+const { state, react, candlesLit, markMemesCompleted, initializeSession } = memeMazeStore
 
 const memeImg = ref<HTMLImageElement | null>(null)
 // Popup variables disabled - no more annoying popups!
@@ -137,6 +137,8 @@ async function onReact(type: 'laugh' | 'meh') {
   // Don't process reactions if memes are already completed
   if (memeMazeStore.isComplete) return
   
+  const reactionStartTime = Date.now()
+  
   // Add visual feedback for the reaction
   const button = event?.target as HTMLElement
   if (button) {
@@ -153,8 +155,10 @@ async function onReact(type: 'laugh' | 'meh') {
   
   // Wait for fade out, then react and show next meme
   setTimeout(async () => {
-    // Update the reaction immediately
-    react(type)
+    const reactionTime = Date.now() - reactionStartTime
+    
+    // Update the reaction with Supabase tracking
+    await react(type, reactionTime)
     
     // Wait for the next tick to ensure reactivity updates
     await nextTick()
@@ -169,7 +173,7 @@ async function onReact(type: 'laugh' | 'meh') {
     
     // Only auto-redirect if this was the first completion
     if (memeMazeStore.isComplete && !state.memesCompleted) {
-      markMemesCompleted()
+      await markMemesCompleted()
       // Don't auto-redirect anymore, let user choose
     }
   }, 300)
@@ -249,6 +253,16 @@ watch(() => candlesLit, (newCount) => {
 watch(() => state.reactions, (newReactions) => {
   console.log('Reactions updated:', newReactions.filter(r => r === 'laugh').length, 'laughs')
 }, { deep: true })
+
+// Initialize Supabase session when component mounts
+onMounted(async () => {
+  try {
+    await initializeSession()
+    console.log('Supabase session initialized for memes')
+  } catch (error) {
+    console.error('Failed to initialize Supabase session:', error)
+  }
+})
 
 // Remove old candle animation code since we're using CandlesProgress component
 </script>
