@@ -77,11 +77,11 @@
 import { ref, computed, onMounted, onUnmounted} from 'vue'
 // import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMemeMazeStore } from '@/stores/memeMaze'
+import { useMemeMazeSupabaseStore } from '@/stores/memeMazeSupabase'
 import GameLayout from '@/layouts/GameLayout.vue'
 import CandlesProgress from '@/shared/CandlesProgress.vue'
 import {
-  FireIcon,
+  // FireIcon,
   // ExclamationTriangleIcon
 } from '@heroicons/vue/24/solid'
 
@@ -91,8 +91,8 @@ defineOptions({
 })
 
 const router = useRouter()
-const memeMazeStore = useMemeMazeStore()
-const { markNumberPlayCompleted, addNumberPlayCandle } = memeMazeStore
+const memeMazeStore = useMemeMazeSupabaseStore()
+const { markNumberPlayCompleted, addNumberPlayCandle, initializeSession, recordMathResponse } = memeMazeStore
 
 const userInput = ref('')
 const showError = ref(false)
@@ -245,7 +245,7 @@ function initializeProblemSet() {
 }
 
 // Rotate through math problems in current set
-function rotateMathProblem() {
+async function rotateMathProblem() {
   if (currentProblemSet.value.length === 0) {
     initializeProblemSet()
     return
@@ -255,7 +255,7 @@ function rotateMathProblem() {
   
   // If we've completed all problems in the set, check if we earned a candle
   if (problemIndex.value >= currentProblemSet.value.length) {
-    checkCandleEligibility()
+    await checkCandleEligibility()
     // Start a new set
     initializeProblemSet()
   } else {
@@ -265,11 +265,11 @@ function rotateMathProblem() {
 }
 
 // Check if user earned a candle (2/3 correct answers)
-function checkCandleEligibility() {
+async function checkCandleEligibility() {
   if (correctAnswersInSet.value >= 2 && candlesEarned.value < totalCandlesNeeded) {
     candlesEarned.value++
     // Add a candle to the store using the new method
-    addNumberPlayCandle()
+    await addNumberPlayCandle()
     console.log(`Candle earned! Total: ${candlesEarned.value}/${totalCandlesNeeded}`)
   }
   
@@ -646,14 +646,14 @@ function evadeMouse() {
   buttonPosition.value = { x: newX, y: newY }
 }
 
-function generateNewProblem() {
+async function generateNewProblem() {
   console.log('Generating new problem...')
-  rotateMathProblem()
+  await rotateMathProblem()
   userInput.value = ''
   console.log('New problem generated:', currentMathProblem.value)
 }
 
-function checkAnswer() {
+async function checkAnswer() {
   // If in full screen evasion mode, don't process the answer
   if (isFullScreenEvasion.value) {
     console.log('Button escaped! Answer not processed.')
@@ -681,9 +681,9 @@ function checkAnswer() {
       }, 2000)
     } else {
       // Move to next problem after success
-      setTimeout(() => {
+      setTimeout(async () => {
         showSuccess.value = false
-        generateNewProblem()
+        await generateNewProblem()
       }, 1500)
     }
   } else {
@@ -696,22 +696,30 @@ function checkAnswer() {
     startDancing()
     
     // Hide error and move to next problem
-    setTimeout(() => {
+    setTimeout(async () => {
       showError.value = false
-      generateNewProblem()
+      await generateNewProblem()
     }, 1500)
   }
 }
 
-function proceedToFinale() {
-  markNumberPlayCompleted()
+async function proceedToFinale() {
+  await markNumberPlayCompleted()
   clearLocalStorage() // Clear saved game state when completing
   router.push('/levels/meme-maze/finale')
 }
 
 // Lifecycle hooks
-onMounted(() => {
+onMounted(async () => {
   console.log('Component mounted, loading state...')
+  
+  // Initialize Supabase session
+  try {
+    await initializeSession()
+    console.log('Supabase session initialized for number play')
+  } catch (error) {
+    console.error('Failed to initialize Supabase session:', error)
+  }
   
   // Detect if device supports touch
   isTouchDevice.value = 'ontouchstart' in window || navigator.maxTouchPoints > 0
