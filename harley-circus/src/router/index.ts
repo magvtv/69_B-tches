@@ -27,6 +27,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/levels/01-meme-maze/LandingPage.vue'),
   },
   {
+    path: '/levels/meme-maze',
+    name: 'MemeMazeLanding',
+    component: () => import('@/pages/levels/01-meme-maze/LandingPage.vue'),
+  },
+  {
     path: '/levels/meme-maze/:slug',
     name: 'MemeMazeStep',
     component: () => import('@/pages/levels/[slug].vue'),

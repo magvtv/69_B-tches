@@ -14,7 +14,7 @@
         <router-link
           v-for="level in levels"
           :key="level.number"
-          :to="`/levels/0${level.number}`"
+          :to="getLevelRoute(level.number)"
           class="group block bg-black/40 backdrop-blur-sm border border-red-600/30 rounded-2xl p-6 hover:bg-black/50 hover:border-red-500/50 transition-all duration-300 transform hover:scale-105"
         >
           <div class="text-center">
@@ -72,6 +72,24 @@ const levels = [
     icon: ShieldCheckIcon
   }
 ]
+
+// Function to get the correct route for each level
+function getLevelRoute(levelNumber: number): string {
+  switch (levelNumber) {
+    case 1:
+      return '/levels/meme-maze' // Use the explicit meme-maze route
+    case 2:
+      return '/levels/02'
+    case 3:
+      return '/levels/03'
+    case 4:
+      return '/levels/04'
+    case 5:
+      return '/levels/05'
+    default:
+      return '/levels'
+  }
+}
 
 // Acts as the hub page for levels
 </script>
