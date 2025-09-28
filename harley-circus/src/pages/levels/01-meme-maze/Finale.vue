@@ -72,7 +72,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMemeMazeStore } from '@/stores/memeMaze'
+import { useMemeMazeSupabaseStore } from '@/stores/memeMazeSupabase'
 import GameLayout from '@/layouts/GameLayout.vue'
 import {
   CakeIcon,
@@ -86,8 +86,8 @@ defineOptions({
 })
 
 const router = useRouter()
-const memeMazeStore = useMemeMazeStore()
-const { markFinaleCompleted } = memeMazeStore
+const memeMazeStore = useMemeMazeSupabaseStore()
+const { markFinaleCompleted, initializeSession } = memeMazeStore
 
 const rewardClaimed = ref(false)
 const showConfetti = ref(false)
@@ -96,10 +96,10 @@ const isRedirecting = ref(false)
 
 const candlesLit = computed(() => memeMazeStore.candlesLit)
 
-function claimReward() {
+async function claimReward() {
   rewardClaimed.value = true
   showConfetti.value = true
-  markFinaleCompleted()
+  await markFinaleCompleted()
   
   // Start countdown and redirect after 3 seconds
   startRedirectCountdown()
@@ -141,7 +141,15 @@ function confettiStyle(index: number) {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // Initialize Supabase session
+  try {
+    await initializeSession()
+    console.log('Supabase session initialized for finale')
+  } catch (error) {
+    console.error('Failed to initialize Supabase session:', error)
+  }
+  
   // Check if user has completed all candles
   if (candlesLit.value < 23) {
     // Redirect back to NumberPlay if not all candles are lit
