@@ -9,6 +9,16 @@
             Puzzle Challenge Demo
           </h1>
           <p class="text-xl text-gray-200 dm-sans">Test the 3x3 sliding puzzle with move & time tracking</p>
+          
+          <!-- Currency & Time Display -->
+          <div class="mt-4 flex flex-col items-center gap-2">
+            <div class="inline-flex items-center gap-2 bg-yellow-600/20 border border-yellow-600/30 px-4 py-2 rounded-full">
+              <span class="text-yellow-200 dm-sans">Total Points: {{ totalCurrency }}</span>
+            </div>
+            <div class="inline-flex items-center gap-2 bg-red-600/20 border border-red-600/30 px-4 py-2 rounded-full" v-if="lastRemainingTime">
+              <span class="text-red-200 dm-sans">Time: {{ lastRemainingTime }}</span>
+            </div>
+          </div>
         </div>
 
         <!-- Puzzle Component -->
@@ -82,11 +92,14 @@
               </ul>
             </div>
             <div>
-              <h4 class="text-lg font-bold mb-4 dm-sans text-red-400">Scoring System:</h4>
+              <h4 class="text-lg font-bold mb-4 dm-sans text-red-400">Currency System:</h4>
               <ul class="space-y-2 text-sm dm-sans text-gray-300">
-                <li>• Base score: 100 points for completing</li>
-                <li>• +10 points per move under 50</li>
-                <li>• +2 points per second under 4 minutes</li>
+                <li>• Under 30s: 1000 pts</li>
+                <li>• 30-60s: 800 pts</li>
+                <li>• 1-2min: 600 pts</li>
+                <li>• 2-3min: 400 pts</li>
+                <li>• 3-4min: 200 pts</li>
+                <li>• Time's up: 50 pts</li>
               </ul>
             </div>
           </div>
@@ -118,12 +131,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import PuzzleLevel from '@/components/PuzzleLevel.vue'
 import GameLayout from '@/layouts/GameLayout.vue'
 import { PlayIcon, ArrowPathIcon } from '@heroicons/vue/24/solid'
 
 const puzzleRef = ref<InstanceType<typeof PuzzleLevel> | null>(null)
+const totalCurrency = ref(parseInt(localStorage.getItem('puzzleCurrency') || '0'))
+const lastFinishTime = ref<string | null>(null)
+const lastRemainingTime = ref<string | null>(null)
+
+const loadLastTimes = () => {
+  const formatted = localStorage.getItem('puzzleLastElapsedFormatted')
+  lastFinishTime.value = formatted
+  // Compute remaining from 4:00 - elapsed, or use stored remaining seconds
+  const remainingSecondsRaw = localStorage.getItem('puzzleLastRemainingSeconds')
+  let remainingSeconds = remainingSecondsRaw ? parseInt(remainingSecondsRaw) : null
+  if (remainingSeconds === null || isNaN(remainingSeconds)) {
+    const elapsedSecondsRaw = localStorage.getItem('puzzleLastElapsedSeconds')
+    const elapsedSeconds = elapsedSecondsRaw ? parseInt(elapsedSecondsRaw) : NaN
+    if (!isNaN(elapsedSeconds)) {
+      remainingSeconds = Math.max(0, 240 - elapsedSeconds)
+    }
+  }
+  if (remainingSeconds !== null && !isNaN(remainingSeconds)) {
+    const minutes = Math.floor(remainingSeconds / 60)
+    const seconds = remainingSeconds % 60
+    lastRemainingTime.value = `${minutes}:${seconds.toString().padStart(2, '0')}`
+  } else {
+    lastRemainingTime.value = null
+  }
+}
+
+onMounted(() => {
+  loadLastTimes()
+})
+
 // Quiz-related variables commented out for now
 // const showQuizModal = ref(false)
 // const selectedAnswer = ref<number | null>(null)
@@ -136,8 +179,17 @@ const puzzleRef = ref<InstanceType<typeof PuzzleLevel> | null>(null)
 //   "Crowbar"
 // ]
 
-const handleLevelComplete = () => {
-  console.log('Puzzle completed!')
+const handleLevelComplete = (currencyEarned: number) => {
+  console.log(`Puzzle completed! Currency earned: ${currencyEarned}`)
+  
+  // Update the currency display
+  totalCurrency.value = parseInt(localStorage.getItem('puzzleCurrency') || '0')
+  // Update last finish time display
+  loadLastTimes()
+  
+  // Show currency earned notification
+  alert(`🎉 Puzzle Complete!\n\nCurrency Earned: ${currencyEarned}\nTotal Currency: ${totalCurrency.value}\n\nUse this currency to unlock hints in difficult levels!`)
+  
   // You can add navigation or other completion logic here
 }
 
