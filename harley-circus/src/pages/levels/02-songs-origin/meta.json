@@ -1,5 +1,394 @@
 {
-  "title": "First Track",
+  "title": "Songs of Origins",
   "order": 2,
-  "slug": "02-first-track"
+  "slug": "02-songs-origin",
+  "totalChallenges": 26,
+  "description": "The melodies that shaped our connection",
+  "backgroundAudio": {
+    "file": "/public/audio/if-this-isnt-love.mp3",
+    "artist": "Jennifer Hudson",
+    "title": "This Isn't Love",
+    "volume": 0.3,
+    "autoplay": true
+  },
+  "challenges": [
+    {
+      "id": "lyric-001",
+      "type": "finish_the_lyric",
+      "songTitle": "One Step at a Time",
+      "artist": "Jordin Sparks",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "Hurry up and wait, so close but so far away...",
+      "options": [
+        "Everything that you've always wished for",
+        "Could get there if you just believe",
+        "Take one step at a time"
+      ],
+      "correctAnswer": 0,
+      "context": "First song from our playlist",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-002",
+      "type": "finish_the_lyric",
+      "songTitle": "Somewhere",
+      "artist": "Rexx Life Raj",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "I wish I was somewhere...",
+      "options": ["Where nobody knows my name", "With you by my side", "Far away from here"],
+      "correctAnswer": 0,
+      "context": "Rexx Life Raj vibes",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-003",
+      "type": "finish_the_lyric",
+      "songTitle": "Mode",
+      "artist": "Rexx Life Raj",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "I been in my mode...",
+      "options": ["Can't nobody stop me now", "I been on my own", "Living life my way"],
+      "correctAnswer": 0,
+      "context": "More Rexx Life Raj",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-004",
+      "type": "finish_the_lyric",
+      "songTitle": "You're the One",
+      "artist": "Elaine",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "You're the one that I want...",
+      "options": ["You're the one I need", "Baby can't you see", "You're the one for me"],
+      "correctAnswer": 0,
+      "context": "Elaine bringing the feels",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-005",
+      "type": "finish_the_lyric",
+      "songTitle": "On You",
+      "artist": "Timi Dre feat. Tonton Bicha",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "I'm so focused on you...",
+      "options": ["Can't take my eyes away", "You're all I think about", "Nothing else matters"],
+      "correctAnswer": 0,
+      "context": "Timi Dre vibes",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-006",
+      "type": "finish_the_lyric",
+      "songTitle": "Miami",
+      "artist": "Odeal feat. Leon Thomas",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "Take me to Miami...",
+      "options": ["Where the sun always shines", "Let's get away tonight", "We could disappear"],
+      "correctAnswer": 0,
+      "context": "Odeal featuring Leon Thomas",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-007",
+      "type": "finish_the_lyric",
+      "songTitle": "Insomnia",
+      "artist": "Normani",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "I can't sleep at night...",
+      "options": ["Thinking about you baby", "You're always on my mind", "Tossing and turning"],
+      "correctAnswer": 0,
+      "context": "Normani keeping us up",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-008",
+      "type": "finish_the_lyric",
+      "songTitle": "Cotton Candy Blvd",
+      "artist": "Indian Shawn feat. Lucky Daye",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "Sweet like cotton candy...",
+      "options": ["You're my favorite flavor", "Can't get enough of you", "Sugar on my tongue"],
+      "correctAnswer": 0,
+      "context": "Indian Shawn featuring Lucky Daye",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-009",
+      "type": "finish_the_lyric",
+      "songTitle": "Love on Replay",
+      "artist": "Kenyon Dixon & Tiffany Gouche",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "Got your love on replay...",
+      "options": [
+        "Playing it over and over",
+        "Can't stop thinking of you",
+        "You're stuck in my head"
+      ],
+      "correctAnswer": 0,
+      "context": "Kenyon Dixon & Tiffany Gouche",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-010",
+      "type": "finish_the_lyric",
+      "songTitle": "Woah",
+      "artist": "Snoh Aalegra",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "Woah, I never felt this way...",
+      "options": [
+        "You got me feeling some type of way",
+        "Can't explain what I feel",
+        "This is something new"
+      ],
+      "correctAnswer": 0,
+      "context": "Snoh Aalegra vibes",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-011",
+      "type": "finish_the_lyric",
+      "songTitle": "Water My Heart",
+      "artist": "rum.gold feat. Mereba",
+      "question": "Mereba cameo! Which lyric comes next?",
+      "lyricSnippet": "Come water my heart...",
+      "options": ["Let it grow with love", "Make me feel alive", "Bring me back to life"],
+      "correctAnswer": 0,
+      "context": "The Mereba feature!",
+      "reward": "mereba_token",
+      "special": true
+    },
+    {
+      "id": "lyric-012",
+      "type": "finish_the_lyric",
+      "songTitle": "Man I Need",
+      "artist": "Olivia Dean",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "You're the man I need...",
+      "options": ["Can't deny what I feel", "Everything I want", "All I ever wanted"],
+      "correctAnswer": 0,
+      "context": "Olivia Dean bringing it",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-013",
+      "type": "finish_the_lyric",
+      "songTitle": "Ever Needed",
+      "artist": "Mereba",
+      "question": "Pure Mereba! Which lyric comes next?",
+      "lyricSnippet": "Have you ever needed someone...",
+      "options": ["More than words can say", "The way I need you now", "Like I need you baby"],
+      "correctAnswer": 0,
+      "context": "Pure Mereba magic",
+      "reward": "mereba_token",
+      "special": true
+    },
+    {
+      "id": "lyric-014",
+      "type": "finish_the_lyric",
+      "songTitle": "Rider",
+      "artist": "Mereba",
+      "question": "More Mereba! Which lyric comes next?",
+      "lyricSnippet": "I need a rider...",
+      "options": [
+        "Someone to hold me down",
+        "Someone who's always there",
+        "Someone to call my own"
+      ],
+      "correctAnswer": 0,
+      "context": "More Mereba greatness",
+      "reward": "mereba_token",
+      "special": true
+    },
+    {
+      "id": "lyric-015",
+      "type": "finish_the_lyric",
+      "songTitle": "Best Part",
+      "artist": "H.E.R. feat. Daniel Caesar",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "You're the best part...",
+      "options": ["The best part of my day", "Of everything I do", "Of my entire life"],
+      "correctAnswer": 0,
+      "context": "H.E.R. featuring Daniel Caesar",
+      "reward": "music_token"
+    },
+    {
+      "id": "lyric-016",
+      "type": "finish_the_lyric",
+      "songTitle": "Conversations in the Dark",
+      "artist": "John Legend",
+      "question": "Which lyric comes next?",
+      "lyricSnippet": "I will never try to change you...",
+      "options": [
+        "I will always want the same you",
+        "You're perfect as you are",
+        "Just the way you are"
+      ],
+      "correctAnswer": 0,
+      "context": "John Legend serenading us",
+      "reward": "music_token"
+    },
+    {
+      "id": "joke-001",
+      "type": "song_recognition",
+      "songTitle": "The Hanging Tree",
+      "artist": "Jennifer Lawrence",
+      "question": "Are you coming to the tree?",
+      "lyricSnippet": "Hunger Games vibes...",
+      "options": ["The Hanging Tree", "Safe & Sound", "Yellow Flicker Beat"],
+      "correctAnswer": 0,
+      "context": "Hunger Games throwback",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-002",
+      "type": "song_recognition",
+      "songTitle": "The Best Part of Life",
+      "artist": "SAINt JHN",
+      "question": "What song represents 'foreverness of something beautiful and unforgettable'?",
+      "lyricSnippet": "She said this feels like...",
+      "options": ["Roses by SAINt JHN", "The Best Part of Life", "Forever"],
+      "correctAnswer": 0,
+      "context": "Beautiful and unforgettable",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-003",
+      "type": "song_recognition",
+      "songTitle": "Brown Skin Girl",
+      "artist": "Beyoncé",
+      "question": "Which song relates to Cadbury chocolate?",
+      "lyricSnippet": "Sweet like chocolate...",
+      "options": ["Brown Skin Girl", "Chocolate", "Sweet Like Honey"],
+      "correctAnswer": 0,
+      "context": "Cadbury chocolate vibes",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-004",
+      "type": "finish_the_lyric",
+      "songTitle": "Heat Waves",
+      "artist": "Glass Animals",
+      "question": "Which lyric matches the song that had you on chokehold in 2020?",
+      "lyricSnippet": "Sometimes, all I think about is you...",
+      "options": [
+        "It's gone now, the day has come, and",
+        "You know it hurts me too",
+        "Heat, heat waves, I'm swimming in visions"
+      ],
+      "correctAnswer": 1,
+      "context": "Song that had you on chokehold in 2020",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-005",
+      "type": "song_recognition",
+      "songTitle": "Close",
+      "artist": "Nick Jonas",
+      "question": "Favorite line: 'Space is a word made up by someone who was afraid to get...'",
+      "lyricSnippet": "I can't stay away...",
+      "options": ["Close", "Closer", "Near"],
+      "correctAnswer": 0,
+      "context": "Nick Jonas wisdom",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-006",
+      "type": "song_recognition",
+      "songTitle": "Tailor Swif",
+      "artist": "A$AP Rocky",
+      "question": "Hiyo ngoma ya ulisema iko trippy?",
+      "lyricSnippet": "Your ass might just go and get upset, don't be...",
+      "options": ["Fashion Killa", "Praise Da Lord", "Tailor Swif"],
+      "correctAnswer": 2,
+      "context": "A$AP trippy vibes",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-007",
+      "type": "song_recognition",
+      "songTitle": "Towards the Sun",
+      "artist": "Rihanna",
+      "question": "From the 'Home' film - when Oh got ran over...",
+      "lyricSnippet": "Turn your face towards the sun...",
+      "options": ["Let the shadow fall behind you", "As Real as You and Me", "Feel the Light"],
+      "correctAnswer": 0,
+      "context": "As Real as You and Me - started when oh got ran over",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-008",
+      "type": "song_recognition",
+      "songTitle": "Dancing in the Dark",
+      "artist": "Rihanna",
+      "question": "Happy vibes from the 'Home' film?",
+      "lyricSnippet": "Dancing in the dark...",
+      "options": ["Dancing in the Dark", "Feel the Light", "Towards the Sun"],
+      "correctAnswer": 0,
+      "context": "Happy vibes from Home film",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "joke-009",
+      "type": "song_recognition",
+      "songTitle": "Shiny",
+      "artist": "Jemaine Clement",
+      "question": "Tamatoa the crab's anthem from Moana?",
+      "lyricSnippet": "I'm so shiny...",
+      "options": ["Shiny", "You're Welcome", "How Far I'll Go"],
+      "correctAnswer": 0,
+      "context": "Tamatoa crab from Moana",
+      "reward": "throwback_token"
+    },
+    {
+      "id": "audio-guess",
+      "type": "audio_identification",
+      "songTitle": "If This Isn't Love",
+      "artist": "Jennifer Hudson",
+      "question": "What song has been playing in the background?",
+      "lyricSnippet": "Were you paying attention?",
+      "options": [
+        "If This Isn't Love by Jennifer Hudson",
+        "Love on Replay by Kenyon Dixon",
+        "Insomnia by Normani"
+      ],
+      "correctAnswer": 0,
+      "context": "Were you paying attention to the background?",
+      "reward": "attention_token",
+      "final": true
+    }
+  ],
+  "voiceNoteChallenge": {
+    "enabled": true,
+    "title": "Your Turn to Shine",
+    "description": "Record yourself singing 10 seconds of ANY song from this level. This is the truth or dare throwback!",
+    "duration": 10,
+    "reward": "voice_note_token"
+  },
+  "rewards": {
+    "music_token": {
+      "name": "Music Token",
+      "description": "Earned for correct lyric recognition",
+      "icon": "[MUSIC]"
+    },
+    "mereba_token": {
+      "name": "Mereba Token",
+      "description": "Special token for Mereba recognition",
+      "icon": "[SPARKLE]"
+    },
+    "throwback_token": {
+      "name": "Throwback Token",
+      "description": "Earned for remembering the past",
+      "icon": "[TIME]"
+    },
+    "attention_token": {
+      "name": "Attention Token",
+      "description": "For paying attention to background audio",
+      "icon": "[EAR]"
+    },
+    "voice_note_token": {
+      "name": "Voice Note Token",
+      "description": "For completing the voice challenge",
+      "icon": "[MIC]"
+    }
+  }
 }
