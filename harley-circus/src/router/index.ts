@@ -62,6 +62,16 @@ const routes: RouteRecordRaw[] = [
     name: 'Levels',
     component: () => import('@/pages/CircusIntro.vue'),
   },
+  {
+    path: '/levels/02-songs-origin/challenges',
+    name: 'SongsOriginChallenges',
+    component: () => import('@/pages/levels/02-songs-origin/Challenges.vue'),
+  },
+  {
+    path: '/levels/02-songs-origin/voice-note',
+    name: 'SongsOriginVoiceNote',
+    component: () => import('@/pages/levels/02-songs-origin/VoiceNote.vue'),
+  },
   // Removed generic dynamic routes to avoid conflict with meme-maze slug routes
   {
     path: '/:pathMatch(.*)*',
@@ -84,7 +94,7 @@ router.beforeEach((to, _from, next) => {
   const prodDomain = 'that-harley-circus.vercel.app'
   const onProdDomain = typeof window !== 'undefined' && window.location.hostname === prodDomain
   // Allow the 404 page to render for unknown routes on production
-  const isNotFound = to.matched.some(r => r.name === 'NotFound')
+  const isNotFound = to.matched.some((r) => r.name === 'NotFound')
   if (isProd && onProdDomain && to.path !== '/' && !isNotFound) {
     next({ path: '/' })
   } else {
@@ -93,5 +103,3 @@ router.beforeEach((to, _from, next) => {
 })
 
 export default router
-
-
