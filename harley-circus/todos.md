@@ -1,4 +1,5 @@
 ## FEATURES TO ADD/REMOVE:
+
 - [] have a catchy name for the web application
 - [] change the icon for the web application
 - [] might need to make it more personalized for her
@@ -6,7 +7,7 @@
 - [] remove the personal journal entry part. think of an alternative feature
 - [] need to make the final reward as quick and scarce as possible.
 - [] update the font of the browser to a goofier one
-- [] add toaster messages for her: 
+- [] add toaster messages for her:
 
 - [ ] Music taste: which song would she say was the first that I ever recommended to her
 - [ ] Funny memes and stickers: just to make
@@ -21,15 +22,17 @@
 - [ ] Love tension and hints to something in real life and pseudo-danger vibes
 - [ ] Back-door tracking system: a way to track her interactions, preferences and choices without exposing any evidence on production
 
-
-
 ## REFACTORING IMPLEMENTATION
+
 - [] having the tracking debug componet in another folder, outside the pages
 - [] a progress bar to help her track how she is moving in each challenge or level
-- [] IP restricting implementation should be in a separate file, outside the pages. be able to detect her WiFi IP address, save it and never open the experience elsewhere unless she is at home. 
-riding on that scarcity factor. get the wifi name to know this in advance
+- [] IP restricting implementation should be in a separate file, outside the pages. be able to detect her WiFi IP address, save it and never open the experience elsewhere unless she is at home.
+  riding on that scarcity factor. get the wifi name to know this in advance
 - [] rename the game levels into better names (multi-name issues)
 
+## 02-SONGS-OF-ORIGIN
 
-## HOT FIXES WITH THE AESTHETICS
-- [] the container content on the landing page is not looking great on tab view
+- [] shuffle the option lyrics, order of the quesiton challenge appear with the fischer-yates algorithm
+- [] add the other 
+- [] update the meta.json with api data for fallback
+- [] there is a scenario the background music is playing twice at the same time. we need to correct this.
