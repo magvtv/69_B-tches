@@ -2,92 +2,115 @@
   <GameLayout>
     <div class="number-play-container">
       <div class="content">
-      <div class="title-section">
-        <h1 class="main-title">Number Play</h1>
-        <div class="subtitle">Is your age is hidden in the candles?</div>
-      </div>
-      
-      <div class="riddle-section">
-        <!-- Math Problem Display -->
-        <div class="math-problem" v-if="currentMathProblem" :class="getOperationClass(currentMathProblem.question)">
-          <div class="problem-text">{{ currentMathProblem.question }}</div>
+        <div class="title-section">
+          <h1 class="main-title">Number Play</h1>
+          <div class="subtitle">Is your age is hidden in the candles?</div>
         </div>
-        <!-- Candles Progress -->
-        <div class="candles-display">
-          <div class="flex items-center justify-center gap-2 mb-4">
-            <CandlesProgress :lit="candlesLit" :total="23" />
-          </div>
-          <div class="candles-text">You've lit {{ candlesLit }} candles so far...</div>
-          <div class="progress-text">{{ progressText }}</div>
-        </div>
-        
-        <!-- Input Section -->
-        <div class="input-section" @mouseenter="onInputSectionHover">
-          <input 
-            v-model="userInput" 
-            @input="onInputChange"
-            type="number" 
-            placeholder="One Correct Answer"
-            class="age-input"
-            :class="{ 'error': showError, 'success': showSuccess }"
-            ref="dancingInput"
-          />
-          <button 
-            @click="checkAnswer" 
-            @mousedown="handleButtonMouseDown"
-            @touchstart="handleButtonTouchStart"
-            class="submit-btn"
-            :class="{ 
-              'dancing': isDancing, 
-              'evading': isMouseNear,
-              'normal-dance': isDancing && !isMouseNear,
-              'touch-device': isTouchDevice,
-              'fullscreen-evasion': isFullScreenEvasion
-            }"
-            :style="buttonStyle"
-            :disabled="!userInput || userInput.toString().trim() === ''"
-            ref="submitButton"
+
+        <div class="riddle-section">
+          <!-- Math Problem Display -->
+          <div
+            class="math-problem"
+            v-if="currentMathProblem"
+            :class="getOperationClass(currentMathProblem.question)"
           >
-            {{ getButtonText() }}
+            <div class="problem-text">{{ currentMathProblem.question }}</div>
+          </div>
+          <!-- Candles Progress -->
+          <div class="candles-display">
+            <div class="flex items-center justify-center gap-2 mb-4">
+              <CandlesProgress :lit="candlesLit" :total="23" />
+            </div>
+            <div class="candles-text">You've lit {{ candlesLit }} candles so far...</div>
+            <div class="progress-text">{{ progressText }}</div>
+          </div>
+
+          <!-- Input Section -->
+          <div class="input-section" @mouseenter="onInputSectionHover">
+            <input
+              v-model="userInput"
+              @input="onInputChange"
+              type="number"
+              placeholder="One Correct Answer"
+              class="age-input"
+              :class="{ error: showError, success: showSuccess }"
+              ref="dancingInput"
+            />
+            <button
+              @click="checkAnswer"
+              @mousedown="handleButtonMouseDown"
+              @touchstart="handleButtonTouchStart"
+              class="submit-btn"
+              :class="{
+                dancing: isDancing,
+                evading: isMouseNear,
+                'normal-dance': isDancing && !isMouseNear,
+                'touch-device': isTouchDevice,
+                'fullscreen-evasion': isFullScreenEvasion,
+              }"
+              :style="buttonStyle"
+              :disabled="!userInput || userInput.toString().trim() === ''"
+              ref="submitButton"
+            >
+              {{ getButtonText() }}
+            </button>
+          </div>
+
+          <div v-if="showError && timeExpired" class="error-message">
+            <div class="error-text">
+              Time's up! You needed {{ minProblemsRequired }} correct answers in 23 seconds.
+            </div>
+            <div class="hint-text">You solved {{ problemsSolved }} problems. Try again!</div>
+          </div>
+
+          <div v-if="showError && !timeExpired" class="error-message">
+            <div class="error-text">Wrong! Try again... HAHAHA!</div>
+            <div class="hint-text">
+              Time remaining: {{ timeRemaining }}s | Solved: {{ problemsSolved }}
+            </div>
+          </div>
+
+          <div v-if="showSuccess && problemsSolved >= minProblemsRequired" class="success-message">
+            <div class="success-text">
+              Excellent! You solved {{ problemsSolved }} problems in time!
+            </div>
+          </div>
+
+          <div v-if="showSuccess && problemsSolved < minProblemsRequired" class="success-message">
+            <div class="success-text">Correct! Keep going...</div>
+          </div>
+        </div>
+
+        <div v-if="showSuccess && problemsSolved >= minProblemsRequired" class="proceed-section">
+          <button @click="proceedToFinale" class="proceed-btn">
+            <span class="btn-text">Proceed to Finale</span>
           </button>
         </div>
-        
-        <div v-if="showError" class="error-message">
-          <div class="error-text">Wrong! Try again... HAHAHA!</div>
-          <!-- <ExclamationTriangleIcon class="error-icon" /> -->
+
+        <div v-if="timeExpired && problemsSolved < minProblemsRequired" class="proceed-section">
+          <button @click="restartChallenge" class="proceed-btn">
+            <span class="btn-text">Try Again</span>
+          </button>
         </div>
-        
-        <div v-if="showSuccess" class="success-message">
-          <div class="success-text">Excellent! You solved it!</div>
-          <!-- <FireIcon class="success-icon" /> -->
-        </div>
-      </div>
-      
-      <div v-if="showSuccess" class="proceed-section">
-        <button @click="proceedToFinale" class="proceed-btn">
-          <span class="btn-text">Proceed</span>
-        </button>
-      </div>
       </div>
     </div>
   </GameLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted} from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 // import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMemeMazeSupabaseStore } from '@/stores/memeMazeSupabase'
 import GameLayout from '@/layouts/GameLayout.vue'
 import CandlesProgress from '@/shared/CandlesProgress.vue'
-import {
-  // FireIcon,
-  // ExclamationTriangleIcon
-} from '@heroicons/vue/24/solid'
+import {} from // FireIcon,
+// ExclamationTriangleIcon
+'@heroicons/vue/24/solid'
 
 // Define component name for linting
 defineOptions({
-  name: 'MemeMazeNumberPlay'
+  name: 'MemeMazeNumberPlay',
 })
 
 const router = useRouter()
@@ -114,12 +137,19 @@ const isTouchDevice = ref(false)
 const isFullScreenEvasion = ref(false) // When button escapes to full screen
 const clickAttempts = ref(0) // Track how many times user tried to click
 
+// Timer for 23-second challenge
+const timeRemaining = ref(23)
+const timerInterval = ref<ReturnType<typeof setInterval> | null>(null)
+const timerStarted = ref(false)
+const timeExpired = ref(false)
+
 // Progress tracking for candle lighting
 const currentProblemSet = ref<{ question: string; answer: number }[]>([])
 const correctAnswersInSet = ref(0)
 const totalProblemsInSet = 3 // Need 2/3 correct to light a candle
 const problemsSolved = ref(0)
 const candlesEarned = ref(0)
+const minProblemsRequired = 3 // Must solve at least 3 problems in 23 seconds
 
 // Math problems
 const currentMathProblem = ref<{ question: string; answer: number } | null>(null)
@@ -128,15 +158,15 @@ const problemIndex = ref(0)
 const candlesLit = computed(() => memeMazeStore.candlesLit)
 const totalCandlesNeeded = 23
 const progressText = computed(() => {
-  const setProgress = `${correctAnswersInSet.value}/${totalProblemsInSet}`
-  const candleProgress = `${candlesEarned.value}/${totalCandlesNeeded}`
-  return `Set: ${setProgress} | Candles: ${candleProgress}`
+  const problemsProgress = `Problems: ${problemsSolved.value}/${minProblemsRequired} (min)`
+  const timeProgress = `Time: ${timeRemaining.value}s`
+  return `${problemsProgress} | ${timeProgress}`
 })
 
 // Computed style for dancing button
 const buttonStyle = computed(() => {
   if (!isDancing.value) return {}
-  
+
   if (isFullScreenEvasion.value) {
     // Full screen evasion - position relative to viewport
     return {
@@ -144,7 +174,7 @@ const buttonStyle = computed(() => {
       left: `${buttonPosition.value.x}px`,
       top: `${buttonPosition.value.y}px`,
       zIndex: 9999,
-      transition: 'all 0.2s ease-out'
+      transition: 'all 0.2s ease-out',
     }
   } else {
     // Normal evasion within input section
@@ -153,61 +183,88 @@ const buttonStyle = computed(() => {
       left: `${buttonPosition.value.x}px`,
       top: `${buttonPosition.value.y}px`,
       zIndex: 1000,
-      transition: 'all 0.3s ease-out'
+      transition: 'all 0.3s ease-out',
     }
   }
 })
 
-// Generate random arithmetic problems with single digits
+// Generate random arithmetic problems with single and double digits
 function generateRandomArithmeticProblem() {
   const operators = ['+', '-', '×', '÷']
   const operator = operators[Math.floor(Math.random() * operators.length)]
-  
+
+  // 60% chance of double-digit problems for difficulty
+  const useDoubleDigit = Math.random() > 0.4
+
   let question: string
   let answer: number
   let num1: number
   let num2: number
-  
+
   switch (operator) {
     case '+':
-      num1 = Math.floor(Math.random() * 9) + 1 // 1-9
-      num2 = Math.floor(Math.random() * 9) + 1 // 1-9
+      if (useDoubleDigit) {
+        num1 = Math.floor(Math.random() * 90) + 10 // 10-99
+        num2 = Math.floor(Math.random() * 90) + 10 // 10-99
+      } else {
+        num1 = Math.floor(Math.random() * 9) + 1 // 1-9
+        num2 = Math.floor(Math.random() * 9) + 1 // 1-9
+      }
       question = `What is ${num1} + ${num2}?`
       answer = num1 + num2
       break
-      
+
     case '-':
-      num1 = Math.floor(Math.random() * 9) + 1 // 1-9
-      num2 = Math.floor(Math.random() * 9) + 1 // 1-9
-      // Ensure positive result for subtraction
-      const larger = Math.max(num1, num2)
-      const smaller = Math.min(num1, num2)
-      question = `What is ${larger} - ${smaller}?`
-      answer = larger - smaller
+      if (useDoubleDigit) {
+        num1 = Math.floor(Math.random() * 90) + 10 // 10-99
+        num2 = Math.floor(Math.random() * num1) + 1 // 1 to num1 (ensure positive)
+      } else {
+        num1 = Math.floor(Math.random() * 9) + 1 // 1-9
+        num2 = Math.floor(Math.random() * 9) + 1 // 1-9
+        // Ensure positive result for subtraction
+        const larger = Math.max(num1, num2)
+        const smaller = Math.min(num1, num2)
+        num1 = larger
+        num2 = smaller
+      }
+      question = `What is ${num1} - ${num2}?`
+      answer = num1 - num2
       break
-      
+
     case '×':
-      num1 = Math.floor(Math.random() * 9) + 1 // 1-9
-      num2 = Math.floor(Math.random() * 9) + 1 // 1-9
+      if (useDoubleDigit) {
+        // Mix: one double-digit, one single-digit for reasonable products
+        num1 = Math.floor(Math.random() * 90) + 10 // 10-99
+        num2 = Math.floor(Math.random() * 9) + 1 // 1-9
+      } else {
+        num1 = Math.floor(Math.random() * 9) + 1 // 1-9
+        num2 = Math.floor(Math.random() * 9) + 1 // 1-9
+      }
       question = `What is ${num1} × ${num2}?`
       answer = num1 * num2
       break
-      
+
     case '÷':
       // For division, ensure clean division (no remainders)
-      num2 = Math.floor(Math.random() * 8) + 2 // 2-9 (divisor)
-      answer = Math.floor(Math.random() * 8) + 1 // 1-8 (quotient)
-      num1 = num2 * answer // dividend
+      if (useDoubleDigit) {
+        num2 = Math.floor(Math.random() * 9) + 2 // 2-10 (divisor)
+        answer = Math.floor(Math.random() * 15) + 5 // 5-19 (quotient)
+        num1 = num2 * answer // dividend
+      } else {
+        num2 = Math.floor(Math.random() * 8) + 2 // 2-9 (divisor)
+        answer = Math.floor(Math.random() * 8) + 1 // 1-8 (quotient)
+        num1 = num2 * answer // dividend
+      }
       question = `What is ${num1} ÷ ${num2}?`
       break
-      
+
     default:
       num1 = Math.floor(Math.random() * 9) + 1
       num2 = Math.floor(Math.random() * 9) + 1
       question = `What is ${num1} + ${num2}?`
       answer = num1 + num2
   }
-  
+
   return { question, answer }
 }
 
@@ -233,12 +290,12 @@ function getOperationClass(question: string) {
 function initializeProblemSet() {
   currentProblemSet.value = []
   correctAnswersInSet.value = 0
-  
+
   // Generate 3 problems for the set
   for (let i = 0; i < totalProblemsInSet; i++) {
     currentProblemSet.value.push(generateRandomArithmeticProblem())
   }
-  
+
   // Set the first problem as current
   currentMathProblem.value = currentProblemSet.value[0]
   problemIndex.value = 0
@@ -250,9 +307,9 @@ async function rotateMathProblem() {
     initializeProblemSet()
     return
   }
-  
+
   problemIndex.value++
-  
+
   // If we've completed all problems in the set, check if we earned a candle
   if (problemIndex.value >= currentProblemSet.value.length) {
     await checkCandleEligibility()
@@ -272,7 +329,7 @@ async function checkCandleEligibility() {
     await addNumberPlayCandle()
     console.log(`Candle earned! Total: ${candlesEarned.value}/${totalCandlesNeeded}`)
   }
-  
+
   // Reset for next set
   correctAnswersInSet.value = 0
 }
@@ -288,7 +345,7 @@ function saveToLocalStorage() {
     candlesEarned: candlesEarned.value,
     problemIndex: problemIndex.value,
     // Don't save the current problem - always generate fresh ones
-    timestamp: Date.now()
+    timestamp: Date.now(),
   }
   localStorage.setItem('numberPlayGameState', JSON.stringify(gameState))
 }
@@ -299,23 +356,23 @@ function loadFromLocalStorage() {
     try {
       const gameState = JSON.parse(savedState)
       console.log('Loading game state:', gameState)
-      
+
       // Only restore if saved within last 24 hours
       if (Date.now() - gameState.timestamp < 24 * 60 * 60 * 1000) {
         // Ensure userInput is always a string
         userInput.value = gameState.userInput ? gameState.userInput.toString() : ''
-        
+
         // Restore progress data
         correctAnswersInSet.value = gameState.correctAnswersInSet || 0
         problemsSolved.value = gameState.problemsSolved || 0
         candlesEarned.value = gameState.candlesEarned || 0
         problemIndex.value = gameState.problemIndex || 0
-        
+
         console.log('Restored progress:', {
           userInput: userInput.value,
           correctAnswersInSet: correctAnswersInSet.value,
           problemsSolved: problemsSolved.value,
-          candlesEarned: candlesEarned.value
+          candlesEarned: candlesEarned.value,
         })
       } else {
         console.log('Saved state too old, not restoring')
@@ -332,15 +389,56 @@ function clearLocalStorage() {
   localStorage.removeItem('numberPlayGameState')
 }
 
+// Timer functions
+function startTimer() {
+  if (timerStarted.value) return
+
+  timerStarted.value = true
+  timerInterval.value = setInterval(() => {
+    timeRemaining.value--
+
+    if (timeRemaining.value <= 0) {
+      stopTimer()
+      timeExpired.value = true
+      handleTimeExpired()
+    }
+  }, 1000)
+}
+
+function stopTimer() {
+  if (timerInterval.value) {
+    clearInterval(timerInterval.value)
+    timerInterval.value = null
+  }
+}
+
+function handleTimeExpired() {
+  stopDancing()
+
+  // Check if user solved enough problems
+  if (problemsSolved.value >= minProblemsRequired) {
+    showSuccess.value = true
+    showError.value = false
+  } else {
+    showError.value = true
+    showSuccess.value = false
+  }
+}
+
 // Input change handler
 function onInputChange() {
   saveToLocalStorage()
-  
+
+  // Start timer on first input
+  if (!timerStarted.value && userInput.value.trim() !== '') {
+    startTimer()
+  }
+
   // Start dancing immediately when user has input
   if (userInput.value.trim() !== '' && !isDancing.value) {
     startDancing()
   }
-  
+
   // Stop dancing if input is empty
   if (userInput.value.trim() === '' && isDancing.value) {
     stopDancing()
@@ -358,10 +456,10 @@ function onInputSectionHover() {
 // Button click detection handlers
 function handleButtonMouseDown(event: MouseEvent) {
   if (isTouchDevice.value) return // Skip on touch devices
-  
+
   event.preventDefault()
   clickAttempts.value++
-  
+
   // If user is trying to click, escape to full screen
   if (clickAttempts.value >= 2) {
     escapeToFullScreen()
@@ -370,10 +468,10 @@ function handleButtonMouseDown(event: MouseEvent) {
 
 function handleButtonTouchStart(event: TouchEvent) {
   if (!isTouchDevice.value) return
-  
+
   event.preventDefault()
   clickAttempts.value++
-  
+
   // On mobile, escape to full screen more aggressively
   if (clickAttempts.value >= 1) {
     escapeToFullScreen()
@@ -383,28 +481,28 @@ function handleButtonTouchStart(event: TouchEvent) {
 // Escape to full screen evasion
 function escapeToFullScreen() {
   if (isFullScreenEvasion.value) return // Already in full screen mode
-  
+
   console.log('Button escaping to full screen!')
   isFullScreenEvasion.value = true
-  
+
   // Move button to a random position on screen
   const viewportWidth = window.innerWidth
   const viewportHeight = window.innerHeight
   const headerHeight = 80 // Approximate header height
-  
+
   // Position button in safe area (below header, above bottom)
   const safeTop = headerHeight + 20
   const safeBottom = viewportHeight - 100
   const safeHeight = safeBottom - safeTop
-  
+
   buttonPosition.value = {
     x: Math.random() * (viewportWidth - 200), // Leave space for button width
-    y: safeTop + Math.random() * safeHeight
+    y: safeTop + Math.random() * safeHeight,
   }
-  
+
   // Increase dance speed for full screen evasion
   danceSpeed.value = 50
-  
+
   // Return to normal mode after some time
   setTimeout(() => {
     if (isFullScreenEvasion.value) {
@@ -419,7 +517,7 @@ function returnToNormalMode() {
   isFullScreenEvasion.value = false
   buttonPosition.value = { x: 0, y: 0 }
   danceSpeed.value = isTouchDevice.value ? 100 : 80
-  
+
   // Reset click attempts after a delay
   setTimeout(() => {
     clickAttempts.value = 0
@@ -429,7 +527,7 @@ function returnToNormalMode() {
 // Get button text based on state
 function getButtonText() {
   if (isFullScreenEvasion.value) {
-    return 'You can\'t catch me!'
+    return "You can't catch me!"
   } else if (isMouseNear.value) {
     return 'Catch me!'
   } else {
@@ -440,58 +538,58 @@ function getButtonText() {
 // Mouse and touch tracking functions
 function handleMouseMove(event: MouseEvent) {
   if (isTouchDevice.value) return // Skip mouse events on touch devices
-  
+
   // Calculate mouse velocity for predictive evasion
   previousMousePosition.value = { ...mousePosition.value }
   mousePosition.value = { x: event.clientX, y: event.clientY }
-  
+
   // Calculate velocity (pixels per frame)
   mouseVelocity.value = {
     x: mousePosition.value.x - previousMousePosition.value.x,
-    y: mousePosition.value.y - previousMousePosition.value.y
+    y: mousePosition.value.y - previousMousePosition.value.y,
   }
-  
+
   checkMouseProximity()
 }
 
 function handleTouchMove(event: TouchEvent) {
   if (!isTouchDevice.value) return
-  
+
   event.preventDefault() // Prevent scrolling
-  
+
   const touch = event.touches[0]
   if (!touch) return
-  
+
   // Calculate touch velocity for predictive evasion
   previousMousePosition.value = { ...mousePosition.value }
   mousePosition.value = { x: touch.clientX, y: touch.clientY }
-  
+
   // Calculate velocity (pixels per frame)
   mouseVelocity.value = {
     x: mousePosition.value.x - previousMousePosition.value.x,
-    y: mousePosition.value.y - previousMousePosition.value.y
+    y: mousePosition.value.y - previousMousePosition.value.y,
   }
-  
+
   checkMouseProximity()
 }
 
 function checkMouseProximity() {
   if (!submitButton.value || !isDancing.value) return
-  
+
   const button = submitButton.value
   const buttonRect = button.getBoundingClientRect()
   const buttonCenter = {
     x: buttonRect.left + buttonRect.width / 2,
-    y: buttonRect.top + buttonRect.height / 2
+    y: buttonRect.top + buttonRect.height / 2,
   }
-  
+
   const distance = Math.sqrt(
-    Math.pow(mousePosition.value.x - buttonCenter.x, 2) + 
-    Math.pow(mousePosition.value.y - buttonCenter.y, 2)
+    Math.pow(mousePosition.value.x - buttonCenter.x, 2) +
+      Math.pow(mousePosition.value.y - buttonCenter.y, 2),
   )
-  
+
   isMouseNear.value = distance < evasionThreshold
-  
+
   // If mouse is close, increase dance speed for faster evasion
   if (isMouseNear.value) {
     danceSpeed.value = Math.max(30, danceSpeed.value - 15) // More aggressive evasion
@@ -503,16 +601,16 @@ function checkMouseProximity() {
 // Dancing button functions
 function startDancing() {
   if (isDancing.value) return
-  
+
   isDancing.value = true
-  
+
   // Add appropriate event listeners based on device type
   if (isTouchDevice.value) {
     document.addEventListener('touchmove', handleTouchMove, { passive: false })
   } else {
     document.addEventListener('mousemove', handleMouseMove)
   }
-  
+
   // Start the evasion loop with device-appropriate speed
   const initialSpeed = isTouchDevice.value ? 100 : danceSpeed.value
   danceInterval.value = setInterval(evadeMouse, initialSpeed)
@@ -520,19 +618,19 @@ function startDancing() {
 
 function stopDancing() {
   isDancing.value = false
-  
+
   // Remove event listeners
   if (isTouchDevice.value) {
     document.removeEventListener('touchmove', handleTouchMove)
   } else {
     document.removeEventListener('mousemove', handleMouseMove)
   }
-  
+
   if (danceInterval.value) {
     clearInterval(danceInterval.value)
     danceInterval.value = null
   }
-  
+
   // Reset button position and speed
   buttonPosition.value = { x: 0, y: 0 }
   danceSpeed.value = 100
@@ -541,108 +639,124 @@ function stopDancing() {
 
 function evadeMouse() {
   if (!submitButton.value) return
-  
+
   const button = submitButton.value
   const buttonRect = button.getBoundingClientRect()
-  
+
   let availableWidth: number
   let availableHeight: number
   let containerRect: DOMRect
-  
+
   if (isFullScreenEvasion.value) {
     // Full screen evasion - use viewport bounds
     const viewportWidth = window.innerWidth
     const viewportHeight = window.innerHeight
     const headerHeight = 80
-    
+
     availableWidth = viewportWidth - buttonRect.width
     availableHeight = viewportHeight - buttonRect.height - headerHeight - 100 // Leave space for header and bottom
-    
+
     containerRect = {
       left: 0,
       top: headerHeight,
       width: viewportWidth,
-      height: viewportHeight - headerHeight - 100
+      height: viewportHeight - headerHeight - 100,
     } as DOMRect
   } else {
     // Normal evasion within input section
     const container = button.closest('.input-section') as HTMLElement
     if (!container) return
-    
+
     containerRect = container.getBoundingClientRect()
     availableWidth = containerRect.width - buttonRect.width
     availableHeight = containerRect.height - buttonRect.height
   }
-  
+
   let newX = buttonPosition.value.x
   let newY = buttonPosition.value.y
-  
+
   if (isMouseNear.value) {
     // EVASION MODE: Move away from mouse with predictive movement
     const mouseRelativeToContainer = {
       x: mousePosition.value.x - containerRect.left,
-      y: mousePosition.value.y - containerRect.top
+      y: mousePosition.value.y - containerRect.top,
     }
-    
+
     const buttonCenter = {
       x: buttonPosition.value.x + buttonRect.width / 2,
-      y: buttonPosition.value.y + buttonRect.height / 2
+      y: buttonPosition.value.y + buttonRect.height / 2,
     }
-    
+
     // Predict where mouse will be based on velocity
     const predictedMousePosition = {
       x: mouseRelativeToContainer.x + mouseVelocity.value.x * 3, // Predict 3 frames ahead
-      y: mouseRelativeToContainer.y + mouseVelocity.value.y * 3
+      y: mouseRelativeToContainer.y + mouseVelocity.value.y * 3,
     }
-    
+
     // Calculate escape direction (away from predicted mouse position)
     const escapeDirection = {
       x: buttonCenter.x - predictedMousePosition.x,
-      y: buttonCenter.y - predictedMousePosition.y
+      y: buttonCenter.y - predictedMousePosition.y,
     }
-    
+
     // Normalize direction
     const distance = Math.sqrt(escapeDirection.x ** 2 + escapeDirection.y ** 2)
     if (distance > 0) {
       const normalizedDirection = {
         x: escapeDirection.x / distance,
-        y: escapeDirection.y / distance
+        y: escapeDirection.y / distance,
       }
-      
+
       // Move in escape direction with some randomness and urgency
       const escapeDistance = 120 + Math.random() * 80 // 120-200 pixels (more aggressive escape)
-      newX = Math.max(0, Math.min(availableWidth, 
-        buttonPosition.value.x + normalizedDirection.x * escapeDistance))
-      newY = Math.max(0, Math.min(availableHeight, 
-        buttonPosition.value.y + normalizedDirection.y * escapeDistance))
+      newX = Math.max(
+        0,
+        Math.min(availableWidth, buttonPosition.value.x + normalizedDirection.x * escapeDistance),
+      )
+      newY = Math.max(
+        0,
+        Math.min(availableHeight, buttonPosition.value.y + normalizedDirection.y * escapeDistance),
+      )
     }
   } else {
     // NORMAL MODE: Gentle random movement
     if (isFullScreenEvasion.value) {
       // Full screen mode: more aggressive movement
       const maxMove = isTouchDevice.value ? 80 : 60
-      newX = Math.max(0, Math.min(availableWidth, 
-        buttonPosition.value.x + (Math.random() - 0.5) * maxMove))
-      newY = Math.max(0, Math.min(availableHeight, 
-        buttonPosition.value.y + (Math.random() - 0.5) * maxMove))
+      newX = Math.max(
+        0,
+        Math.min(availableWidth, buttonPosition.value.x + (Math.random() - 0.5) * maxMove),
+      )
+      newY = Math.max(
+        0,
+        Math.min(availableHeight, buttonPosition.value.y + (Math.random() - 0.5) * maxMove),
+      )
     } else if (isTouchDevice.value) {
       // On mobile, prefer side-to-side movement
       const maxMove = 30
-      newX = Math.max(0, Math.min(availableWidth, 
-        buttonPosition.value.x + (Math.random() - 0.5) * maxMove))
+      newX = Math.max(
+        0,
+        Math.min(availableWidth, buttonPosition.value.x + (Math.random() - 0.5) * maxMove),
+      )
       // Less vertical movement on mobile
-      newY = Math.max(0, Math.min(availableHeight, 
-        buttonPosition.value.y + (Math.random() - 0.5) * (maxMove * 0.3)))
+      newY = Math.max(
+        0,
+        Math.min(availableHeight, buttonPosition.value.y + (Math.random() - 0.5) * (maxMove * 0.3)),
+      )
     } else {
       // Desktop: normal random movement
       const maxMove = 20
-      newX = Math.max(0, Math.min(availableWidth, 
-        buttonPosition.value.x + (Math.random() - 0.5) * maxMove))
-      newY = Math.max(0, Math.min(availableHeight, 
-        buttonPosition.value.y + (Math.random() - 0.5) * maxMove))
+      newX = Math.max(
+        0,
+        Math.min(availableWidth, buttonPosition.value.x + (Math.random() - 0.5) * maxMove),
+      )
+      newY = Math.max(
+        0,
+        Math.min(availableHeight, buttonPosition.value.y + (Math.random() - 0.5) * maxMove),
+      )
     }
   }
-  
+
   buttonPosition.value = { x: newX, y: newY }
 }
 
@@ -654,52 +768,72 @@ async function generateNewProblem() {
 }
 
 async function checkAnswer() {
+  // If time expired, don't allow more answers
+  if (timeExpired.value) {
+    return
+  }
+
   // If in full screen evasion mode, don't process the answer
   if (isFullScreenEvasion.value) {
     console.log('Button escaped! Answer not processed.')
     return
   }
-  
+
   // Stop dancing when button is clicked
   stopDancing()
-  
+
   const answer = parseInt(userInput.value)
   const correctAnswer = currentMathProblem.value?.answer
-  
+
   if (answer === correctAnswer) {
     showError.value = false
-    showSuccess.value = true
-    correctAnswersInSet.value++
     problemsSolved.value++
-    
-    console.log(`Correct! Set progress: ${correctAnswersInSet.value}/${totalProblemsInSet}`)
-    
-    // Check if game is complete (23 candles total)
-    if (candlesEarned.value >= totalCandlesNeeded) {
-      setTimeout(() => {
-        proceedToFinale()
-      }, 2000)
+
+    console.log(`Correct! Problems solved: ${problemsSolved.value}`)
+
+    // Check if user met minimum requirement and time is still running
+    if (problemsSolved.value >= minProblemsRequired && !timeExpired.value) {
+      showSuccess.value = true
+      stopTimer()
+
+      // Check if all 23 candles are lit before proceeding to finale
+      if (candlesLit.value >= 23) {
+        setTimeout(() => {
+          proceedToFinale()
+        }, 2000)
+      } else {
+        // User solved the challenge but hasn't lit all candles yet
+        // They need to continue solving more problems
+        setTimeout(async () => {
+          showSuccess.value = false
+          problemsSolved.value = 0 // Reset for next round
+          timeRemaining.value = 23 // Reset timer
+          timerStarted.value = false
+          await generateNewProblem()
+        }, 2000)
+      }
     } else {
-      // Move to next problem after success
+      // Move to next problem after brief success indication
+      showSuccess.value = true
       setTimeout(async () => {
         showSuccess.value = false
         await generateNewProblem()
-      }, 1500)
+      }, 800)
     }
   } else {
     showError.value = true
     showSuccess.value = false
-    
-    console.log(`Wrong! Set progress: ${correctAnswersInSet.value}/${totalProblemsInSet}`)
-    
+
+    console.log(`Wrong! Problems solved: ${problemsSolved.value}`)
+
     // Start dancing button on wrong answer (more aggressively)
     startDancing()
-    
+
     // Hide error and move to next problem
     setTimeout(async () => {
       showError.value = false
       await generateNewProblem()
-    }, 1500)
+    }, 1000)
   }
 }
 
@@ -709,10 +843,28 @@ async function proceedToFinale() {
   router.push('/levels/meme-maze/finale')
 }
 
+function restartChallenge() {
+  // Reset all state
+  timeRemaining.value = 23
+  timerStarted.value = false
+  timeExpired.value = false
+  problemsSolved.value = 0
+  showError.value = false
+  showSuccess.value = false
+  userInput.value = ''
+
+  // Stop timer and dancing
+  stopTimer()
+  stopDancing()
+
+  // Generate new problem
+  initializeProblemSet()
+}
+
 // Lifecycle hooks
 onMounted(async () => {
   console.log('Component mounted, loading state...')
-  
+
   // Initialize Supabase session
   try {
     await initializeSession()
@@ -720,37 +872,30 @@ onMounted(async () => {
   } catch (error) {
     console.error('Failed to initialize Supabase session:', error)
   }
-  
+
   // Detect if device supports touch
   isTouchDevice.value = 'ontouchstart' in window || navigator.maxTouchPoints > 0
   console.log('Touch device detected:', isTouchDevice.value)
-  
+
   // Load saved game state
   loadFromLocalStorage()
-  
+
   // Initialize the first problem set
   console.log('Initializing problem set...')
   initializeProblemSet()
-  
+
   // Add window resize listener
   window.addEventListener('resize', handleWindowResize)
-  
-  // Start dancing after a delay to be annoying
-  setTimeout(() => {
-    if (!showSuccess.value && !showError.value) {
-      startDancing()
-      // Stop dancing after 3 seconds
-      setTimeout(() => {
-        stopDancing()
-      }, 3000)
-    }
-  }, 2000)
+
+  // Don't start dancing automatically - only when user starts typing
+  // This prevents the button from dancing before the challenge begins
 })
 
 onUnmounted(() => {
   saveToLocalStorage()
   stopDancing() // Clean up dancing interval
-  
+  stopTimer() // Clean up timer interval
+
   // Clean up window resize listener
   window.removeEventListener('resize', handleWindowResize)
 })
@@ -762,10 +907,10 @@ function handleWindowResize() {
     const viewportWidth = window.innerWidth
     const viewportHeight = window.innerHeight
     const headerHeight = 80 // Keep space for header
-    
+
     buttonPosition.value = {
       x: Math.min(buttonPosition.value.x, viewportWidth - 200),
-      y: Math.min(buttonPosition.value.y, viewportHeight - headerHeight - 100)
+      y: Math.min(buttonPosition.value.y, viewportHeight - headerHeight - 100),
     }
   }
 }
@@ -774,9 +919,14 @@ function handleWindowResize() {
 <style scoped>
 .number-play-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--dark-bg) 0%, var(--secondary-purple) 50%, var(--primary-purple) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--dark-bg) 0%,
+    var(--secondary-purple) 50%,
+    var(--primary-purple) 100%
+  );
   color: var(--text-white);
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -797,17 +947,17 @@ function handleWindowResize() {
   font-size: 3.5rem;
   font-weight: bold;
   margin: 0;
-  background: linear-gradient(45deg, #39FF14, #6A0DAD);
+  background: linear-gradient(45deg, #39ff14, #6a0dad);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px #39FF14;
+  text-shadow: 0 0 30px #39ff14;
   margin-bottom: 1rem;
 }
 
 .subtitle {
   font-size: 1.3rem;
-  color: #F5F5F5;
+  color: #f5f5f5;
   opacity: 0.9;
 }
 
@@ -827,7 +977,7 @@ function handleWindowResize() {
 .riddle-text p {
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 
 /* Timer section removed - no longer needed */
@@ -841,15 +991,15 @@ function handleWindowResize() {
   font-size: 1.2rem;
   color: var(--accent-green);
   font-weight: bold;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   transition: all 0.3s ease;
 }
 
 .progress-text {
   font-size: 1rem;
-  color: #FFD700;
+  color: #ffd700;
   font-weight: bold;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   background: rgba(255, 215, 0, 0.1);
@@ -879,14 +1029,14 @@ function handleWindowResize() {
 .problem-text {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #39FF14;
-  text-shadow: 0 0 10px #39FF14;
+  color: #39ff14;
+  text-shadow: 0 0 10px #39ff14;
   margin-bottom: 0.5rem;
 }
 
 .operation-hint {
   font-size: 0.9rem;
-  color: #FFD700;
+  color: #ffd700;
   font-weight: normal;
   opacity: 0.8;
   text-transform: uppercase;
@@ -917,7 +1067,7 @@ function handleWindowResize() {
 .age-input {
   padding: 1rem 1.5rem;
   font-size: 1.2rem;
-  border: 2px solid #6A0DAD;
+  border: 2px solid #6a0dad;
   border-radius: 50px;
   background: rgba(0, 0, 0, 0.5);
   color: white;
@@ -928,35 +1078,40 @@ function handleWindowResize() {
 }
 
 .age-input.urgent {
-  border-color: #FF6B35;
+  border-color: #ff6b35;
   box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
   animation: urgent-pulse 0.5s ease-in-out infinite;
 }
 
 @keyframes urgent-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .age-input:focus {
   outline: none;
-  border-color: #39FF14;
+  border-color: #39ff14;
   box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
 }
 
 .age-input.error {
-  border-color: #B22222;
+  border-color: #b22222;
   box-shadow: 0 0 20px rgba(178, 34, 34, 0.5);
   animation: shake 0.5s ease-in-out;
 }
 
 .age-input.success {
-  border-color: #39FF14;
+  border-color: #39ff14;
   box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
 }
 
 .submit-btn {
-  background: linear-gradient(45deg, #39FF14, #6A0DAD);
+  background: linear-gradient(45deg, #39ff14, #6a0dad);
   border: none;
   padding: 1rem 2rem;
   font-size: 1.1rem;
@@ -1013,53 +1168,56 @@ function handleWindowResize() {
 }
 
 @keyframes fullscreen-panic {
-  0%, 100% { 
+  0%,
+  100% {
     transform: scale(1.1) rotate(-2deg);
     filter: hue-rotate(0deg);
   }
-  25% { 
+  25% {
     transform: scale(1.15) rotate(2deg);
     filter: hue-rotate(15deg);
   }
-  50% { 
+  50% {
     transform: scale(1.2) rotate(-1deg);
     filter: hue-rotate(-15deg);
   }
-  75% { 
+  75% {
     transform: scale(1.15) rotate(1deg);
     filter: hue-rotate(10deg);
   }
 }
 
 @keyframes gentle-wiggle {
-  0%, 100% { 
+  0%,
+  100% {
     transform: rotate(0deg) scale(1);
   }
-  25% { 
+  25% {
     transform: rotate(-2deg) scale(1.02);
   }
-  50% { 
+  50% {
     transform: rotate(0deg) scale(1.05);
   }
-  75% { 
+  75% {
     transform: rotate(2deg) scale(1.02);
   }
 }
 
 @keyframes panic-evade {
-  0%, 100% { 
+  0%,
+  100% {
     transform: rotate(-3deg) scale(1.1);
     filter: hue-rotate(0deg);
   }
-  25% { 
+  25% {
     transform: rotate(3deg) scale(1.15);
     filter: hue-rotate(10deg);
   }
-  50% { 
+  50% {
     transform: rotate(-2deg) scale(1.2);
     filter: hue-rotate(-10deg);
   }
-  75% { 
+  75% {
     transform: rotate(2deg) scale(1.15);
     filter: hue-rotate(5deg);
   }
@@ -1070,18 +1228,18 @@ function handleWindowResize() {
   padding: 1rem;
   background: rgba(178, 34, 34, 0.2);
   border-radius: 15px;
-  border: 2px solid #B22222;
+  border: 2px solid #b22222;
 }
 
 .error-text {
   font-size: 1.1rem;
-  color: #FF6B6B;
+  color: #ff6b6b;
   margin-bottom: 0.5rem;
 }
 
 .hint-text {
   font-size: 0.9rem;
-  color: #FFD700;
+  color: #ffd700;
   margin-bottom: 0.5rem;
   font-style: italic;
 }
@@ -1089,7 +1247,7 @@ function handleWindowResize() {
 .error-icon {
   width: 32px;
   height: 32px;
-  color: #B22222;
+  color: #b22222;
   animation: shake 0.5s ease-in-out infinite;
 }
 
@@ -1098,19 +1256,19 @@ function handleWindowResize() {
   padding: 1rem;
   background: rgba(57, 255, 20, 0.2);
   border-radius: 15px;
-  border: 2px solid #39FF14;
+  border: 2px solid #39ff14;
 }
 
 .success-text {
   font-size: 1.1rem;
-  color: #39FF14;
+  color: #39ff14;
   margin-bottom: 0.5rem;
 }
 
 .success-icon {
   width: 32px;
   height: 32px;
-  color: #39FF14;
+  color: #39ff14;
   animation: glow 1s ease-in-out infinite alternate;
 }
 
@@ -1119,7 +1277,7 @@ function handleWindowResize() {
 }
 
 .proceed-btn {
-  background: linear-gradient(45deg, #39FF14, #6A0DAD);
+  background: linear-gradient(45deg, #39ff14, #6a0dad);
   border: none;
   padding: 1.5rem 3rem;
   font-size: 1.3rem;
@@ -1147,19 +1305,35 @@ function handleWindowResize() {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 @keyframes glow {
-  from { filter: drop-shadow(0 0 10px #39FF14); }
-  to { filter: drop-shadow(0 0 20px #39FF14); }
+  from {
+    filter: drop-shadow(0 0 10px #39ff14);
+  }
+  to {
+    filter: drop-shadow(0 0 20px #39ff14);
+  }
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 /* Responsive design */
@@ -1167,60 +1341,60 @@ function handleWindowResize() {
   .number-play-container {
     padding: 1rem;
   }
-  
+
   .content {
     max-width: 100%;
   }
-  
+
   .main-title {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .riddle-section {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .math-problem {
     padding: 0.8rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .problem-text {
     font-size: 1.3rem;
   }
-  
+
   .candles-display {
     margin-bottom: 1.5rem;
   }
-  
+
   .candles-text {
     font-size: 1.1rem;
   }
-  
+
   .progress-text {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
   }
-  
+
   .input-section {
     flex-direction: column;
     gap: 1rem;
     min-height: 100px; /* Increased for better button movement space */
   }
-  
+
   .age-input {
     min-width: 100%;
     font-size: 1.2rem;
     padding: 1rem 1.2rem;
   }
-  
+
   .submit-btn {
     width: 80%;
     max-width: 200px;
@@ -1228,18 +1402,18 @@ function handleWindowResize() {
     padding: 0.8rem 1.2rem;
     margin: 0 auto;
   }
-  
+
   .error-message,
   .success-message {
     margin-top: 1rem;
     padding: 0.8rem;
   }
-  
+
   .error-text,
   .success-text {
     font-size: 1rem;
   }
-  
+
   .proceed-btn {
     padding: 1.2rem 2rem;
     font-size: 1.2rem;
@@ -1250,41 +1424,41 @@ function handleWindowResize() {
   .number-play-container {
     padding: 0.5rem;
   }
-  
+
   .main-title {
     font-size: 2rem;
   }
-  
+
   .subtitle {
     font-size: 1rem;
   }
-  
+
   .riddle-section {
     padding: 1rem;
   }
-  
+
   .math-problem {
     padding: 0.6rem;
   }
-  
+
   .problem-text {
     font-size: 1.1rem;
   }
-  
+
   .candles-text {
     font-size: 1rem;
   }
-  
+
   .progress-text {
     font-size: 0.8rem;
     padding: 0.3rem 0.6rem;
   }
-  
+
   .age-input {
     font-size: 1.1rem;
     padding: 0.8rem 1rem;
   }
-  
+
   .submit-btn {
     width: 70%;
     max-width: 180px;
