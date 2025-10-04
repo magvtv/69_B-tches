@@ -2,11 +2,10 @@
   <div class="level-container">
     <MemeMazeIntro v-if="slug === 'vibe-check'" />
     <MemeMazeMemes v-else-if="slug === 'memes'" />
-    <MemeMazeNumberPlay v-else-if="slug === 'number-play'" />
     <MemeMazeFinale v-else-if="slug === 'finale'" />
     <div v-else class="error-container">
       <h1>Level not found: {{ slug }}</h1>
-      <p>Available levels: intro, memes, number-play, finale</p>
+      <p>Available levels: vibe-check, memes, finale</p>
     </div>
   </div>
 </template>
@@ -16,7 +15,6 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import MemeMazeIntro from './01-meme-maze/VibeCheck.vue'
 import MemeMazeMemes from './01-meme-maze/Memes.vue'
-import MemeMazeNumberPlay from './01-meme-maze/NumberPlay.vue'
 import MemeMazeFinale from './01-meme-maze/Finale.vue'
 
 // Define component name for linting

@@ -119,7 +119,7 @@ function startRedirectCountdown() {
 }
 
 function redirectToLandingPage() {
-  router.push('/levels/meme-maze')
+  router.push('/levels/02-songs-origin')
 }
 
 function backToLevels() {
@@ -152,8 +152,8 @@ onMounted(async () => {
   
   // Check if user has completed all candles
   if (candlesLit.value < 23) {
-    // Redirect back to NumberPlay if not all candles are lit
-    router.push('/levels/meme-maze/number-play')
+    // Redirect back to memes if not all candles are lit
+    router.push('/levels/meme-maze/memes')
     return
   }
   

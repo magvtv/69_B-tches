@@ -71,9 +71,8 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
 
   const candlesLit = computed(() => {
     const memeCandles = state.value.reactions.filter(r => r === 'laugh').length
-    // Add candles earned from NumberPlay arithmetic problems
-    const numberPlayCandles = state.value.numberPlayCandles
-    return Math.min(memeCandles + numberPlayCandles, 23)
+    // Memes now directly light all 23 candles
+    return Math.min(memeCandles, 23)
   })
   
   const isComplete = computed(() => state.value.currentIndex >= state.value.totalMemes)
@@ -218,6 +217,11 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
   // Mark memes as completed
   async function markMemesCompleted() {
     state.value.memesCompleted = true
+    
+    // Check if all 23 candles are lit to unlock finale
+    if (allCandlesLit.value) {
+      state.value.finaleUnlocked = true
+    }
 
     if (state.value.gameSessionId) {
       try {
@@ -230,6 +234,8 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
             completed: true,
             totalReactions: state.value.reactions.filter(r => r !== undefined).length,
             laughsCount: state.value.laughsCount,
+            finaleUnlocked: state.value.finaleUnlocked,
+            candlesLit: candlesLit.value,
             timestamp: Date.now()
           }
         )
@@ -240,11 +246,16 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           { 
             totalMemes: state.value.totalMemes,
             laughsCount: state.value.laughsCount,
+            finaleUnlocked: state.value.finaleUnlocked,
+            candlesLit: candlesLit.value,
             timestamp: Date.now()
           }
         )
 
-        debugLog('Memes completion tracked')
+        debugLog('Memes completion tracked', {
+          finaleUnlocked: state.value.finaleUnlocked,
+          candlesLit: candlesLit.value
+        })
       } catch (error) {
         errorLog('Failed to track memes completion', error)
       }

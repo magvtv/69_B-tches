@@ -40,43 +40,25 @@
               Memes
               <LockClosedIcon v-if="!canAccessMemes" class="ml-2 w-4 h-4 text-gray-500" />
             </div>
-            <div class="text-sm text-gray-400">Swipe and react</div>
+            <div class="text-sm text-gray-400">Swipe and react to light all 23 candles</div>
           </div>
           
-          <!-- Number Play - Only accessible after memes -->
+          <!-- Next Level - Only accessible after all candles are lit -->
           <div 
-            @click="handleSectionClick('number-play')"
-            data-section="number-play"
+            @click="handleSectionClick('next-level')"
+            data-section="next-level"
             :class="[
               'block p-5 rounded-lg border transition-colors cursor-pointer',
-              canAccessNumberPlay 
+              canAccessNextLevel 
                 ? 'bg-gray-800/60 border-gray-700 hover:border-red-500/50' 
                 : 'bg-gray-900/40 border-gray-800 hover:border-gray-600 locked-section'
             ]"
           >
             <div class="font-bold mb-1 flex items-center">
-              Number Play
-              <LockClosedIcon v-if="!canAccessNumberPlay" class="ml-2 w-4 h-4 text-gray-500" />
+              Songs of Origin
+              <LockClosedIcon v-if="!canAccessNextLevel" class="ml-2 w-4 h-4 text-gray-500" />
             </div>
-            <div class="text-sm text-gray-400">Count your wishes</div>
-          </div>
-          
-          <!-- Finale - Only accessible after all previous steps -->
-          <div 
-            @click="handleSectionClick('finale')"
-            data-section="finale"
-            :class="[
-              'block p-5 rounded-lg border transition-colors cursor-pointer',
-              canAccessFinale 
-                ? 'bg-gray-800/60 border-gray-700 hover:border-red-500/50' 
-                : 'bg-gray-900/40 border-gray-800 hover:border-gray-600 locked-section'
-            ]"
-          >
-            <div class="font-bold mb-1 flex items-center">
-              Finale
-              <LockClosedIcon v-if="!canAccessFinale" class="ml-2 w-4 h-4 text-gray-500" />
-            </div>
-            <div class="text-sm text-gray-400">Claim your reward</div>
+            <div class="text-sm text-gray-400">Continue to Level 2</div>
           </div>
         </div>
       </div>
@@ -110,11 +92,7 @@ const canAccessMemes = computed(() => {
   return state.vibeCheckCompleted || false
 })
 
-const canAccessNumberPlay = computed(() => {
-  return state.vibeCheckCompleted && state.memesCompleted || false
-})
-
-const canAccessFinale = computed(() => {
+const canAccessNextLevel = computed(() => {
   return memeMazeStore.allCandlesLit && state.finaleUnlocked
 })
 
@@ -125,16 +103,17 @@ function handleSectionClick(section: string) {
     case 'memes':
       canAccess = canAccessMemes.value
       break
-    case 'number-play':
-      canAccess = canAccessNumberPlay.value
-      break
-    case 'finale':
-      canAccess = canAccessFinale.value
+    case 'next-level':
+      canAccess = canAccessNextLevel.value
       break
   }
   
   if (canAccess) {
-    router.push(`/levels/meme-maze/${section}`)
+    if (section === 'next-level') {
+      router.push('/levels/02-songs-origin')
+    } else {
+      router.push(`/levels/meme-maze/${section}`)
+    }
   } else {
     // Trigger wiggle animation
     const element = document.querySelector(`[data-section="${section}"]`)
@@ -148,7 +127,9 @@ function handleSectionClick(section: string) {
 }
 
 function continueOrStart() {
-  if (canAccessMemes.value) {
+  if (canAccessNextLevel.value) {
+    router.push('/levels/02-songs-origin')
+  } else if (canAccessMemes.value) {
     router.push('/levels/meme-maze/memes')
   } else {
     router.push('/levels/meme-maze/vibe-check')
