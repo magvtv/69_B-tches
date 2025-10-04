@@ -60,7 +60,7 @@ class AudioCacheService {
       }
 
       this.cache.set(cacheKey, cachedAudio)
-      this.saveToStorage()
+      await this.saveToStorage()
 
       debugLog('Audio cached successfully', { url, size, totalSize: this.getTotalSize() })
 
@@ -117,8 +117,7 @@ class AudioCacheService {
     }
   }
 
-  cleanup(): void {
-    const now = Date.now()
+  async cleanup(): Promise<void> {
     let cleaned = 0
 
     for (const [key, cached] of this.cache.entries()) {
@@ -129,18 +128,18 @@ class AudioCacheService {
     }
 
     if (cleaned > 0) {
-      this.saveToStorage()
+      await this.saveToStorage()
       debugLog('Audio cache cleaned', { cleaned, remaining: this.cache.size })
     }
   }
 
-  clearAll(): void {
+  async clearAll(): Promise<void> {
     for (const cached of this.cache.values()) {
       URL.revokeObjectURL(URL.createObjectURL(cached.data))
     }
 
     this.cache.clear()
-    this.saveToStorage()
+    await this.saveToStorage()
     debugLog('Audio cache cleared')
   }
 
@@ -180,17 +179,19 @@ class AudioCacheService {
     debugLog('Made space in audio cache', { freedSize, requiredSize, deleted: toDelete.length })
   }
 
-  private saveToStorage(): void {
+  private async saveToStorage(): Promise<void> {
     try {
-      const data = Array.from(this.cache.entries()).map(([key, cached]) => [
-        key,
-        {
-          url: cached.url,
-          data: Array.from(new Uint8Array(cached.data)),
-          cachedAt: cached.cachedAt,
-          size: cached.size,
-        },
-      ])
+      const data = await Promise.all(
+        Array.from(this.cache.entries()).map(async ([key, cached]) => [
+          key,
+          {
+            url: cached.url,
+            data: Array.from(new Uint8Array(await cached.data.arrayBuffer())),
+            cachedAt: cached.cachedAt,
+            size: cached.size,
+          },
+        ])
+      )
 
       localStorage.setItem(
         'audio_cache',
