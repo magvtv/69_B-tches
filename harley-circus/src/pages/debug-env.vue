@@ -88,10 +88,16 @@ const spotifyClientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnon = import.meta.env.VITE_SUPABASE_ANON
 
+interface TestResult {
+  success: boolean
+  message?: string
+  error?: string
+}
+
 const testing = ref(false)
-const testResult = ref(null)
+const testResult = ref<TestResult | null>(null)
 const audioTesting = ref(false)
-const audioResult = ref(null)
+const audioResult = ref<TestResult | null>(null)
 
 async function testSpotifyAPI() {
   testing.value = true
