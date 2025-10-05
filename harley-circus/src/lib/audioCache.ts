@@ -190,7 +190,7 @@ class AudioCacheService {
             cachedAt: cached.cachedAt,
             size: cached.size,
           },
-        ])
+        ]),
       )
 
       localStorage.setItem(

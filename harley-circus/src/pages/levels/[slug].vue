@@ -19,7 +19,7 @@ import MemeMazeFinale from './01-meme-maze/Finale.vue'
 
 // Define component name for linting
 defineOptions({
-  name: 'LevelSlugPage'
+  name: 'LevelSlugPage',
 })
 
 const route = useRoute()
@@ -29,7 +29,7 @@ const slug = computed(() => String(route.params.slug || ''))
 <style scoped>
 .level-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0D0D0D 0%, #1a0a2e 50%, #6A0DAD 100%);
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a0a2e 50%, #6a0dad 100%);
 }
 
 .error-container {
@@ -44,7 +44,7 @@ const slug = computed(() => String(route.params.slug || ''))
 }
 
 .error-container h1 {
-  color: #39FF14;
+  color: #39ff14;
   margin-bottom: 1rem;
   font-size: 2rem;
 }
@@ -54,5 +54,3 @@ const slug = computed(() => String(route.params.slug || ''))
   font-size: 1.1rem;
 }
 </style>
-
-

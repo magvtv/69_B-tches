@@ -33,7 +33,9 @@ function loadState(totalMemes: number): MemeProgressState {
         currentIndex: parsed.currentIndex ?? 0,
         totalMemes,
         laughsCount: parsed.laughsCount ?? 0,
-        reactions: Array.isArray(parsed.reactions) ? parsed.reactions.slice(0, totalMemes) as MemeReaction[] : Array(totalMemes).fill(undefined),
+        reactions: Array.isArray(parsed.reactions)
+          ? (parsed.reactions.slice(0, totalMemes) as MemeReaction[])
+          : Array(totalMemes).fill(undefined),
         vibeCheckCompleted: parsed.vibeCheckCompleted ?? false,
         memesCompleted: parsed.memesCompleted ?? false,
         numberPlayCompleted: parsed.numberPlayCompleted ?? false,
@@ -48,10 +50,10 @@ function loadState(totalMemes: number): MemeProgressState {
   } catch {
     // ignore for now
   }
-  return { 
-    currentIndex: 0, 
-    totalMemes, 
-    laughsCount: 0, 
+  return {
+    currentIndex: 0,
+    totalMemes,
+    laughsCount: 0,
     reactions: Array(totalMemes).fill(undefined),
     vibeCheckCompleted: false,
     memesCompleted: false,
@@ -70,11 +72,11 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
   const state = ref<MemeProgressState>(loadState(TOTAL_MEMES))
 
   const candlesLit = computed(() => {
-    const memeCandles = state.value.reactions.filter(r => r === 'laugh').length
+    const memeCandles = state.value.reactions.filter((r) => r === 'laugh').length
     // Memes now directly light all 23 candles
     return Math.min(memeCandles, 23)
   })
-  
+
   const isComplete = computed(() => state.value.currentIndex >= state.value.totalMemes)
   const allCandlesLit = computed(() => candlesLit.value >= 23)
 
@@ -86,7 +88,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
 
     try {
       debugLog('Initializing Supabase session for meme maze')
-      
+
       // Initialize user session
       const userSession = await progressService.initializeSession()
       state.value.sessionId = userSession.sessionId
@@ -98,15 +100,14 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
       state.value.isInitialized = true
 
       // Record initial interaction
-      await progressService.recordInteraction(
-        gameSession.id,
-        'level_started',
-        { level: '01-meme-maze', timestamp: Date.now() }
-      )
+      await progressService.recordInteraction(gameSession.id, 'level_started', {
+        level: '01-meme-maze',
+        timestamp: Date.now(),
+      })
 
-      debugLog('Session initialized successfully', { 
-        sessionId: userSession.sessionId, 
-        gameSessionId: gameSession.id 
+      debugLog('Session initialized successfully', {
+        sessionId: userSession.sessionId,
+        gameSessionId: gameSession.id,
       })
     } catch (error) {
       errorLog('Failed to initialize session', error)
@@ -119,7 +120,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
     if (isComplete.value) return
 
     const startTime = Date.now()
-    
+
     // Update local state
     state.value.reactions[state.value.currentIndex] = reaction
     if (reaction === 'laugh') state.value.laughsCount += 1
@@ -132,7 +133,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           state.value.gameSessionId,
           state.value.currentIndex - 1, // The meme index we just reacted to
           reaction,
-          reactionTimeMs || (Date.now() - startTime)
+          reactionTimeMs || Date.now() - startTime,
         )
 
         // Update level progress
@@ -145,13 +146,13 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
             currentIndex: state.value.currentIndex,
             totalMemes: state.value.totalMemes,
             laughsCount: state.value.laughsCount,
-            reactions: state.value.reactions
-          }
+            reactions: state.value.reactions,
+          },
         )
 
-        debugLog('Meme reaction tracked', { 
-          memeIndex: state.value.currentIndex - 1, 
-          reaction 
+        debugLog('Meme reaction tracked', {
+          memeIndex: state.value.currentIndex - 1,
+          reaction,
         })
       } catch (error) {
         errorLog('Failed to track meme reaction', error)
@@ -170,14 +171,12 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           '01-meme-maze',
           'vibe_check',
           true,
-          { completed: true, timestamp: Date.now() }
+          { completed: true, timestamp: Date.now() },
         )
 
-        await progressService.recordInteraction(
-          state.value.gameSessionId,
-          'vibe_check_completed',
-          { timestamp: Date.now() }
-        )
+        await progressService.recordInteraction(state.value.gameSessionId, 'vibe_check_completed', {
+          timestamp: Date.now(),
+        })
 
         debugLog('Vibe check completion tracked')
       } catch (error) {
@@ -193,7 +192,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
     selectedOptionId: number,
     selectedOptionText: string,
     explanation?: string,
-    responseTimeMs?: number
+    responseTimeMs?: number,
   ) {
     if (state.value.gameSessionId) {
       try {
@@ -204,7 +203,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           selectedOptionId,
           selectedOptionText,
           explanation,
-          responseTimeMs
+          responseTimeMs,
         )
 
         debugLog('Vibe response tracked', { vibeId, selectedOptionId })
@@ -217,7 +216,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
   // Mark memes as completed
   async function markMemesCompleted() {
     state.value.memesCompleted = true
-    
+
     // Check if all 23 candles are lit to unlock finale
     if (allCandlesLit.value) {
       state.value.finaleUnlocked = true
@@ -232,29 +231,25 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           true,
           {
             completed: true,
-            totalReactions: state.value.reactions.filter(r => r !== undefined).length,
+            totalReactions: state.value.reactions.filter((r) => r !== undefined).length,
             laughsCount: state.value.laughsCount,
             finaleUnlocked: state.value.finaleUnlocked,
             candlesLit: candlesLit.value,
-            timestamp: Date.now()
-          }
+            timestamp: Date.now(),
+          },
         )
 
-        await progressService.recordInteraction(
-          state.value.gameSessionId,
-          'memes_completed',
-          { 
-            totalMemes: state.value.totalMemes,
-            laughsCount: state.value.laughsCount,
-            finaleUnlocked: state.value.finaleUnlocked,
-            candlesLit: candlesLit.value,
-            timestamp: Date.now()
-          }
-        )
+        await progressService.recordInteraction(state.value.gameSessionId, 'memes_completed', {
+          totalMemes: state.value.totalMemes,
+          laughsCount: state.value.laughsCount,
+          finaleUnlocked: state.value.finaleUnlocked,
+          candlesLit: candlesLit.value,
+          timestamp: Date.now(),
+        })
 
         debugLog('Memes completion tracked', {
           finaleUnlocked: state.value.finaleUnlocked,
-          candlesLit: candlesLit.value
+          candlesLit: candlesLit.value,
         })
       } catch (error) {
         errorLog('Failed to track memes completion', error)
@@ -276,17 +271,17 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           await progressService.recordInteraction(
             state.value.gameSessionId,
             'number_play_candle_earned',
-            { 
+            {
               candlesLit: candlesLit.value,
               numberPlayCandles: state.value.numberPlayCandles,
               finaleUnlocked: state.value.finaleUnlocked,
-              timestamp: Date.now()
-            }
+              timestamp: Date.now(),
+            },
           )
 
-          debugLog('Number play candle earned tracked', { 
+          debugLog('Number play candle earned tracked', {
             candlesLit: candlesLit.value,
-            numberPlayCandles: state.value.numberPlayCandles
+            numberPlayCandles: state.value.numberPlayCandles,
           })
         } catch (error) {
           errorLog('Failed to track number play candle earned', error)
@@ -298,7 +293,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
   // Mark number play as completed
   async function markNumberPlayCompleted() {
     state.value.numberPlayCompleted = true
-    
+
     // Check if all candles are now lit to unlock finale
     if (allCandlesLit.value) {
       state.value.finaleUnlocked = true
@@ -315,18 +310,18 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
             completed: true,
             finaleUnlocked: state.value.finaleUnlocked,
             candlesLit: candlesLit.value,
-            timestamp: Date.now()
-          }
+            timestamp: Date.now(),
+          },
         )
 
         await progressService.recordInteraction(
           state.value.gameSessionId,
           'number_play_completed',
-          { 
+          {
             finaleUnlocked: state.value.finaleUnlocked,
             candlesLit: candlesLit.value,
-            timestamp: Date.now()
-          }
+            timestamp: Date.now(),
+          },
         )
 
         debugLog('Number play completion tracked')
@@ -343,7 +338,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
     correctAnswer: number,
     userAnswer?: number,
     responseTimeMs?: number,
-    attempts: number = 1
+    attempts: number = 1,
   ) {
     if (state.value.gameSessionId) {
       try {
@@ -354,7 +349,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           correctAnswer,
           userAnswer,
           responseTimeMs,
-          attempts
+          attempts,
         )
 
         debugLog('Math response tracked', { problemIndex, isCorrect: userAnswer === correctAnswer })
@@ -378,18 +373,14 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           {
             completed: true,
             totalCandlesLit: candlesLit.value,
-            timestamp: Date.now()
-          }
+            timestamp: Date.now(),
+          },
         )
 
-        await progressService.recordInteraction(
-          state.value.gameSessionId,
-          'finale_completed',
-          { 
-            totalCandlesLit: candlesLit.value,
-            timestamp: Date.now()
-          }
-        )
+        await progressService.recordInteraction(state.value.gameSessionId, 'finale_completed', {
+          totalCandlesLit: candlesLit.value,
+          timestamp: Date.now(),
+        })
 
         // Complete the game session
         const totalTimeSeconds = Math.floor((Date.now() - new Date().getTime()) / 1000)
@@ -408,14 +399,10 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
 
     if (state.value.gameSessionId) {
       try {
-        await progressService.recordInteraction(
-          state.value.gameSessionId,
-          'finale_unlocked',
-          { 
-            candlesLit: candlesLit.value,
-            timestamp: Date.now()
-          }
-        )
+        await progressService.recordInteraction(state.value.gameSessionId, 'finale_unlocked', {
+          candlesLit: candlesLit.value,
+          timestamp: Date.now(),
+        })
 
         debugLog('Finale unlock tracked')
       } catch (error) {
@@ -427,7 +414,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
   // Reset progress (clears both local and Supabase data)
   async function reset() {
     state.value = loadState(TOTAL_MEMES)
-    
+
     // Initialize a new session
     await initializeSession()
   }
@@ -436,14 +423,14 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
   async function loadProgressFromSupabase() {
     try {
       const progress = await progressService.getUserProgress('01-meme-maze')
-      
+
       if (progress.gameSession) {
         state.value.gameSessionId = progress.gameSession.id
         state.value.isInitialized = true
 
         // Restore progress from Supabase data
         if (progress.memeReactions) {
-          progress.memeReactions.forEach(reaction => {
+          progress.memeReactions.forEach((reaction) => {
             if (reaction.memeIndex < state.value.reactions.length) {
               state.value.reactions[reaction.memeIndex] = reaction.reaction
               if (reaction.reaction === 'laugh') {
@@ -456,7 +443,7 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
 
         // Check level progress
         if (progress.levelProgress) {
-          progress.levelProgress.forEach(step => {
+          progress.levelProgress.forEach((step) => {
             switch (step.currentStep) {
               case 'vibe_check':
                 state.value.vibeCheckCompleted = step.stepCompleted
@@ -479,15 +466,15 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
           state.value.finaleUnlocked = true
         }
 
-        debugLog('Progress loaded from Supabase', { 
+        debugLog('Progress loaded from Supabase', {
           currentIndex: state.value.currentIndex,
           laughsCount: state.value.laughsCount,
           completedSteps: {
             vibeCheck: state.value.vibeCheckCompleted,
             memes: state.value.memesCompleted,
             numberPlay: state.value.numberPlayCompleted,
-            finale: state.value.finaleCompleted
-          }
+            finale: state.value.finaleCompleted,
+          },
         })
       }
     } catch (error) {
@@ -496,26 +483,33 @@ export const useMemeMazeSupabaseStore = defineStore('memeMazeSupabase', () => {
   }
 
   // Watch for state changes and persist to localStorage
-  watch(state, (s) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        currentIndex: s.currentIndex,
-        laughsCount: s.laughsCount,
-        reactions: s.reactions,
-        vibeCheckCompleted: s.vibeCheckCompleted,
-        memesCompleted: s.memesCompleted,
-        numberPlayCompleted: s.numberPlayCompleted,
-        numberPlayCandles: s.numberPlayCandles,
-        finaleUnlocked: s.finaleUnlocked,
-        finaleCompleted: s.finaleCompleted,
-        sessionId: s.sessionId,
-        gameSessionId: s.gameSessionId,
-        isInitialized: s.isInitialized,
-      }))
-    } catch {
-      // ignore
-    }
-  }, { deep: true })
+  watch(
+    state,
+    (s) => {
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            currentIndex: s.currentIndex,
+            laughsCount: s.laughsCount,
+            reactions: s.reactions,
+            vibeCheckCompleted: s.vibeCheckCompleted,
+            memesCompleted: s.memesCompleted,
+            numberPlayCompleted: s.numberPlayCompleted,
+            numberPlayCandles: s.numberPlayCandles,
+            finaleUnlocked: s.finaleUnlocked,
+            finaleCompleted: s.finaleCompleted,
+            sessionId: s.sessionId,
+            gameSessionId: s.gameSessionId,
+            isInitialized: s.isInitialized,
+          }),
+        )
+      } catch {
+        // ignore
+      }
+    },
+    { deep: true },
+  )
 
   return {
     state,
