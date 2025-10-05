@@ -5,7 +5,7 @@
   "totalChallenges": 26,
   "description": "The melodies that shaped our connection",
   "backgroundAudio": {
-    "file": "/public/audio/if-this-isnt-love.mp3",
+    "file": "/audio/if-this-isnt-love.mp3",
     "artist": "Jennifer Hudson",
     "title": "This Isn't Love",
     "volume": 0.3,

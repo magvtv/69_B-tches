@@ -40,6 +40,15 @@ class SpotifyService {
     this.clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID || ''
     this.clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET || ''
 
+    // Debug environment variables
+    debugLog('Spotify service initialized', {
+      hasClientId: !!this.clientId,
+      hasClientSecret: !!this.clientSecret,
+      clientIdLength: this.clientId.length,
+      clientSecretLength: this.clientSecret.length,
+      environment: import.meta.env.MODE
+    })
+
     this.loadStoredToken()
   }
 
@@ -224,7 +233,14 @@ class SpotifyService {
 
   private async getClientCredentialsToken(): Promise<void> {
     try {
-      debugLog('Getting Spotify access token using Client Credentials Flow')
+      debugLog('Getting Spotify access token using Client Credentials Flow', {
+        hasClientId: !!this.clientId,
+        hasClientSecret: !!this.clientSecret
+      })
+
+      if (!this.clientId || !this.clientSecret) {
+        throw new Error('Missing Spotify client credentials')
+      }
 
       const authString = btoa(`${this.clientId}:${this.clientSecret}`)
 
@@ -237,8 +253,17 @@ class SpotifyService {
         body: 'grant_type=client_credentials',
       })
 
+      debugLog('Spotify token request response', {
+        status: response.status,
+        ok: response.ok
+      })
+
       if (!response.ok) {
         const errorText = await response.text()
+        debugLog('Spotify token request failed', {
+          status: response.status,
+          error: errorText
+        })
         throw new Error(`Failed to get access token: ${response.status} - ${errorText}`)
       }
 

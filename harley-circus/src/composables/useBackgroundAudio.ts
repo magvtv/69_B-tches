@@ -6,6 +6,8 @@ const currentSrc = ref('')
 
 export function useBackgroundAudio() {
   const initAudio = (src: string, volume = 0.3, autoplay = true) => {
+    console.log('[BackgroundAudio] Initializing audio:', { src, volume, autoplay })
+    
     // If audio already initialized with same src and playing, don't reinitialize
     if (audioElement.value && currentSrc.value === src && isPlaying.value) {
       console.log('[BackgroundAudio] Already playing, skipping initialization')
@@ -21,6 +23,7 @@ export function useBackgroundAudio() {
         audioElement.value.removeEventListener('play', handlePlay)
         audioElement.value.removeEventListener('pause', handlePause)
         audioElement.value.removeEventListener('ended', handleEnded)
+        audioElement.value.removeEventListener('error', handleError)
         audioElement.value.remove()
       }
 
@@ -34,8 +37,10 @@ export function useBackgroundAudio() {
       audioElement.value.addEventListener('play', handlePlay)
       audioElement.value.addEventListener('pause', handlePause)
       audioElement.value.addEventListener('ended', handleEnded)
+      audioElement.value.addEventListener('error', handleError)
 
       if (autoplay) {
+        console.log('[BackgroundAudio] Attempting autoplay')
         play()
       }
     } else {
@@ -57,16 +62,33 @@ export function useBackgroundAudio() {
 
   const handleEnded = () => {
     isPlaying.value = false
+    console.log('[BackgroundAudio] Audio ended')
+  }
+
+  const handleError = (event: Event) => {
+    const error = event.target as HTMLAudioElement
+    console.error('[BackgroundAudio] Audio error:', {
+      error: error.error,
+      src: currentSrc.value,
+      networkState: error.networkState,
+      readyState: error.readyState
+    })
+    isPlaying.value = false
   }
 
   const play = async () => {
     if (audioElement.value) {
       try {
+        console.log('[BackgroundAudio] Attempting to play audio')
         await audioElement.value.play()
+        console.log('[BackgroundAudio] Audio started successfully')
         isPlaying.value = true
       } catch (error) {
-        console.warn('Background audio play failed:', error)
+        console.warn('[BackgroundAudio] Play failed:', error)
         // Browser might require user interaction first
+        if (error instanceof Error && error.name === 'NotAllowedError') {
+          console.log('[BackgroundAudio] Autoplay blocked - user interaction required')
+        }
       }
     }
   }
